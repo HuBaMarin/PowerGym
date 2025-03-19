@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegisterActivity">
+    tools:context=".ui.activity.RegisterActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,13 +13,32 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
+        android:background="#AED581"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="300dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFB74D"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:titleTextColor="@android:color/white"
+            app:title="Registrarse" />
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etNameRegister"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:hint="Nombre"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etEmailRegister"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:padding="12dp"
@@ -28,7 +47,7 @@
             android:layout_marginBottom="16dp"/>
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etPasswordRegister"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
@@ -37,7 +56,7 @@
             android:layout_marginBottom="16dp"/>
 
         <EditText
-            android:id="@+id/etRepeatPassword"
+            android:id="@+id/etConfirmPasswordRegister"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:padding="12dp"
@@ -46,11 +65,22 @@
             android:layout_marginBottom="24dp"/>
 
         <Button
-            android:id="@+id/btnCrear"
+            android:id="@+id/btnRegister"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Crear cuenta"/>
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBarRegister"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

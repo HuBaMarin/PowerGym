@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PrincipalActivity">
+    tools:context=".ui.main.PrincipalActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -18,24 +18,38 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
+            android:layout_marginTop="16dp"
+            android:background="@drawable/toolbar_background">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchView"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:iconifiedByDefault="false"
                 android:queryHint="Buscar ejercicios..." />
 
-            <ImageButton
-                android:id="@+id/btnProfile"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="35dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:src="@drawable/baseline_person_outline_24" />
+                android:padding="4dp">
+
+                <ImageButton
+                    android:id="@+id/btnProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@drawable/baseline_person_outline_24" />
+
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -44,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/filtergroup_background"
             app:singleSelection="false">
 
             <com.google.android.material.chip.Chip
@@ -51,40 +67,63 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Todos los días"
-                app:chipIcon="@drawable/ic_calendar" />
+                app:chipIcon="@drawable/baseline_calendar_month_24" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipBasico"
+                android:id="@+id/chipDificultad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Básico"
-                app:chipIcon="@drawable/ic_difficulty_low" />
+                android:text="Dificultad"
+                app:chipIcon="@drawable/chart_bar_svgrepo_com" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipMedio"
+                android:id="@+id/chipGrupoMuscular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medio"
-                app:chipIcon="@drawable/ic_difficulty_medium" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipAvanzado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Avanzado"
-                app:chipIcon="@drawable/ic_difficulty_high" />
-
+                android:text="Grupo muscular"
+                app:chipIcon="@drawable/gym_weight" />
         </com.google.android.material.chip.ChipGroup>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvExercises"
+        android:id="@+id/rvEjercicios"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        app:spanCount="2" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/rvEjercicios"
+        app:layout_constraintBottom_toBottomOf="@id/rvEjercicios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Empty TextView -->
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No items available"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/rvEjercicios"
+        app:layout_constraintBottom_toBottomOf="@id/rvEjercicios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

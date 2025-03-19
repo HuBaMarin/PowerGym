@@ -1,8 +1,8 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:viewportWidth="45.532"
     android:viewportHeight="45.532"
-    android:width="50dp"
-    android:height="50dp">
+    android:width="30dp"
+    android:height="30dp">
 
     <!-- Fondo circular -->
     <path
