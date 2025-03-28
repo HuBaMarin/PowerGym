@@ -1,9 +1,9 @@
-package com.amarina.powergym.ui.viewmodel.auth.factory
+package com.amarina.powergym.ui.auth.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amarina.powergym.repository.UserRepository
-import com.amarina.powergym.ui.viewmodel.auth.RegisterViewModel
+import com.amarina.powergym.ui.auth.RegisterViewModel
 
 class RegisterViewModelFactory(
     private val userRepository: UserRepository

@@ -1,9 +1,9 @@
-package com.amarina.powergym.ui.viewmodel.settings.factory
+package com.amarina.powergym.ui.settings.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amarina.powergym.repository.PreferenciaRepository
-import com.amarina.powergym.ui.viewmodel.settings.SettingsViewModel
+import com.amarina.powergym.ui.settings.SettingsViewModel
 import com.amarina.powergym.utils.SessionManager
 
 class SettingsViewModelFactory(

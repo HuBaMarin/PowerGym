@@ -1,4 +1,4 @@
-package com.amarina.powergym.ui.viewmodel.main
+package com.amarina.powergym.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,14 +14,18 @@ class MainViewModel(
     private val ejercicioRepository: EjercicioRepository
 ) : ViewModel() {
 
-    private val _ejerciciosState = MutableStateFlow<EjerciciosState>(EjerciciosState.Loading)
-    val ejerciciosState: StateFlow<EjerciciosState> = _ejerciciosState
+    private val _filteredCount = MutableStateFlow(0)
+    val filteredCount: StateFlow<Int> = _filteredCount
+
+  private val _ejerciciosState = MutableStateFlow<EjerciciosState>(EjerciciosState.Loading)
+  val ejercicios: StateFlow<EjerciciosState> = _ejerciciosState
+  //private val ejerciciosState: StateFlow<EjerciciosState> = _ejerciciosState
 
     private val _musculosState = MutableStateFlow<List<String>>(emptyList())
     val musculosState: StateFlow<List<String>> = _musculosState
 
     private val _seccionesState = MutableStateFlow<List<String>>(emptyList())
-    val seccionesState: StateFlow<List<String>> = _seccionesState
+
 
     private val _navigationEvents = MutableSharedFlow<NavigationEvent>()
     val navigationEvents: SharedFlow<NavigationEvent> = _navigationEvents
@@ -96,8 +100,21 @@ class MainViewModel(
         aplicarFiltros()
     }
 
-    fun setConsulta(query: String) {
-        _consulta.value = query
+   fun setDiaFilter(dias: String) {
+       _diasSeleccionados.value = setOf(dias)
+       aplicarFiltros()
+   }
+    fun setDificultadFilter(dificultad: String?) {
+        _dificultadesSeleccionadas.value = if (dificultad != null) setOf(dificultad) else emptySet()
+        aplicarFiltros()
+    }
+
+   suspend fun getAllMuscleGroups(): Result<List<String>> {
+       return ejercicioRepository.getAllMuscleGroups()
+   }
+
+    fun setGrupoMuscularFilter(grupo: String?) {
+        _grupoMuscularSeleccionado.value = grupo
         aplicarFiltros()
     }
 
@@ -128,9 +145,10 @@ class MainViewModel(
         }
     }
 
-    fun navigateToSettings() {
+
+    fun navigateToSearch() {
         viewModelScope.launch {
-            _navigationEvents.emit(NavigationEvent.ToSettings)
+            _navigationEvents.emit(NavigationEvent.ToSearch)
         }
     }
 
@@ -147,11 +165,19 @@ class MainViewModel(
     }
 
     sealed class EjerciciosState {
-        object Loading : EjerciciosState()
-        data class Success(val ejerciciosBySection: Map<String, List<Ejercicio>>) :
-            EjerciciosState()
+        abstract val ejercicios: List<Ejercicio>
 
-        data class Error(val message: String) : EjerciciosState()
+        object Loading : EjerciciosState() {
+            override val ejercicios: List<Ejercicio> = emptyList()
+        }
+
+        data class Success(val ejerciciosBySection: Map<String, List<Ejercicio>>) : EjerciciosState() {
+            override val ejercicios: List<Ejercicio> = ejerciciosBySection.values.flatten()
+        }
+
+        data class Error(val message: String) : EjerciciosState() {
+            override val ejercicios: List<Ejercicio> = emptyList()
+        }
     }
 
     sealed class NavigationEvent {
@@ -159,5 +185,7 @@ class MainViewModel(
         object ToSettings : NavigationEvent()
         object ToProfile : NavigationEvent()
         object ToStatistics : NavigationEvent()
+        object ToSearch : NavigationEvent()
+        object ToMain : NavigationEvent()
     }
 }

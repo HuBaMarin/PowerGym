@@ -1,9 +1,9 @@
-package com.amarina.powergym.ui.viewmodel.auth.factory
+package com.amarina.powergym.ui.auth.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.amarina.powergym.repository.UserRepository
-import com.amarina.powergym.ui.viewmodel.auth.LoginViewModel
+import com.amarina.powergym.ui.auth.LoginViewModel
 import com.amarina.powergym.utils.SessionManager
 
 class LoginViewModelFactory(

@@ -1,4 +1,4 @@
-package com.amarina.powergym.ui.viewmodel.settings
+package com.amarina.powergym.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

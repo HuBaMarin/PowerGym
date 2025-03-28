@@ -1,4 +1,4 @@
-package com.amarina.powergym.ui.viewmodel.auth
+package com.amarina.powergym.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
