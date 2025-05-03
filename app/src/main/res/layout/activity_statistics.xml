@@ -1,10 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".ui.activity.StatisticsActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background_color"
+        android:elevation="4dp"
+        app:title="@string/statistics"
+        app:titleTextColor="@color/icon_tint"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:padding="8dp"
+        android:background="@color/background_color"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="56dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+                
+            <!-- Training Frequency Chart -->
+            <include
+                android:id="@+id/trainingChart"
+                layout="@layout/layout_training_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Most Frequent Exercises -->
+            <TextView
+                android:id="@+id/tvMostFrequentExercises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/most_frequent_exercises"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/icon_tint"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEjerciciosMasTrabajados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:contentDescription="@string/most_frequent_exercises"
+                android:layout_marginBottom="16dp"
+                android:minHeight="100dp"/>
+
+            <!-- Complete Exercise Stats -->
+            <TextView
+                android:id="@+id/tvCompleteStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/complete_exercise_stats"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/icon_tint"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvNoStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_exercise_stats"
+                android:textSize="16sp"
+                android:textColor="@color/icon_tint"
+                android:gravity="center"
+                android:layout_margin="16dp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvComprehensiveStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:contentDescription="@string/complete_exercise_stats"
+                android:layout_marginBottom="16dp"
+                android:minHeight="100dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGruposATrabajar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:contentDescription="@string/muscle_groups"
+                android:layout_marginBottom="16dp"
+                android:minHeight="100dp"/>
+
+            <!-- Historial de ejercicios -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/exercise_history"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/icon_tint"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEstadisticasEjercicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:contentDescription="@string/statistics"
+                android:minHeight="200dp"
+                android:visibility="gone"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLoadMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/load_more"
+                android:visibility="gone"
+                android:backgroundTint="@color/icon_tint"
+                android:textColor="@color/background_color"
+                app:cornerRadius="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_statistics"
+                android:textColor="@color/icon_tint"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="16dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/statistics"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/icon_tint"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/background_color"
+        android:elevation="8dp"
+        app:itemIconTint="@color/icon_tint"
+        app:itemTextColor="@color/icon_tint"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
