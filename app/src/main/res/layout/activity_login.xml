@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:indeterminateTint="@color/primary"
+            android:indeterminateTint="?attr/colorPrimary"
             android:layout_marginBottom="16dp"/>
 
         <com.google.android.material.button.MaterialButton

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Boolean resource to determine if the device is a tablet or large screen -->
+    <bool name="is_tablet">true</bool>
+
+    <!-- Visibility for elements that should be hidden on tablets -->
+    <bool name="is_tablet_visibility">false</bool>
+</resources>

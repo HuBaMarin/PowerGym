@@ -1,53 +1,52 @@
 package com.amarina.powergym.utils
 
-import android.content.Context
-import android.text.format.DateUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object Utils {
-    fun isValidEmail(email: String): Boolean {
+    /**
+     * Valida si una cadena de texto tiene formato de correo electrónico válido.
+     *
+     * @param email El correo electrónico a validar
+     * @return true si el correo es válido, false en caso contrario
+     */
+    fun esEmailValido(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun isValidPassword(password: String): Boolean {
+    /**
+     * Valida si una contraseña cumple con los requisitos mínimos de seguridad.
+     *
+     * @param password La contraseña a validar
+     * @return true si la contraseña tiene al menos 6 caracteres, false en caso contrario
+     */
+    fun esContrasenaValida(password: String): Boolean {
         return password.length >= 6
     }
 
-    fun formatDate(timestamp: Long): String {
+    /**
+     * Convierte un timestamp en milisegundos a una cadena de texto con formato de fecha.
+     *
+     * @param timestamp El tiempo en milisegundos desde epoch (1 enero 1970)
+     * @return Una cadena con la fecha en formato dd/MM/yyyy
+     */
+    fun formatearFecha(timestamp: Long): String {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return sdf.format(Date(timestamp))
     }
 
-    fun formatTime(seconds: Long): String {
-        val hours = seconds / 3600
-        val minutes = (seconds % 3600) / 60
-        val secs = seconds % 60
 
-        return when {
-           hours > 0 -> String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, secs)
-            else -> String.format(Locale.getDefault(), "%02d:%02d", minutes, secs)
-        }
-    }
-
-    fun getRelativeTimeSpanString(context: Context, timeInMillis: Long): String {
-        return DateUtils.getRelativeTimeSpanString(
-            timeInMillis,
-            System.currentTimeMillis(),
-            DateUtils.MINUTE_IN_MILLIS
-        ).toString()
-    }
 }
 
-fun Fragment.showToast(message: String) {
-    context?.let {
-        Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
-    }
-}
-
-fun AppCompatActivity.showToast(message: String) {
+/**
+ * Función de extensión para mostrar un mensaje Toast corto en una actividad.
+ *
+ * @param message El mensaje a mostrar en el Toast
+ */
+fun AppCompatActivity.mostrarToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

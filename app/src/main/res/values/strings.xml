@@ -292,7 +292,29 @@
     <string name="exercise_salto_a_la_comba_desc">Cardio exercise using a jump rope for coordination and endurance</string>
 
     <string name="exercise_cable_row_name">Cable Row</string>
-    <string name="exercise_cable_row_desc">A compound back exercise performed using a seated cable machine that strengthens the middle back muscles, lats, and arms.</string>
+    <string name="exercise_cable_row_desc">Un exercice pour le dos effectué avec une machine à câble.</string>
+
+    <!-- New Exercise Names and Descriptions -->
+    <string name="exercise_seated_arm_curl_name">Seated Arm Curls</string>
+    <string name="exercise_seated_arm_curl_desc">A simple exercise to strengthen arm muscles while seated.</string>
+
+    <string name="exercise_wall_pushup_name">Wall Push-ups</string>
+    <string name="exercise_wall_pushup_desc">An upper body exercise that strengthens chest and arms.</string>
+
+    <string name="exercise_seated_marching_name">Seated Marching</string>
+    <string name="exercise_seated_marching_desc">A leg exercise that improves strength from a seated position.</string>
+
+    <string name="exercise_balance_support_name">Supported Balance Exercises</string>
+    <string name="exercise_balance_support_desc">Exercises that improve balance using support for added safety.</string>
+
+    <string name="exercise_shoulder_rolls_name">Shoulder Rolls</string>
+    <string name="exercise_shoulder_rolls_desc">Circular shoulder movements that reduce tension.</string>
+
+    <string name="exercise_knee_extension_name">Knee Extensions</string>
+    <string name="exercise_knee_extension_desc">A seated exercise that strengthens thigh muscles.</string>
+
+    <string name="exercise_tabletop_circle_name">Tabletop Circles</string>
+    <string name="exercise_tabletop_circle_desc">A rehabilitation exercise for arm coordination.</string>
 
     <!-- Search Empty State -->
     <string name="no_results">No results found</string>

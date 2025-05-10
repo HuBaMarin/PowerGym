@@ -1,4 +1,4 @@
-package com.amarina.powergym.data.repository
+package com.amarina.powergym.repository
 
 import com.amarina.powergym.database.dao.UsuarioDao
 import com.amarina.powergym.database.entities.Usuario
@@ -22,7 +22,7 @@ class UserRepositoryTest {
     @Before
     fun setup() {
         userDao = mockk()
-        userRepository = UserRepository(userDao)
+        userRepository = UserRepository(userDao, mockk())
     }
 
     @Test
@@ -66,13 +66,13 @@ class UserRepositoryTest {
         val password = "password123"
         val name = "New User"
 
-        coEvery { userDao.getUserByEmail(email) } returns null
-        coEvery { userDao.insert(any()) } returns 42L
+        coEvery { userDao.obtenerUsuarioPorEmail(email) } returns null
+        coEvery { userDao.insertar(any()) } returns 42L
 
         val result = userRepository.register(email, password, name)
 
-        coVerify { userDao.getUserByEmail(email) }
-        coVerify { userDao.insert(any()) }
+        coVerify { userDao.obtenerUsuarioPorEmail(email) }
+        coVerify { userDao.insertar(any()) }
         assertTrue(result.isSuccess)
         assertEquals(42L, result.getOrNull())
     }
@@ -90,12 +90,12 @@ class UserRepositoryTest {
             rol = "usuario"
         )
 
-        coEvery { userDao.getUserByEmail(email) } returns existingUser
+        coEvery { userDao.obtenerUsuarioPorEmail(email) } returns existingUser
 
         val result = userRepository.register(email, password, name)
 
-        coVerify { userDao.getUserByEmail(email) }
-        coVerify(exactly = 0) { userDao.insert(any()) }
+        coVerify { userDao.obtenerUsuarioPorEmail(email) }
+        coVerify(exactly = 0) { userDao.insertar(any()) }
         assertTrue(result.isFailure)
         assertEquals("El email ya está registrado", result.exceptionOrNull()?.message)
     }

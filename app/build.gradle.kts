@@ -40,10 +40,10 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation("com.google.android.material:material:1.12.0")
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.junit.ktx)
@@ -62,6 +62,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
 
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     val mockkVersion = "1.13.17"
     testImplementation("io.mockk:mockk-android:${mockkVersion}")
@@ -75,4 +76,11 @@ dependencies {
     testImplementation(kotlin("test"))
 
     androidTestImplementation("androidx.test:rules:1.6.1")
+
+    // For secure password hashing with Argon2id
+    implementation("org.bouncycastle:bcprov-jdk18on:1.80")
+
+    // Security libraries
+    implementation("com.google.crypto.tink:tink-android:1.8.0")
+
 }

@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Basic Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Colores Base -->
+    <color name="background_color">#FAFAFA</color> <!-- Fondo principal claro -->
+    <color name="surface_color">#FFFFFF</color> <!-- Superficie de componentes -->
+    <color name="component_background">#E0F2F1</color> <!-- Fondo de componentes UI -->
+    <color name="dark_background">#103232</color> <!-- Fondo oscuro alternativo -->
+    <color name="dark_surface">#FFFFFF</color> <!-- Superficie para temas claros -->
+
+    <!-- Colores de Texto -->
+    <color name="text_color">#212121</color> <!-- Texto principal -->
+    <color name="text_secondary">#757575</color> <!-- Texto secundario -->
+    <color name="on_surface">#212121</color> <!-- Texto sobre superficies claras -->
+
+    <!-- Colores Primarios y Secundarios -->
+    <color name="primary">#00796B</color> <!-- Color primario (verde oscuro) -->
+    <color name="primary_variant">#004D40</color> <!-- Variante para estados activos -->
+    <color name="secondary">#009688</color> <!-- Color acento secundario -->
+    <color name="secondary_variant">#26A69A</color> <!-- Variante secundaria -->
+
+    <!-- Elementos Interactivos -->
+    <color name="input_background">#FFFFFF</color> <!-- Fondo de campos de formulario -->
+    <color name="input_stroke">#004D40</color> <!-- Borde de inputs activos -->
+    <color name="button_background">#00796B</color> <!-- Fondo de botones -->
+    <color name="button_text">#FFFFFF</color> <!-- Texto en botones -->
+
+    <!-- Estados y Feedback -->
+    <color name="disabled">#BDBDBD</color> <!-- Elementos deshabilitados -->
+    <color name="error">#B00020</color> <!-- Estados de error -->
+    <color name="warning_color_light">#FFB300</color> <!-- Alertas y advertencias -->
+    <color name="warning_icon_tint">#F57C00</color> <!-- Iconos de alerta -->
+
+    <!-- Divisores y Separadores -->
+    <color name="divider_color">#AAAAAA</color> <!-- Líneas divisorias -->
+
+    <!-- Tarjetas y Componentes Especiales -->
+    <color name="card_background">#FFFFFF</color> <!-- Fondo de tarjetas -->
+    <color name="chipBackgroundColor">#308778</color> <!-- Fondo de chips -->
+
+    <!-- Colores para Gráficos y Datos -->
+    <color name="high_training_teal">#00796B</color> <!-- Alto rendimiento -->
+    <color name="medium_training_blue">#1976D2</color> <!-- Rendimiento medio -->
+    <color name="low_training_orange">#FF5722</color> <!-- Bajo rendimiento -->
+
+    <!-- Colores de Accesibilidad -->
+    <color name="dark_text_primary">#E0F2F1</color> <!-- Texto legible sobre fondos oscuros -->
+    <color name="dark_text_secondary">#B3FFFFFF</color> <!-- Texto secundario contrastado -->
+
+    <!-- Colores Específicos de Iconos -->
+    <color name="icon_tint">#00796B</color> <!-- Tinte base para iconos -->
+
 </resources>

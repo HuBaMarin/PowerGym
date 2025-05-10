@@ -1,23 +1,20 @@
-package com.amarina.powergym.ui.main
+package com.amarina.powergym.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.amarina.powergym.PowerGymApplication
 import com.amarina.powergym.R
 import com.amarina.powergym.databinding.ActivityPrincipalBinding
-import com.amarina.powergym.ui.activity.EjercicioDetailActivity
-import com.amarina.powergym.ui.adapter.EjercicioAdapter
-import com.amarina.powergym.ui.activity.ProfileActivity
-import com.amarina.powergym.ui.activity.StatisticsActivity
-import com.amarina.powergym.ui.settings.SettingsActivity
+import com.amarina.powergym.ui.adapter.exercise.EjercicioAdapter
+import com.amarina.powergym.ui.adapter.exercise.EjercicioAdapterItem
 import com.amarina.powergym.ui.viewmodel.main.MainViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.amarina.powergym.utils.LanguageHelper
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -26,9 +23,23 @@ class PrincipalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrincipalBinding
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: EjercicioAdapter
+    private var currentDifficulty: String? = null
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.establecerIdioma(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Check if user is admin and redirect to AdminExerciseActivity
+        val sessionManager = (application as PowerGymApplication).sessionManager
+        if (sessionManager.esAdmin()) {
+            startActivity(Intent(this, AdminExerciseActivity::class.java))
+            finish()
+            return
+        }
+
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -39,7 +50,6 @@ class PrincipalActivity : AppCompatActivity() {
 
         setupAdapter()
         setupRecyclerView()
-        setupSearch()
         setupFilters()
         setupNavigation()
         observeViewModel()
@@ -47,7 +57,10 @@ class PrincipalActivity : AppCompatActivity() {
 
     private fun setupAdapter() {
         adapter = EjercicioAdapter { ejercicio ->
-            viewModel.navigateToEjercicioDetail(ejercicio.id)
+            // Navegar a la pantalla de detalles del ejercicio
+            val intent = Intent(this, EjercicioDetailActivity::class.java)
+            intent.putExtra("ejercicio_id", ejercicio)
+            startActivity(intent)
         }
     }
 
@@ -67,200 +80,140 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupSearch() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.setConsulta(newText ?: "")
-                return true
-            }
-        })
-    }
 
     private fun setupFilters() {
-        binding.chipDias.setOnClickListener {
-            showDiasDialog()
-        }
-
         binding.chipDificultad.setOnClickListener {
             showDificultadDialog()
         }
 
-        binding.chipGrupoMuscular.setOnClickListener {
-            showGrupoMuscularDialog()
+        binding.chipDificultad.setOnCloseIconClickListener {
+            currentDifficulty = null
+            binding.chipDificultad.text = getString(R.string.difficulty)
+            binding.chipDificultad.isCloseIconVisible = false
+            viewModel.clearDificultadFilter()
+            binding.chipDificultad.isChecked = false
         }
     }
 
-    private fun showDiasDialog() {
-        val dias = resources.getStringArray(R.array.dias_semana)
-        val seleccionados = viewModel.diasSeleccionados.value.toTypedArray()
-        val checkedItems = dias.map { it in seleccionados }.toBooleanArray()
-
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Selecciona los días")
-            .setMultiChoiceItems(dias, checkedItems) { _, which, isChecked ->
-                val selectedDias = viewModel.diasSeleccionados.value.toMutableSet()
-                if (isChecked) {
-                    selectedDias.add(dias[which])
-                } else {
-                    selectedDias.remove(dias[which])
-                }
-                viewModel.setDiasSeleccionados(selectedDias)
-            }
-            .setPositiveButton("Aceptar", null)
-            .show()
-    }
 
     private fun showDificultadDialog() {
-        val dificultades = resources.getStringArray(R.array.dificultades)
-        val selectedIndex = viewModel.dificultadesSeleccionadas.value
-            .singleOrNull()
-            ?.let { dificultades.indexOf(it) }
-            ?: -1
+        // Opciones visibles para el usuario
+        val dificultadesDisplay = arrayOf(
+            getString(R.string.basic),
+            getString(R.string.medium),
+            getString(R.string.advanced)
+        )
 
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Selecciona la dificultad")
-            .setSingleChoiceItems(dificultades, selectedIndex) { dialog, which ->
-                val selectedDificultades = setOf(dificultades[which])
-                viewModel.setDificultadesSeleccionadas(selectedDificultades)
+        // Valores reales en la base de datos
+        val dificultadesDB = arrayOf(
+            "basico",
+            "intermedio",
+            "avanzado"
+        )
+
+        // Determinar el índice de selección actual
+        val currentDisplayValue = when(currentDifficulty) {
+            "basico" -> getString(R.string.basic)
+            "intermedio" -> getString(R.string.medium)
+            "avanzado" -> getString(R.string.advanced)
+            else -> null
+        }
+
+        val currentIndex = if (currentDisplayValue != null) {
+            dificultadesDisplay.indexOf(currentDisplayValue)
+        } else {
+            -1
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.choose_difficulty))
+            .setSingleChoiceItems(dificultadesDisplay, currentIndex) { dialog, which ->
+                // Usar el valor de la BD para filtrar
+                val dbValue = dificultadesDB[which]
+                val displayValue = dificultadesDisplay[which]
+
+                // Guardar la selección y aplicar filtro
+                currentDifficulty = dbValue
+                applyDifficultyFilter(dbValue, displayValue)
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancelar", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
-    private fun showGrupoMuscularDialog() {
-        lifecycleScope.launch {
-            val gruposMuscular = viewModel.musculosState.value.toTypedArray()
-            val selectedIndex = viewModel.grupoMuscularSeleccionado.value
-                ?.let { gruposMuscular.indexOf(it) }
-                ?: -1
+    private fun applyDifficultyFilter(dbValue: String, displayValue: String) {
+        // Actualizar UI del chip
+        binding.chipDificultad.text = "${getString(R.string.difficulty)}: $displayValue"
+        binding.chipDificultad.isCloseIconVisible = true
+        binding.chipDificultad.isChecked = true
 
-            MaterialAlertDialogBuilder(this@PrincipalActivity)
-                .setTitle("Selecciona el grupo muscular")
-                .setSingleChoiceItems(gruposMuscular, selectedIndex) { dialog, which ->
-                    viewModel.setGrupoMuscularSeleccionado(gruposMuscular[which])
-                    dialog.dismiss()
-                }
-                .setNegativeButton("Cancelar", null)
-                .show()
-        }
+        // Aplicar filtro usando el valor de la BD
+        viewModel.setDificultadFilter(dbValue)
     }
+
+
+
+
+
+
 
     private fun setupNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> true
-               R.id.navigation_search -> {
-                    viewModel.search()
+                R.id.navigation_search -> {
+                    startActivity(Intent(this, SearchActivity::class.java))
                     false
                 }
-
                 R.id.navigation_statistics -> {
-                    viewModel.navigateToStatistics()
+                    startActivity(Intent(this, StatisticsActivity::class.java))
                     false
                 }
                 else -> false
             }
         }
 
-        binding.cardProfile.setOnClickListener {
-            viewModel.navigateToProfile()
+        binding.cvPerfil.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
 
     private fun observeViewModel() {
         lifecycleScope.launch {
-            viewModel.ejerciciosState.collectLatest { state ->
+            viewModel.ejercicios.collectLatest { state ->
                 when (state) {
                     is MainViewModel.EjerciciosState.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                        binding.rvEjercicios.visibility = View.GONE
-                        binding.tvEmpty.visibility = View.GONE
+                        binding.progressBar.visibility = android.view.View.VISIBLE
+                        binding.rvEjercicios.visibility = android.view.View.GONE
+                        binding.tvEmpty.visibility = android.view.View.GONE
                     }
                     is MainViewModel.EjerciciosState.Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.progressBar.visibility = android.view.View.GONE
 
-                        if (state.ejerciciosBySection.isEmpty()) {
-                            binding.rvEjercicios.visibility = View.GONE
-                            binding.tvEmpty.visibility = View.VISIBLE
+                        if (state.ejercicios.isEmpty()) {
+                            binding.rvEjercicios.visibility = android.view.View.GONE
+                            binding.tvEmpty.visibility = android.view.View.VISIBLE
+                            binding.tvEmpty.text = getString(R.string.no_results)
                         } else {
-                            binding.rvEjercicios.visibility = View.VISIBLE
-                            binding.tvEmpty.visibility = View.GONE
+                            binding.rvEjercicios.visibility = android.view.View.VISIBLE
+                            binding.tvEmpty.visibility = android.view.View.GONE
 
-                            val sections = state.ejerciciosBySection.toList()
-                            adapter.updateSections(sections)
+                            // SOLO actualiza las secciones con los ejercicios
+                            adapter.updateSections(state.ejercicios)
+
+                            // ELIMINA esta línea que sobreescribe con lista vacía
+                            // adapter.submitList(adapterItems)
                         }
                     }
                     is MainViewModel.EjerciciosState.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                        binding.rvEjercicios.visibility = View.GONE
-                        binding.tvEmpty.visibility = View.VISIBLE
-                        binding.tvEmpty.text = state.message
+                        binding.progressBar.visibility = android.view.View.GONE
+                        binding.rvEjercicios.visibility = android.view.View.GONE
+                        binding.tvEmpty.visibility = android.view.View.VISIBLE
+                        binding.tvEmpty.text = getString(R.string.no_results)
                     }
                 }
             }
         }
-
-        lifecycleScope.launch {
-            viewModel.navigationEvents.collectLatest { event ->
-                when (event) {
-                    is MainViewModel.NavigationEvent.ToEjercicioDetail -> {
-                        val intent = Intent(this@PrincipalActivity, EjercicioDetailActivity::class.java)
-                        intent.putExtra(EjercicioDetailActivity.EXTRA_EJERCICIO_ID, event.ejercicioId)
-                        startActivity(intent)
-                    }
-                    is MainViewModel.NavigationEvent.ToSettings -> {
-                        startActivity(Intent(this@PrincipalActivity, SettingsActivity::class.java))
-                    }
-                    is MainViewModel.NavigationEvent.ToProfile -> {
-                        startActivity(Intent(this@PrincipalActivity, ProfileActivity::class.java))
-                    }
-                    is MainViewModel.NavigationEvent.ToStatistics -> {
-                        startActivity(Intent(this@PrincipalActivity, StatisticsActivity::class.java))
-                    }
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.diasSeleccionados.collectLatest { dias ->
-                updateChipDiasText(dias)
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.dificultadesSeleccionadas.collectLatest { dificultades ->
-                updateChipDificultadText(dificultades)
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.grupoMuscularSeleccionado.collectLatest { grupo ->
-                updateChipGrupoMuscularText(grupo)
-            }
-        }
     }
 
-    private fun updateChipDiasText(dias: Set<String>) {
-        binding.chipDias.text = when {
-            dias.isEmpty() -> "Todos los días"
-            dias.size == 1 -> dias.first()
-            else -> "${dias.size} días"
-        }
-    }
-
-    private fun updateChipDificultadText(dificultades: Set<String>) {
-        binding.chipDificultad.text = when {
-            dificultades.isEmpty() -> "Cualquier dificultad"
-            else -> dificultades.first()
-        }
-    }
-
-    private fun updateChipGrupoMuscularText(grupo: String?) {
-        binding.chipGrupoMuscular.text = grupo ?: "Todos los grupos"
-    }
 }

@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="?attr/colorSurface"
     tools:context=".ui.activity.PrincipalActivity">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/primary"
+        android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="12dp">
@@ -34,14 +34,14 @@
                 android:text="@string/difficulty"
                 app:chipIcon="@drawable/chart_bar_svgrepo_com"
                 app:chipIconSize="18dp"
-                app:chipIconTint="@color/primary"
+                app:chipIconTint="?attr/colorPrimary"
                 app:closeIconEnabled="false"
                 app:chipStartPadding="12dp"
                 app:chipEndPadding="12dp"
-                app:chipBackgroundColor="@color/white"
-                app:chipStrokeColor="@color/primary"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipStrokeColor="?attr/colorPrimary"
                 app:chipStrokeWidth="1dp"
-                android:textColor="@color/text_color"/>
+                android:textColor="?attr/colorOnSurface" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.card.MaterialCardView
@@ -52,8 +52,8 @@
             android:focusable="true"
             app:cardCornerRadius="24dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/ice_blue"
-            app:strokeColor="@color/primary"
+            app:cardBackgroundColor="?attr/colorSurface"
+            app:strokeColor="?attr/colorPrimary"
             app:strokeWidth="1dp"
             android:layout_marginStart="8dp">
 
@@ -77,7 +77,7 @@
         android:layout_height="0dp"
         android:padding="8dp"
         android:clipToPadding="false"
-        android:background="@color/background_color"
+        android:background="?attr/colorSurface"
         android:contentDescription="@string/exercises"
         app:layout_constraintTop_toBottomOf="@+id/Header"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"/>
@@ -88,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:indeterminateTint="@color/primary"
+        android:indeterminateTint="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="@id/rvEjercicios"
         app:layout_constraintBottom_toBottomOf="@id/rvEjercicios"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,10 +111,10 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/background_color"
+        android:background="?attr/colorSurface"
         android:elevation="8dp"
-        app:itemIconTint="@color/icon_tint"
-        app:itemTextColor="@color/icon_tint"
+        app:itemIconTint="?attr/colorOnSurface"
+        app:itemTextColor="?attr/colorOnSurface"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"

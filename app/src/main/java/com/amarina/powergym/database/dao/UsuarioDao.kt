@@ -5,24 +5,33 @@ import com.amarina.powergym.database.entities.Usuario
 
 @Dao
 interface UsuarioDao {
+
     @Insert
-    suspend fun insert(user: Usuario): Long
-
-    @Query("SELECT * FROM usuarios WHERE email = :email AND password = :password")
-    suspend fun login(email: String, password: String): Usuario?
-
-    @Query("SELECT * FROM usuarios WHERE email = :email")
-    suspend fun getUserByEmail(email: String): Usuario?
+    suspend fun insertar(user: Usuario): Long
 
     @Update
-    suspend fun update(user: Usuario)
+    suspend fun actualizar(user: Usuario)
 
     @Delete
-    suspend fun delete(user: Usuario)
+    suspend fun eliminar(user: Usuario)
 
     @Query("SELECT * FROM usuarios")
-    suspend fun getAll(): List<Usuario>
+    suspend fun obtenerTodos(): List<Usuario>
 
     @Query("SELECT * FROM usuarios WHERE id = :userId")
-    suspend fun getUserById(userId: Int): Usuario?
+    suspend fun obtenerUsuarioPorId(userId: Int): Usuario?
+
+    @Query("SELECT * FROM usuarios WHERE email = :email")
+    suspend fun obtenerUsuarioPorEmail(email: String): Usuario?
+
+    /**
+     * Iniciar sesión a un usuario con su correo y contraseña para
+     * las pruebas de la aplicación.
+     *
+     * @param email El correo electrónico del usuario
+     * @param password La contraseña del usuario
+     * @return El usuario autenticado o null si las credenciales son incorrectas
+     */
+    @Query("SELECT * FROM usuarios WHERE email = :email AND password = :password")
+    suspend fun login(email: String, password: String): Usuario?
 }

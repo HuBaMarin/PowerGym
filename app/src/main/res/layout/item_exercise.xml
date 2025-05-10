@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_margin="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/primary"
+    app:strokeWidth="1dp">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,31 +20,58 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:contentDescription="placeholder_image"
-            android:src="@drawable/workout_placeholder_image" />
+            android:contentDescription="@string/exercise_image"
+            android:src="@drawable/workout_placeholder_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/gradient_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.5" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#E91E63"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="12dp"
+            android:background="@android:color/transparent"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/tvExerciseTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Nombre del Ejercicio"/>
 
             <TextView
                 android:id="@+id/tvMuscleGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Grupo Muscular"/>
 
         </LinearLayout>
 
@@ -50,12 +79,14 @@
             android:id="@+id/chipDifficulty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
             android:layout_margin="8dp"
-            android:text="Ejemplo"
-            app:chipBackgroundColor="@color/primarycolor"
-            app:chipIconTint="@android:color/white"
-            app:chipTextColor="@android:color/white" />
+            app:chipBackgroundColor="@color/primary"
+            android:textColor="@color/white"
+            app:chipStrokeColor="@color/primary_variant"
+            app:chipStrokeWidth="1dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Dificultad"/>
 
-    </FrameLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

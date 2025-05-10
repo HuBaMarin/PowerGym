@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/darkModeToggleContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackgroundBorderless">
+
+    <ImageView
+        android:id="@+id/darkModeToggle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/toggle_dark_mode"
+        android:src="@drawable/ic_dark_mode"
+        app:tint="?attr/colorControlNormal" />
+
+</FrameLayout>

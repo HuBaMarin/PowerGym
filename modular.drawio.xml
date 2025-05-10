@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36" version="26.2.13">
+  <diagram name="Página-1" id="jX2LSwKFRKfeDX7vtRQw">
+    <mxGraphModel dx="1428" dy="751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Start Event -->
+        <mxCell id="9" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#00CC00;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="670" y="100" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Start to Main Process Flow -->
+        <mxCell id="10" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#00CC00;rounded=0;" edge="1" parent="1" source="9" target="33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="685" y="198.75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Title -->
+        <mxCell id="11" value="Flujo de Trabajo PowerGym" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="585" y="30" width="200" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Authentication check -->
+        <mxCell id="33" value="¿Usuario&#xa;Autenticado?" style="rhombus;whiteSpace=wrap;html=1;strokeColor=#0000ff;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="640" y="160" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- No Auth Path -->
+        <mxCell id="34" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="33" target="35">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Auth Activity -->
+        <mxCell id="35" value="Autenticación&#xa;(LoginActivity)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="480" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Auth to User Role Check -->
+        <mxCell id="36" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="35" target="43">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="240" />
+              <mxPoint x="685" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Auth Yes path -->
+        <mxCell id="37" value="Sí" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="33" target="43">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="685" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Role Check -->
+        <mxCell id="43" value="¿Es&#xa;Administrador?" style="rhombus;whiteSpace=wrap;html=1;strokeColor=#0000ff;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="640" y="260" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- No Admin Path (Normal User) -->
+        <mxCell id="44" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="43" target="2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="685" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Path -->
+        <mxCell id="45" value="Sí" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="43" target="46">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Control Activity -->
+        <mxCell id="46" value="Panel de Administrador&#xa;(AdminControlActivity)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="780" y="260" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin Fork -->
+        <mxCell id="47" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=parallelGateway;strokeColor=#00ff00;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="835" y="350" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin Control to Fork -->
+        <mxCell id="48" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="46" target="47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin User Management -->
+        <mxCell id="49" value="Gestión de Usuarios" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="760" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin Exercise Management -->
+        <mxCell id="50" value="Gestión de Ejercicios&#xa;(AdminExerciseActivity)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="900" y="400" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Fork to User Management -->
+        <mxCell id="51" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#00ff00;rounded=0;" edge="1" parent="1" source="47" target="49">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Fork to Exercise Management -->
+        <mxCell id="52" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#00ff00;rounded=0;" edge="1" parent="1" source="47" target="50">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Join -->
+        <mxCell id="53" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=parallelGateway;strokeColor=#00ff00;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="835" y="490" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- User Management to Join -->
+        <mxCell id="54" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="49" target="53">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Exercise Management to Join -->
+        <mxCell id="55" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="50" target="53">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Logout to Login -->
+        <mxCell id="56" value="Cerrar Sesión" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="53" target="35">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="850" y="550" />
+              <mxPoint x="420" y="550" />
+              <mxPoint x="420" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Main Process Flow -->
+        <mxCell id="2" value="Inicialización&#xa;(PrincipalActivity)" style="shape=line;html=1;strokeWidth=6;strokeColor=#ff0000;" vertex="1" parent="1">
+          <mxGeometry x="585" y="320" width="200" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Main Process to Decision -->
+        <mxCell id="12" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" parent="1" source="2" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Loop Back Connection -->
+        <mxCell id="3" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" edge="1" parent="1" source="4" target="5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="610" y="440" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="615" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Decision Node (Loop Condition) -->
+        <mxCell id="4" value="Verificar&#xa;Configuración&#xa;(Filtrar por dificultad)" style="rhombus;whiteSpace=wrap;html=1;strokeColor=#0000ff;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="635" y="360" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Decision Yes Path -->
+        <mxCell id="13" value="Sí" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="4" target="14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Additional Activity -->
+        <mxCell id="14" value="Personalizar&#xa;Configuración" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="550" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Activity to Fork -->
+        <mxCell id="15" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="14" target="5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="480" />
+              <mxPoint x="615" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Fork Gateway -->
+        <mxCell id="5" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=parallelGateway;strokeColor=#00ff00;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="600" y="500" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Fork to Process 1 -->
+        <mxCell id="16" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#00ff00;rounded=0;" edge="1" parent="1" source="5" target="6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Fork to Process 2 -->
+        <mxCell id="17" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#00ff00;rounded=0;" edge="1" parent="1" source="5" target="7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Parallel Process 1 -->
+        <mxCell id="6" value="Seguimiento de Ejercicios&#xa;(EjercicioDetailActivity)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="500" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Parallel Process 2 -->
+        <mxCell id="7" value="Actualización de UI&#xa;(RecyclerView Adapter)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="700" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Process 1 to Join -->
+        <mxCell id="18" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="6" target="20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Process 2 to Join -->
+        <mxCell id="19" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="7" target="20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Join Gateway -->
+        <mxCell id="20" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=parallelGateway;strokeColor=#00ff00;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="600" y="640" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Join to Final Decision -->
+        <mxCell id="21" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#00ff00;rounded=0;" edge="1" parent="1" source="20" target="22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="615" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Final Decision Node -->
+        <mxCell id="22" value="¿Entrenamiento&#xa;Completo?" style="rhombus;whiteSpace=wrap;html=1;strokeColor=#0000ff;fillColor=#dae8fc;" vertex="1" parent="1">
+          <mxGeometry x="570" y="690" width="90" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Loop Back to Check Condition -->
+        <mxCell id="23" value="No" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="22" target="4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="720" />
+              <mxPoint x="450" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- End Process -->
+        <mxCell id="24" value="Sí" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#0000ff;rounded=0;" edge="1" parent="1" source="22" target="25">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="690" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Save Results Activity -->
+        <mxCell id="25" value="Guardar Resultados&#xa;(Registrar Estadísticas)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="700" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Statistics View Connection -->
+        <mxCell id="38" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="25" target="39">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="720" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="850" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Statistics View Activity -->
+        <mxCell id="39" value="Ver Estadísticas&#xa;(StatisticsActivity)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#666666;fillColor=#f5f5f5;" vertex="1" parent="1">
+          <mxGeometry x="850" y="690" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Final Step -->
+        <mxCell id="26" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#666666;rounded=0;" edge="1" parent="1" source="25" target="27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- End Event -->
+        <mxCell id="27" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="745" y="790" width="30" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- User Preferences Data Object -->
+        <mxCell id="28" value="Preferencias de Usuario&#xa;(Entidad Preferencia)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="400" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Data Object Connection -->
+        <mxCell id="29" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endSize=8;strokeColor=#d6b656;rounded=0;dashed=1;" edge="1" parent="1" source="14" target="28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Exercise Data Object -->
+        <mxCell id="40" value="Datos de Ejercicio&#xa;(Entidad Ejercicio)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="380" y="550" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Exercise Data Connection -->
+        <mxCell id="41" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endSize=8;strokeColor=#d6b656;rounded=0;dashed=1;" edge="1" parent="1" source="6" target="40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin User Data Object -->
+        <mxCell id="57" value="Datos de Usuario&#xa;(Entidad Usuario)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="760" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin User Data Connection -->
+        <mxCell id="58" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endSize=8;strokeColor=#d6b656;rounded=0;dashed=1;" edge="1" parent="1" source="49" target="57">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Admin Exercise Data Object -->
+        <mxCell id="59" value="Datos de Ejercicio&#xa;(Entidad Ejercicio)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin Exercise Data Connection -->
+        <mxCell id="60" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endSize=8;strokeColor=#d6b656;rounded=0;dashed=1;" edge="1" parent="1" source="50" target="59">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Statistics Data Object -->
+        <mxCell id="30" value="Datos de Estadísticas&#xa;(Entidad Estadistica)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="900" y="620" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Statistics Data Connection -->
+        <mxCell id="31" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;endSize=8;strokeColor=#d6b656;rounded=0;dashed=1;" edge="1" parent="1" source="25" target="30">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="720" />
+              <mxPoint x="820" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Comment/Note 1 -->
+        <mxCell id="8" value="Hilos de Procesamiento Concurrente&#xa;Manejan actualizaciones de UI y seguimiento de ejercicio en segundo plano&#xa;Utilizados por EjercicioDetailActivity y StatisticsActivity" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#ffff00;fillColor=#ffffcc;" vertex="1" parent="1">
+          <mxGeometry x="550" y="600" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Database Repository Comment -->
+        <mxCell id="42" value="Capa de Repositorio&#xa;EjercicioRepository, EstadisticaRepository, UserRepository&#xa;Proporciona acceso a datos para todas las actividades" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#ffff00;fillColor=#ffffcc;" vertex="1" parent="1">
+          <mxGeometry x="250" y="320" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- System Architecture Comment -->
+        <mxCell id="32" value="Flujo de Aplicación PowerGym&#xa;Arquitectura MVVM con base de datos Room&#xa;Admite autenticación, seguimiento de ejercicios y estadísticas" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#ffff00;fillColor=#ffffcc;" vertex="1" parent="1">
+          <mxGeometry x="350" y="100" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Admin Flow Comment -->
+        <mxCell id="61" value="Flujo de Administrador&#xa;Permite la gestión de usuarios y ejercicios&#xa;Accesible solo para cuentas con rol de administrador" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;strokeColor=#ffff00;fillColor=#ffffcc;" vertex="1" parent="1">
+          <mxGeometry x="960" y="260" width="180" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

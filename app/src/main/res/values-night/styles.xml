@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- SearchView style for dark mode -->
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+        <item name="android:tint">@color/primary</item>
+    </style>
+
     <!-- Common TextInput style for dark mode -->
     <style name="Widget.PowerGym.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/primary</item>
@@ -11,7 +18,7 @@
 
     <!-- Style for EditText inside TextInputLayout -->
     <style name="Widget.PowerGym.TextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
-        <item name="android:textColor">@color/input_text_color</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="android:backgroundTint">@color/input_background</item>
     </style>
 
@@ -23,7 +30,7 @@
 
     <!-- Primary button style -->
     <style name="Widget.PowerGym.Button.Primary" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="backgroundTint">@color/primary</item>
         <item name="cornerRadius">8dp</item>
         <item name="android:textSize">16sp</item>
@@ -42,8 +49,19 @@
     <!-- Chip style -->
     <style name="Widget.PowerGym.Chip" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipBackgroundColor">@color/primary</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="chipStrokeColor">@color/primary_variant</item>
         <item name="chipStrokeWidth">1dp</item>
+    </style>
+
+    <!-- Add Spinner style if needed -->
+    <style name="Widget.PowerGym.Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:popupBackground">@color/primary</item>
+    </style>
+
+    <!-- Spinner item style -->
+    <style name="Widget.PowerGym.SpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/text_color</item>
     </style>
 </resources>

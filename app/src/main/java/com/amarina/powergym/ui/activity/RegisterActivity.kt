@@ -1,5 +1,6 @@
 package com.amarina.powergym.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.amarina.powergym.PowerGymApplication
+import com.amarina.powergym.R
 import com.amarina.powergym.databinding.ActivityRegisterBinding
 import com.amarina.powergym.ui.viewmodel.auth.RegisterViewModel
+import com.amarina.powergym.utils.LanguageHelper
 import com.amarina.powergym.utils.Utils
-import com.amarina.powergym.utils.showToast
+import com.amarina.powergym.utils.mostrarToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -18,6 +21,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: RegisterViewModel
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.establecerIdioma(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,18 +42,14 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnRegister.setOnClickListener {
-            val name = binding.etName.text.toString().trim()
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+            val name = binding.etNameRegister.text.toString().trim()
+            val email = binding.etEmailRegister.text.toString().trim()
+            val password = binding.etPasswordRegister.text.toString().trim()
+            val confirmPassword = binding.etConfirmPasswordRegister.text.toString().trim()
 
             if (validateInputs(name, email, password, confirmPassword)) {
                 viewModel.register(email, password, name)
             }
-        }
-
-        binding.toolbar.setNavigationOnClickListener {
-            viewModel.navigateBack()
         }
     }
 
@@ -54,31 +57,31 @@ class RegisterActivity : AppCompatActivity() {
         var isValid = true
 
         if (name.isBlank()) {
-            binding.etName.error = "Nombre requerido"
+            binding.etNameRegister.error = getString(R.string.required_name)
             isValid = false
         } else {
-            binding.etName.error = null
+            binding.etNameRegister.error = null
         }
 
-        if (!Utils.isValidEmail(email)) {
-            binding.etEmail.error = "Email no válido"
+        if (!Utils.esEmailValido(email)) {
+            binding.etEmailRegister.error = getString(R.string.invalid_email)
             isValid = false
         } else {
-            binding.etEmail.error = null
+            binding.etEmailRegister.error = null
         }
 
-        if (!Utils.isValidPassword(password)) {
-            binding.etPassword.error = "La contraseña debe tener al menos 6 caracteres"
+        if (!Utils.esContrasenaValida(password)) {
+            binding.etPasswordRegister.error = getString(R.string.invalid_password)
             isValid = false
         } else {
-            binding.etPassword.error = null
+            binding.etPasswordRegister.error = null
         }
 
         if (password != confirmPassword) {
-            binding.etConfirmPassword.error = "Las contraseñas no coinciden"
+            binding.etConfirmPasswordRegister.error = getString(R.string.passwords_dont_match)
             isValid = false
         } else {
-            binding.etConfirmPassword.error = null
+            binding.etConfirmPasswordRegister.error = null
         }
 
         return isValid
@@ -102,7 +105,7 @@ class RegisterActivity : AppCompatActivity() {
                     is RegisterViewModel.RegisterState.Error -> {
                         binding.progressBarRegister.visibility = View.GONE
                         binding.btnRegister.isEnabled = true
-                        showToast(state.message)
+                        mostrarToast(state.message)
                     }
                 }
             }
@@ -112,7 +115,7 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.navigationEvents.collectLatest { event ->
                 when (event) {
                     is RegisterViewModel.NavigationEvent.ToLogin -> {
-                        showToast("Registro exitoso, inicia sesión")
+                        mostrarToast("Registro exitoso, inicia sesión")
                         navigateToLogin()
                     }
                     is RegisterViewModel.NavigationEvent.Back -> {

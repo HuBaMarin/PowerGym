@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="?attr/colorSurface"
+    app:strokeColor="?attr/colorPrimary"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivEjercicio"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/exercise_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvNombreEjercicio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/ivEjercicio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivEjercicio"
+            tools:text="Nombre del Ejercicio" />
+
+        <TextView
+            android:id="@+id/tvGrupoMuscular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tvNombreEjercicio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreEjercicio"
+            tools:text="Grupo Muscular" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            app:dividerColor="?attr/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/ivEjercicio"/>
+
+        <TextView
+            android:id="@+id/tvFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Fecha: 23/03/2025" />
+
+        <TextView
+            android:id="@+id/tvCaloriasQuemadas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="?attr/colorSecondary"
+            app:layout_constraintTop_toBottomOf="@id/tvFecha"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvTiempoTotal"
+            tools:text="250 cal" />
+
+        <TextView
+            android:id="@+id/tvTiempoTotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorSecondary"
+            android:textAlignment="textEnd"
+            app:layout_constraintTop_toTopOf="@id/tvCaloriasQuemadas"
+            app:layout_constraintStart_toEndOf="@id/tvCaloriasQuemadas"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="30 min" />
+
+        <TextView
+            android:id="@+id/tvSeries"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/tvCaloriasQuemadas"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvRepeticiones"
+            tools:text="3 series" />
+
+        <TextView
+            android:id="@+id/tvRepeticiones"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorPrimary"
+            android:textAlignment="textEnd"
+            app:layout_constraintTop_toTopOf="@id/tvSeries"
+            app:layout_constraintStart_toEndOf="@id/tvSeries"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="12 reps" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

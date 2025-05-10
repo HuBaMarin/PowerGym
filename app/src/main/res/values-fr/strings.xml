@@ -41,7 +41,7 @@
     <string name="frequency_monthly">Mensuelle</string>
     
     <!-- Search -->
-    <string name="search_hint">Rechercher des exercices...</string>
+    <string name="search_hint">Rechercher des exercices…</string>
     <string name="search_results">Résultats de recherche</string>
     <string name="no_results">Aucun résultat trouvé</string>
     <string name="no_results_description">Essayez différents termes ou filtres de recherche</string>
@@ -203,7 +203,28 @@
     <string name="exercise_salto_a_la_comba_desc">Exercice cardio utilisant une corde à sauter pour la coordination et l’endurance</string>
 
     <string name="exercise_cable_row_name">Rameur à Câble</string>
-    <string name="exercise_cable_row_desc">Un exercice composé pour le dos effectué à l&#39;aide d&#39;une machine à câble en position assise qui renforce les muscles du milieu du dos, les dorsaux et les bras.</string>
+    <string name="exercise_cable_row_desc">Un exercice pour le dos effectué avec une machine à câble.</string>
+
+    <string name="exercise_seated_arm_curl_name">Élévations des bras en position assise</string>
+    <string name="exercise_seated_arm_curl_desc">Un exercice simple pour renforcer les muscles des bras en position assise.</string>
+
+    <string name="exercise_wall_pushup_name">Pompes contre le mur</string>
+    <string name="exercise_wall_pushup_desc">Un exercice du haut du corps qui renforce la poitrine et les bras.</string>
+
+    <string name="exercise_seated_marching_name">Marche assise</string>
+    <string name="exercise_seated_marching_desc">Un exercice pour les jambes qui améliore la force en position assise.</string>
+
+    <string name="exercise_balance_support_name">Exercices d\'équilibre avec soutien</string>
+    <string name="exercise_balance_support_desc">Des exercices qui améliorent l\'équilibre avec un support pour plus de sécurité.</string>
+
+    <string name="exercise_shoulder_rolls_name">Rotations des épaules</string>
+    <string name="exercise_shoulder_rolls_desc">Un mouvement circulaire des épaules qui réduit la tension.</string>
+
+    <string name="exercise_knee_extension_name">Extensions de genou</string>
+    <string name="exercise_knee_extension_desc">Un exercice assis qui renforce les muscles de la cuisse.</string>
+
+    <string name="exercise_tabletop_circle_name">Cercles sur table</string>
+    <string name="exercise_tabletop_circle_desc">Un exercice de réhabilitation pour la coordination du bras.</string>
 
     <!-- Search Empty State -->
     <string name="empty_search">Aucun résultat trouvé</string>
@@ -328,12 +349,12 @@
     <string name="muscle_group_full_body">Corps Entier</string>
 
     <!-- Sections -->
-    <string name="section_demo">Démo</string>
-    <string name="section_elderly">Personnes âgées</string>
-    <string name="section_reduced_mobility">Mobilité réduite</string>
+    <string name="section_demo">Démonstration</string>
+    <string name="section_elderly">Personnes Âgées</string>
+    <string name="section_reduced_mobility">Mobilité Réduite</string>
     <string name="section_rehabilitation">Réhabilitation</string>
-    <string name="section_upper_body">Haut du corps</string>
-    <string name="section_lower_body">Bas du corps</string>
+    <string name="section_upper_body">Haut du Corps</string>
+    <string name="section_lower_body">Bas du Corps</string>
     <string name="section_cardio">Cardio</string>
 
     <!-- Training Days -->

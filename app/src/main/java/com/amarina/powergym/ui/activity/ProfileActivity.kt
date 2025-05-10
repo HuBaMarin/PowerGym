@@ -1,5 +1,6 @@
 package com.amarina.powergym.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,18 +9,25 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.amarina.powergym.PowerGymApplication
 import com.amarina.powergym.databinding.ActivityProfileBinding
-import com.amarina.powergym.ui.profile.ProfileViewModel
-import com.amarina.powergym.ui.settings.SettingsActivity
 import com.amarina.powergym.utils.Utils
-import com.amarina.powergym.utils.showToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import com.amarina.powergym.R
+import com.amarina.powergym.utils.LanguageHelper
+import com.amarina.powergym.utils.mostrarToast
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import com.amarina.powergym.ui.viewholder.profile.ProfileViewModel
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var viewModel: ProfileViewModel
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.establecerIdioma(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,12 +80,14 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             viewModel.saveUserProfile()
         }
+
+
     }
 
     private fun showEditNameDialog() {
         val inflater = layoutInflater
-        val dialogView = inflater.inflate(com.amarina.powergym.R.layout.dialog_edit_text, null)
-        val editText = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.amarina.powergym.R.id.etDialogInput)
+        val dialogView = inflater.inflate(R.layout.dialog_edit_name, null)
+        val editText = dialogView.findViewById<TextInputEditText>(R.id.etDialogInput)
         editText.setText(binding.tvName.text)
 
         MaterialAlertDialogBuilder(this)
@@ -95,9 +105,9 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun showEditEmailDialog() {
         val inflater = layoutInflater
-        val dialogView = inflater.inflate(com.amarina.powergym.R.layout.dialog_edit_text, null)
-        val editText = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.amarina.powergym.R.id.etDialogInput)
-        val inputLayout = dialogView.findViewById<com.google.android.material.textfield.TextInputLayout>(com.amarina.powergym.R.id.tilDialogInput)
+        val dialogView = inflater.inflate(R.layout.dialog_edit_email, null)
+        val editText = dialogView.findViewById<TextInputEditText>(R.id.etDialogInput)
+        val inputLayout = dialogView.findViewById<TextInputLayout>(R.id.tilDialogInput)
 
         inputLayout.hint = "Email"
         editText.setText(binding.tvEmail.text)
@@ -113,7 +123,7 @@ class ProfileActivity : AppCompatActivity() {
 
         dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             val newEmail = editText.text.toString().trim()
-            if (!Utils.isValidEmail(newEmail)) {
+            if (!Utils.esEmailValido(newEmail)) {
                 inputLayout.error = "Email no válido"
             } else {
                 dialog.dismiss()
@@ -124,14 +134,14 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun showEditPasswordDialog() {
         val inflater = layoutInflater
-        val dialogView = inflater.inflate(com.amarina.powergym.R.layout.dialog_edit_password, null)
-        val etCurrentPassword = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.amarina.powergym.R.id.etCurrentPassword)
-        val etNewPassword = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.amarina.powergym.R.id.etNewPassword)
-        val etConfirmPassword = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(com.amarina.powergym.R.id.etConfirmPassword)
+        val dialogView = inflater.inflate(R.layout.dialog_edit_password, null)
+        val etCurrentPassword = dialogView.findViewById<TextInputEditText>(R.id.etCurrentPassword)
+        val etNewPassword = dialogView.findViewById<TextInputEditText>(R.id.etNewPassword)
+        val etConfirmPassword = dialogView.findViewById<TextInputEditText>(R.id.etConfirmPassword)
 
-        val tilCurrentPassword = dialogView.findViewById<com.google.android.material.textfield.TextInputLayout>(com.amarina.powergym.R.id.tilCurrentPassword)
-        val tilNewPassword = dialogView.findViewById<com.google.android.material.textfield.TextInputLayout>(com.amarina.powergym.R.id.tilNewPassword)
-        val tilConfirmPassword = dialogView.findViewById<com.google.android.material.textfield.TextInputLayout>(com.amarina.powergym.R.id.tilConfirmPassword)
+        val tilCurrentPassword = dialogView.findViewById<TextInputLayout>(R.id.tilCurrentPassword)
+        val tilNewPassword = dialogView.findViewById<TextInputLayout>(R.id.tilNewPassword)
+        val tilConfirmPassword = dialogView.findViewById<TextInputLayout>(R.id.tilConfirmPassword)
 
        val dialog = MaterialAlertDialogBuilder(this)
            .setTitle("Cambiar contraseña")
@@ -156,7 +166,7 @@ class ProfileActivity : AppCompatActivity() {
                 tilCurrentPassword.error = null
             }
 
-            if (!Utils.isValidPassword(newPassword)) {
+            if (!Utils.esContrasenaValida(newPassword)) {
                 tilNewPassword.error = "La contraseña debe tener al menos 6 caracteres"
                 isValid = false
             } else {
@@ -173,7 +183,7 @@ class ProfileActivity : AppCompatActivity() {
             if (isValid) {
                 if (viewModel.updateUserPassword(currentPassword, newPassword)) {
                     dialog.dismiss()
-                    showToast("Contraseña actualizada")
+                    mostrarToast("Contraseña actualizada")
                 } else {
                     tilCurrentPassword.error = "Contraseña actual incorrecta"
                 }
@@ -187,6 +197,9 @@ class ProfileActivity : AppCompatActivity() {
             .setMessage("¿Estás seguro de que quieres cerrar sesión?")
             .setPositiveButton("Sí") { _, _ ->
                 viewModel.logout()
+                val intent = Intent(this, AutenticacionActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
             .setNegativeButton("No", null)
             .show()
@@ -218,13 +231,15 @@ class ProfileActivity : AppCompatActivity() {
                         val user = state.user
                         binding.tvName.text = user.nombre.takeIf { it.isNotEmpty() } ?: "Sin nombre"
                         binding.tvEmail.text = user.email
-                        binding.tvRegistrationDate.text = Utils.formatDate(user.fechaRegistro)
+                        binding.tvName.text = user.nombre
+                        binding.tvRegistrationDate.text = Utils.formatearFecha(user.fechaRegistro)
                     }
                     is ProfileViewModel.ProfileState.Error -> {
                         binding.progressBar.visibility = View.GONE
-                        showToast(state.message)
+                        mostrarToast(state.message)
                         finish()
                     }
+
                 }
             }
         }
@@ -245,8 +260,8 @@ class ProfileActivity : AppCompatActivity() {
                     }
                     is ProfileViewModel.UpdateState.Error -> {
                         binding.btnSave.isEnabled = true
-                        binding.btnSave.text = "Guardar cambios"
-                        showToast(state.message)
+                        binding.btnSave.text = "Error al guardar"
+                        mostrarToast(state.message)
                     }
                 }
             }

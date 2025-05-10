@@ -331,12 +331,12 @@
 
     <!-- Sections -->
     <string name="section_demo">Demostración</string>
-    <string name="section_elderly">Adultos Mayores</string>
+    <string name="section_elderly">Tercera Edad</string>
     <string name="section_reduced_mobility">Movilidad Reducida</string>
     <string name="section_rehabilitation">Rehabilitación</string>
-    <string name="section_upper_body">Parte Superior</string>
-    <string name="section_lower_body">Parte Inferior</string>
-    <string name="section_cardio">Cardio</string>
+    <string name="section_upper_body">Tren Superior</string>
+    <string name="section_lower_body">Tren Inferior</string>
+    <string name="section_cardio">Cardiovascular</string>
 
     <!-- Training Days -->
     <string name="day_monday">Lunes</string>

@@ -4,18 +4,27 @@
         <!-- Colores generales -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_variant</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">#000000</item>
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorSecondaryVariant">@color/secondary_variant</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">#000000</item>
         <item name="android:colorBackground">@color/background_color</item>
         <item name="colorSurface">@color/surface_color</item>
         <item name="colorOnBackground">@color/text_color</item>
         <item name="colorOnSurface">@color/text_color</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:statusBarColor">#000000</item>
         <item name="android:textColorPrimary">@color/text_color</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+
+    <style name="Base.Theme.PowerGym.Night" parent="Base.Theme.PowerGym">
+        <item name="colorPrimary">@color/secondary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">#121212</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_variant</item>
+        <item name="colorOnSecondary">#121212</item>
     </style>
 
     <!-- Splash Screen Theme -->
@@ -24,11 +33,6 @@
     </style>
 
     <!-- Estilos para los distintos componentes de google -->
-    <style name="Widget.PowerGym.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">@color/black</item>
-        <item name="backgroundTint">@color/primary</item>
-    </style>
-    
     <style name="Widget.PowerGym.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/text_color</item>
     </style>

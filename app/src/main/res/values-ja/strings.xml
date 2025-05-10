@@ -298,7 +298,7 @@
     <string name="exercise_salto_a_la_comba_desc">調整力と持久力のためのジャンプロープを使用した有酸素運動</string>
 
     <string name="exercise_cable_row_name">ケーブルロウ</string>
-    <string name="exercise_cable_row_desc">シートに座ってケーブルマシンを使用して行う背中の複合エクササイズで、中背筋、広背筋、腕を強化します。</string>
+    <string name="exercise_cable_row_desc">ケーブルマシンを使用して行う背中のエクササイズ。</string>
 
     <!-- Search Empty State -->
     <string name="no_results">結果が見つかりません</string>
@@ -336,8 +336,8 @@
     <!-- Sections -->
     <string name="section_demo">デモ</string>
     <string name="section_elderly">高齢者</string>
-    <string name="section_reduced_mobility">運動機能低下</string>
-    <string name="section_rehabilitation">リハビリ</string>
+    <string name="section_reduced_mobility">運動制限がある方</string>
+    <string name="section_rehabilitation">リハビリテーション</string>
     <string name="section_upper_body">上半身</string>
     <string name="section_lower_body">下半身</string>
     <string name="section_cardio">有酸素運動</string>

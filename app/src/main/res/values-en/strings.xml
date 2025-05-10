@@ -337,9 +337,9 @@
 
     <!-- Sections -->
     <string name="section_demo">Demo</string>
-    <string name="section_elderly">Elderly</string>
-    <string name="section_reduced_mobility">Reduced Mobility</string>
-    <string name="section_rehabilitation">Rehabilitation</string>
+    <string name="section_elderly">Senior Fitness</string>
+    <string name="section_reduced_mobility">Limited Mobility</string>
+    <string name="section_rehabilitation">Recovery</string>
     <string name="section_upper_body">Upper Body</string>
     <string name="section_lower_body">Lower Body</string>
     <string name="section_cardio">Cardio</string>

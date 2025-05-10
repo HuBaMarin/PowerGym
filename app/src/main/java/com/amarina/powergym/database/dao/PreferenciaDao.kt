@@ -6,15 +6,19 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PreferenciaDao {
+   
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(preferencia: Preferencia): Long
+    suspend fun insertar(preferencia: Preferencia): Long
 
     @Update
-    suspend fun update(preferencia: Preferencia)
+    suspend fun actualizar(preferencia: Preferencia)
 
+    /**
+     * Obtiene las preferencias de un usuario de forma síncrona.
+     *
+     * @param usuarioId El ID del usuario
+     * @return Las preferencias del usuario o null si no existen
+     */
     @Query("SELECT * FROM preferencias WHERE usuarioId = :usuarioId")
-    fun getPreferenciasByUsuario(usuarioId: Int): Flow<Preferencia?>
-
-    @Query("SELECT * FROM preferencias WHERE usuarioId = :usuarioId")
-    suspend fun getPreferenciasSync(usuarioId: Int): Preferencia?
+    suspend fun obtenerPreferenciaSync(usuarioId: Int): Preferencia?
 }

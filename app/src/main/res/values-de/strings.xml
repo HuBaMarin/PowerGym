@@ -114,12 +114,12 @@
     <string name="difficulty_intermediate">Mittelstufe</string>
     <string name="difficulty_advanced">Fortgeschritten</string>
     <string name="translations">Übersetzungen</string>
-    <string name="muscle_groups">Muscle groups</string>
-    <string name="muscle_groups_to_work">Muscle groups to work</string>
+    <string name="muscle_groups">Muskelgruppen</string>
+    <string name="muscle_groups_to_work">Zu trainierende Muskelgruppen</string>
 
-    <string name="no_muscle_groups">No muscle groups have been worked out yet</string>
-    <string name="all_muscle_groups">All Muscle Groups</string>
-    <string name="muscle_group_icon">Muscle group icon</string>
+    <string name="no_muscle_groups">Noch keine Muskelgruppe wurde trainiert</string>
+    <string name="all_muscle_groups">Alle Muskelgruppen</string>
+    <string name="muscle_group_icon">Muskelgruppen-Symbol</string>
     <string name="reps_series_format">%1$d series x %2$d reps</string>
     <string name="training_frequency">Training Frequency</string>
     <string name="no_chart_data">No training data available</string>
@@ -299,7 +299,7 @@
     <string name="exercise_salto_a_la_comba_desc">Cardio-Übung mit einem Springseil für Koordination und Ausdauer</string>
 
     <string name="exercise_cable_row_name">Kabelzug-Rudern</string>
-    <string name="exercise_cable_row_desc">Eine zusammengesetzte Rückenübung, die mit einer sitzenden Kabelmaschine durchgeführt wird und die mittleren Rückenmuskeln, Lats und Arme stärkt.</string>
+    <string name="exercise_cable_row_desc">Eine Rückenübung, die mit einer Kabelzugmaschine durchgeführt wird.</string>
 
     <!-- Search Empty State -->
     <string name="empty_search">Keine Treffer gefunden</string>
