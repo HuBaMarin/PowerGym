@@ -1,34 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Only specify overrides here, since English is the default language -->
     <string name="app_name">PowerGym</string>
+    
+    <!-- General -->
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
+    
+    <!-- Main Navigation -->
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
     <string name="nav_statistics">Statistics</string>
     <string name="nav_profile">Profile</string>
+    
+    <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="language">Language</string>
     <string name="sound">Sound</string>
     <string name="notifications">Notifications</string>
     <string name="reminder_frequency">Reminder frequency</string>
     <string name="enable_reminders">Enable reminders</string>
+    <string name="appearance">Appearance</string>
+    <string name="follow_system">Follow System</string>
+    <string name="english">English</string>
+    <string name="spanish">Spanish</string>
+    <string name="german">German</string>
+    <string name="french">French</string>
+    <string name="japanese">Japanese</string>
+    <string name="about">About</string>
+    <string name="app_version">App Version</string>
+    <string name="app_version_number">1.0.0</string>
+    <string name="home">Home</string>
+    
+    <!-- Statistics -->
     <string name="most_frequent_exercises">Most frequent exercises</string>
-    <string name="muscles_to_work">Muscle groups to work</string>
+    <string name="muscles_to_work">Muscle groups to work on</string>
     <string name="exercise_history">Exercise history</string>
     <string name="no_statistics">No statistics available</string>
     <string name="load_more">Load more</string>
-    <string name="calories">Calories</string>
-    <string name="time">Time</string>
-    <string name="date">Date</string>
+    <string name="calories">Calories: %1$d</string>
+    <string name="time">Time: %1$d min</string>
+    <string name="date">Date: %1$s</string>
+    
+    <!-- Exercise Details -->
     <string name="exercise_details">Exercise details</string>
     <string name="muscle_group">Muscle group</string>
     <string name="difficulty">Difficulty</string>
     <string name="training_days">Training days</string>
+    
+    <!-- Time Ranges -->
     <string name="week">Week</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
     <string name="all">All</string>
+
+    <!-- Registry -->
     <string name="register">Register</string>
     <string name="enter">Enter</string>
 
@@ -41,21 +68,21 @@
     
     <!-- Search -->
     <string name="search_hint">Search exercises…</string>
-    <string name="search_results">Search results</string>
-    <string name="empty_search">No results found</string>
-    <string name="empty_search_message">Try modifying your search or filters to find exercises.</string>
+    <string name="no_results">No results found</string>
+    <string name="no_results_description">Try different search terms or filters</string>
     <string name="empty_search_query_message">No results found for "%1$s". Try a different search term.</string>
+    <string name="search_history">Search History</string>
+    <string name="search">Search</string>
+    <string name="search_results">Search Results</string>
+    <string name="search_empty_message">Try another keyword or browse exercise categories</string>
     <plurals name="search_results_count">
         <item quantity="one">%1$d result for "%2$s"</item>
         <item quantity="other">%1$d results for "%2$s"</item>
     </plurals>
-    <string name="try_another_search">Try Again</string>
-    <string name="search_history">Search History</string>
-    <string name="history_cleared">Search history cleared</string>
-    <string name="search_empty_message">Try another keyword or browse exercise categories</string>
     <string name="search_suggestions">Search suggestions</string>
-
+    
     <!-- Exercise Details -->
+    <string name="history_cleared">Search history cleared</string>
     <string name="show_statistics">Show statistics</string>
     <string name="complete_exercise">Complete exercise</string>
     <string name="reps_per_set">Repetitions per set</string>
@@ -65,18 +92,11 @@
     <string name="max_calories">%1$d cal max</string>
     <string name="average_exercises">%1$d exercises average</string>
     <string name="average_time">%1$d min average</string>
-
+    
     <!-- Profile -->
-    <string name="profile_image">Profile image</string>
-    <string name="exercises">Exercises</string>
+    <string name="profile_image">profile image</string>
+    <string name="exercises">exercises</string>
     <string name="empty_exercises">No exercises available</string>
-
-    <!-- Statistics -->
-    <string name="times_completed">%1$d times</string>
-    <string name="percent_format">%1$d%%</string>
-    <string name="series_count">Series: %1$d</string>
-    <string name="reps_count">Repetitions: %1$d</string>
-    <string name="watch_video">Watch video</string>
     <string name="delete_account">Delete account</string>
     <string name="edit_name">Edit Name</string>
     <string name="email">Email</string>
@@ -85,6 +105,13 @@
     <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
     <string name="name">Name</string>
+
+    <!-- Statistics -->
+    <string name="times_completed">%1$d times</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="series_count">Series: %1$d</string>
+    <string name="reps_count">Repetitions: %1$d</string>
+    <string name="watch_video">Watch video</string>
     <string name="create_account">Create account</string>
     <string name="repeat_password">Repeat password</string>
     <string name="password">Password</string>
@@ -93,7 +120,6 @@
     <string name="basic">Basic</string>
     <string name="medium">Medium</string>
     <string name="advanced">Advanced</string>
-    <string name="search">Search</string>
     <string name="statistics">Statistics</string>
     <string name="configuration">Configuration</string>
     <string name="language_spanish">Spanish</string>
@@ -115,6 +141,7 @@
     <string name="translations">Translations</string>
     <string name="muscle_groups">Muscle groups</string>
     <string name="muscle_groups_to_work">Muscle groups to work</string>
+
     <string name="no_muscle_groups">No muscle groups have been worked out yet</string>
     <string name="all_muscle_groups">All Muscle Groups</string>
     <string name="muscle_group_icon">Muscle group icon</string>
@@ -128,7 +155,7 @@
     <string name="training_sessions">Training Sessions</string>
     <string name="no_exercise_selected">No exercise selected</string>
     <string name="performed_count">Performed: %d times</string>
-    <!-- Notifications -->
+
     <string name="reminder_message">Time to exercise! Don\'t miss your training today.</string>
     <string name="channel_name">Workout Reminders</string>
     <string name="channel_description">Notifications to remind you about your workouts</string>
@@ -145,19 +172,15 @@
     <string name="delete_user">Delete user</string>
     <string name="admin_key">Admin Key</string>
     <string name="manage_exercises">Manage Exercises</string>
-
-    <!-- Exercise Management -->
     <string name="exercise_management">Exercise Management</string>
     <string name="add_exercise">Add Exercise</string>
     <string name="edit_exercise">Edit Exercise</string>
     <string name="delete_exercise">Delete Exercise</string>
     <string name="search_exercises">Search exercises</string>
     <string name="no_exercises_found">No exercises found</string>
-
-    <!-- Admin verification strings -->
     <string name="admin_verification_title">Admin Verification</string>
     <string name="admin_verification_description">Please enter your admin password and PIN to continue</string>
-    <string name="enter_all_credentials">Please enter both password and PIN.</string>
+    <string name="enter_all_credentials">Please enter both PIN and password</string>
     <string name="wrong_credentials">Incorrect credentials. Remaining attempts: %1$d</string>
     <string name="account_locked">Too many failed attempts. Account locked for %1$d seconds</string>
     <string name="time_remaining">Time remaining: %1$d seconds</string>
@@ -181,7 +204,7 @@
     <string name="enter_section">Enter section</string>
     <string name="enter_calories">Enter calories</string>
     <string name="enter_frequency">Enter frequency</string>
-    <string name="enter_percentage">Enter percentage (0.0–1.0)</string>
+    <string name="enter_percentage">Enter percentage (0.0-1.0)</string>
     <string name="add_new_exercise">Add New Exercise</string>
     <string name="required_field">Required field</string>
     <string name="loading_muscle_groups_error">Failed to load muscle groups</string>
@@ -191,7 +214,10 @@
     <string name="error_deleting_exercise">Error deleting exercise</string>
     <string name="error_updating_exercise">Error updating exercise</string>
     <string name="general_error">An unexpected error occurred</string>
-
+    
+    <!-- Admin Verification Screen -->
+    <string name="tab_community">Community</string>
+    <string name="admin_verification">Admin Verification</string>
     <string name="admin_description">Please verify your identity to access the admin console.</string>
     <string name="admin_password_label">Enter your admin password:</string>
     <string name="admin_password_hint">Password</string>
@@ -206,22 +232,9 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
     <string name="toggle_dark_mode">Toggle Dark Mode</string>
-    <string name="appearance">Appearance</string>
-    <string name="follow_system">Follow System</string>
-    <string name="english">English</string>
-    <string name="spanish">Español</string>
-    <string name="german">Deutsch</string>
-    <string name="french">Français</string>
-    <string name="japanese">日本語</string>
-    <string name="about">About</string>
-    <string name="app_version">App Version</string>
-    <string name="app_version_number">1.0.0</string>
-    <string name="home">Home</string>
-    <string name="clear_all">Clear All</string>
-    <string name="account_locked_message">Too many failed attempts. Please try again later.</string>
-    <string name="account_locked_title">Account Locked</string>
 
-    <!-- Exercise Names and Descriptions -->
+    <string name="clear_all">Clear All</string>
+    <string name="account_locked_title">Account Locked</string>
     <string name="exercise_demo_name">Demo Exercise</string>
     <string name="exercise_demo_desc">This is a demo exercise for testing</string>
 
@@ -291,15 +304,10 @@
     <string name="exercise_salto_a_la_comba_name">Jump Rope</string>
     <string name="exercise_salto_a_la_comba_desc">Cardio exercise using a jump rope for coordination and endurance</string>
 
-    <string name="exercise_cable_row_name">Cable Row</string>
-    <string name="exercise_cable_row_desc">A compound back exercise performed using a seated cable machine that strengthens the middle back muscles, lats, and arms.</string>
-
     <!-- Search Empty State -->
-    <string name="no_results">No results found</string>
-    <string name="no_results_description">Try different search terms or filters</string>
-
-    <string name="tab_community">Community</string>
-    <string name="admin_verification">Admin Verification</string>
+    <string name="empty_search">No matches found</string>
+    <string name="empty_search_message">Try different search terms or filters</string>
+    <string name="try_another_search">Try another search</string>
     <string name="admin_password">Admin Password</string>
     <string name="verify">Verify</string>
     <string name="admin_access_granted">Admin access granted</string>
@@ -356,4 +364,8 @@
 
     <!-- Difficulty -->
     <string name="difficulty_adaptable">Adaptable</string>
+    <string name="account_locked_message">Too many failed attempts. Please try again later.</string>
+
+    <string name="exercise_cable_row_name">Cable Row</string>
+    <string name="exercise_cable_row_desc">A compound back exercise performed using a seated cable machine that strengthens the middle back muscles, lats, and arms.</string>
 </resources>

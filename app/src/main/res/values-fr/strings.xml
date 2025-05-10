@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PowerGym</string>
+    <string name="save">Sauvegarder</string>
+    <string name="cancel">Annuler</string>
+    <string name="accept">Accepter</string>
+    <string name="nav_home">Accueil</string>
+    <string name="nav_search">Recherche</string>
+    <string name="nav_statistics">Statistiques</string>
+    <string name="nav_profile">Profil</string>
+    <string name="settings">Paramètres</string>
+    <string name="language">Langue</string>
+    <string name="sound">Son</string>
+    <string name="notifications">Notifications</string>
+    <string name="reminder_frequency">Fréquence de rappel</string>
+    <string name="enable_reminders">Activer les rappels</string>
+    <string name="most_frequent_exercises">Exercices les plus fréquents</string>
+    <string name="muscles_to_work">Groupes musculaires à travailler</string>
+    <string name="exercise_history">Historique des exercices</string>
+    <string name="no_statistics">Aucune statistique disponible</string>
+    <string name="load_more">Charger plus</string>
+    <string name="calories">Calories</string>
+    <string name="time">Temps</string>
+    <string name="date">Date</string>
+    <string name="exercise_details">Détails de l’exercice</string>
+    <string name="muscle_group">Groupe musculaire</string>
+    <string name="difficulty">Difficulté</string>
+    <string name="training_days">Jours d’entraînement</string>
+    <string name="week">Semaine</string>
+    <string name="month">Mois</string>
+    <string name="year">Année</string>
+    <string name="all">Tous</string>
+    <string name="register">S’inscrire</string>
+    <string name="enter">Entrer</string>
+
+    <!-- Reminder Frequencies -->
+    <string name="frequency_daily">Quotidienne</string>
+    <string name="frequency_every_other_day">Tous les deux jours</string>
+    <string name="frequency_twice_weekly">Deux fois par semaine</string>
+    <string name="frequency_weekly">Hebdomadaire</string>
+    <string name="frequency_monthly">Mensuelle</string>
+    
+    <!-- Search -->
+    <string name="search_hint">Rechercher des exercices...</string>
+    <string name="search_results">Résultats de recherche</string>
+    <string name="no_results">Aucun résultat trouvé</string>
+    <string name="no_results_description">Essayez différents termes ou filtres de recherche</string>
+    <string name="empty_search_query_message">Aucun résultat pour "%1$s". Essayez un autre terme de recherche.</string>
+    <string name="search_history">Historique de recherche</string>
+    <string name="history_cleared">Historique de recherche effacé</string>
+    <string name="empty_search_message">Essayez de modifier vos termes de recherche</string>
+    <string name="search_suggestions">Suggestions de recherche</string>
+    <plurals name="search_results_count">
+        <item quantity="one">%1$d résultat pour "%2$s"</item>
+        <item quantity="other">%1$d résultats pour "%2$s"</item>
+        <item quantity="many">%1$d résultats pour "%2$s"</item>
+    </plurals>
+
+    <!-- Exercise Details -->
+    <string name="search_empty_message">ad pwd</string>
+    <string name="show_statistics">Afficher les statistiques</string>
+    <string name="complete_exercise">Compléter l’exercice</string>
+    <string name="reps_per_set">Répétitions par série</string>
+    <string name="time_minutes">Temps (minutes)</string>
+    <string name="exercises_count">%1$d exercices</string>
+    <string name="calories_count">%1$d cal</string>
+    <string name="max_calories">%1$d cal max</string>
+    <string name="average_exercises">%1$d exercices en moyenne</string>
+    <string name="average_time">%1$d min en moyenne</string>
+
+    <!-- Profile -->
+    <string name="profile_image">Image de profil</string>
+    <string name="exercises">Exercices</string>
+    <string name="empty_exercises">Aucun exercice disponible</string>
+
+    <!-- Statistics -->
+    <string name="times_completed">%1$d fois</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="series_count">Séries: %1$d</string>
+    <string name="reps_count">Répétitions: %1$d</string>
+    <string name="watch_video">Regarder la vidéo</string>
+    <string name="delete_account">Supprimer le compte</string>
+    <string name="edit_name">Modifier le nom</string>
+    <string name="email">Email</string>
+    <string name="edit_email">Modifier l’email</string>
+    <string name="change_password">Changer le mot de passe</string>
+    <string name="profile">Profil</string>
+    <string name="log_out">Se déconnecter</string>
+    <string name="name">Nom</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="repeat_password">Répéter le mot de passe</string>
+    <string name="password">Mot de passe</string>
+    <string name="log_in">Se connecter</string>
+    <string name="no_exercises_available">Aucun exercice disponible</string>
+    <string name="basic">Débutant</string>
+    <string name="medium">Intermédiaire</string>
+    <string name="advanced">Avancé</string>
+    <string name="search">Rechercher</string>
+    <string name="statistics">Statistiques</string>
+    <string name="configuration">Configuration</string>
+    <string name="language_spanish">Espagnol</string>
+    <string name="language_english">Anglais</string>
+    <string name="language_french">Français</string>
+    <string name="language_german">Allemand</string>
+    <string name="language_japanese">Japonais</string>
+    <string name="selected_difficulty">Difficulté</string>
+    <string name="error_login">Utilisateur non trouvé</string>
+    <string name="choose_difficulty">Choisir la difficulté</string>
+    <string name="apply">Appliquer</string>
+    <string name="exercise_image">Image de l’exercice</string>
+    <string name="new_password">Nouveau mot de passe</string>
+    <string name="confirm_password">Confirmer le mot de passe</string>
+    <string name="difficulty_basic">Débutant</string>
+    <string name="difficulty_intermediate">Intermédiaire</string>
+    <string name="difficulty_advanced">Avancé</string>
+    <string name="translations">Traductions</string>
+    <string name="muscle_groups">Groupes musculaires</string>
+    <string name="muscle_groups_to_work">Groupes musculaires à travailler</string>
+    <string name="no_muscle_groups">Aucun groupe musculaire n’a encore été travaillé</string>
+    <string name="all_muscle_groups">Tous les groupes musculaires</string>
+    <string name="muscle_group_icon">Icône de groupe musculaire</string>
+    <string name="reps_series_format">%1$d séries x %2$d répétitions</string>
+    <string name="training_frequency">Fréquence d’entraînement</string>
+    <string name="no_chart_data">Aucune donnée d’entraînement disponible</string>
+    <string name="complete_exercise_stats">Historique complet des exercices</string>
+    <string name="no_exercise_stats">Aucun exercice complété pour le moment</string>
+    <string name="no_training_data">Aucune donnée d’entraînement disponible</string>
+    <string name="complete_workout_details">Détails complets de l’entraînement</string>
+    <string name="training_sessions">Sessions d’entraînement</string>
+    <string name="no_exercise_selected">Aucun exercice sélectionné</string>
+    <string name="performed_count">Effectué : %d fois</string>
+
+    <!-- Exercise Names and Descriptions -->
+    <string name="clear_all">Tout effacer</string>
+    <string name="account_locked_title">Compte verrouillé</string>
+    <string name="exercise_demo_name">Exercice de démonstration</string>
+    <string name="exercise_demo_desc">Ceci est un exercice de démonstration pour les tests</string>
+
+    <string name="exercise_knee_stretch_name">Étirements des genoux</string>
+    <string name="exercise_knee_stretch_desc">Un étirement doux pour l’articulation du genou pour améliorer la mobilité</string>
+
+    <string name="exercise_seated_arm_extensions_name">Extensions de bras en position assise</string>
+    <string name="exercise_seated_arm_extensions_desc">Exercice assis pour renforcer vos bras tout en maintenant le confort</string>
+
+    <string name="exercise_various_exercises_name">Exercices variés pour le tronc</string>
+    <string name="exercise_various_exercises_desc">Une collection d’exercices ciblant les muscles du tronc</string>
+
+    <string name="exercise_resistance_band_name">Exercices avec bande élastique</string>
+    <string name="exercise_resistance_band_desc">Exercices utilisant des bandes élastiques pour améliorer la force et la flexibilité</string>
+
+    <string name="exercise_elevacion_lateral_de_brazos_sentado_name">Élévations latérales des bras en position assise</string>
+    <string name="exercise_elevacion_lateral_de_brazos_sentado_desc">Exercice assis pour renforcer les muscles des épaules avec des mouvements latéraux des bras</string>
+
+    <string name="exercise_respiratory_exercises_name">Exercices respiratoires</string>
+    <string name="exercise_respiratory_exercises_desc">Techniques pour améliorer la capacité pulmonaire et la relaxation</string>
+
+    <string name="exercise_flexiones_de_muneca_name">Flexions des poignets</string>
+    <string name="exercise_flexiones_de_muneca_desc">Exercice pour renforcer les muscles du poignet et de l’avant-bras</string>
+
+    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_name">Exercices d’équilibre avec soutien</string>
+    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_desc">Exercices d’équilibre utilisant un soutien pour la stabilité et la sécurité</string>
+
+    <string name="exercise_estiramientos_suaves_name">Étirements doux</string>
+    <string name="exercise_estiramientos_suaves_desc">Routine d’étirement douce pour améliorer la flexibilité et la mobilité</string>
+
+    <string name="exercise_yoga_adaptado_en_silla_name">Yoga sur chaise</string>
+    <string name="exercise_yoga_adaptado_en_silla_desc">Postures de yoga adaptées pour être effectuées en position assise sur une chaise</string>
+
+    <string name="exercise_military_press_name">Développé militaire</string>
+    <string name="exercise_military_press_desc">Exercice de renforcement des épaules avec des poids soulevés au-dessus de la tête</string>
+
+    <string name="exercise_lateral_raises_name">Élévations latérales</string>
+    <string name="exercise_lateral_raises_desc">Exercice pour le développement des épaules avec mouvements latéraux des bras</string>
+
+    <string name="exercise_press_de_banca_name">Développé couché</string>
+    <string name="exercise_press_de_banca_desc">Exercice classique de poitrine effectué allongé sur un banc</string>
+
+    <string name="exercise_aperturas_con_mancuernas_name">Écartés avec haltères</string>
+    <string name="exercise_aperturas_con_mancuernas_desc">Exercice de poitrine avec larges mouvements de bras utilisant des haltères</string>
+
+    <string name="exercise_dominadas_name">Tractions</string>
+    <string name="exercise_dominadas_desc">Exercice du haut du corps utilisant une barre pour se hisser vers le haut</string>
+
+    <string name="exercise_remo_con_barra_name">Rowing avec barre</string>
+    <string name="exercise_remo_con_barra_desc">Exercice de dos utilisant une barre avec mouvement de flexion</string>
+
+    <string name="exercise_sentadillas_name">Squats</string>
+    <string name="exercise_sentadillas_desc">Exercice du bas du corps ciblant les quadriceps, les ischio-jambiers et les fessiers</string>
+
+    <string name="exercise_extensiones_de_pierna_name">Extensions de jambe</string>
+    <string name="exercise_extensiones_de_pierna_desc">Exercice d’isolation des quadriceps avec mouvement d’extension de la jambe</string>
+
+    <string name="exercise_hip_thrust_name">Hip thrust</string>
+    <string name="exercise_hip_thrust_desc">Exercice centré sur les fessiers avec mouvement ascendant des hanches</string>
+
+    <string name="exercise_puente_de_gluteos_name">Pont fessier</string>
+    <string name="exercise_puente_de_gluteos_desc">Exercice pour les fessiers avec position de pont depuis la position allongée sur le dos</string>
+
+    <string name="exercise_burpees_name">Burpees</string>
+    <string name="exercise_burpees_desc">Exercice complet combinant flexion et saut pour cardio et force</string>
+
+    <string name="exercise_salto_a_la_comba_name">Corde à sauter</string>
+    <string name="exercise_salto_a_la_comba_desc">Exercice cardio utilisant une corde à sauter pour la coordination et l’endurance</string>
+
+    <string name="exercise_cable_row_name">Rameur à Câble</string>
+    <string name="exercise_cable_row_desc">Un exercice composé pour le dos effectué à l&#39;aide d&#39;une machine à câble en position assise qui renforce les muscles du milieu du dos, les dorsaux et les bras.</string>
+
+    <!-- Search Empty State -->
+    <string name="empty_search">Aucun résultat trouvé</string>
+    <string name="try_another_search">Essayez une autre recherche</string>
+
+    <!-- Notifications -->
+    <string name="reminder_message">C’est l’heure de l’exercice ! Ne manquez pas votre entraînement aujourd’hui.</string>
+    <string name="channel_name">Rappels d’entraînement</string>
+    <string name="channel_description">Notifications pour vous rappeler vos séances d’entraînement</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_control_panel">Panneau d’administration</string>
+    <string name="admin_dashboard">Tableau de bord administrateur</string>
+    <string name="search_users">Rechercher des utilisateurs</string>
+    <string name="add_admin">Ajouter un administrateur</string>
+    <string name="refresh">Actualiser</string>
+    <string name="back">Retour</string>
+    <string name="no_users_found">Aucun utilisateur trouvé</string>
+    <string name="edit_user">Modifier l’utilisateur</string>
+    <string name="delete_user">Supprimer l’utilisateur</string>
+    <string name="admin_key">Clé d’administrateur</string>
+    <string name="manage_exercises">Gérer les exercices</string>
+
+    <!-- Exercise Management -->
+    <string name="exercise_management">Gestion des exercices</string>
+    <string name="add_exercise">Ajouter un exercice</string>
+    <string name="edit_exercise">Modifier l’exercice</string>
+    <string name="delete_exercise">Supprimer l’exercice</string>
+    <string name="search_exercises">Rechercher des exercices</string>
+    <string name="no_exercises_found">Aucun exercice trouvé</string>
+
+    <!-- Admin verification strings -->
+    <string name="admin_verification_title">Vérification administrateur</string>
+    <string name="admin_verification_description">Veuillez entrer votre mot de passe et PIN administrateur pour continuer</string>
+    <string name="enter_all_credentials">Veuillez entrer à la fois le mot de passe et le PIN.</string>
+    <string name="wrong_credentials">Identifiants incorrects. Tentatives restantes : %1$d</string>
+    <string name="account_locked">Trop de tentatives échouées. Compte verrouillé pendant %1$d secondes</string>
+    <string name="time_remaining">Temps restant : %1$d secondes</string>
+    <string name="retries_available">Tentatives disponibles</string>
+    <string name="feature_coming_soon">Fonctionnalité à venir prochainement</string>
+    <string name="feature_next_update">Cette fonctionnalité sera disponible dans la prochaine mise à jour.</string>
+    <string name="confirm_deletion">Confirmer la suppression</string>
+    <string name="confirm_delete_exercise">Êtes-vous sûr de vouloir supprimer cet exercice ? Cette action ne peut pas être annulée.</string>
+    <string name="delete">Supprimer</string>
+    <string name="all_sections">Toutes les sections</string>
+    <string name="access_denied">Accès refusé</string>
+    <string name="admin_access_required">Vous n’avez pas les autorisations d’administrateur pour accéder à cette section.</string>
+    <string name="exercise_details_form">Détails de l’exercice</string>
+    <string name="enter_exercise_name">Entrez le nom de l’exercice</string>
+    <string name="enter_description">Entrez la description</string>
+    <string name="select_muscle_group">Sélectionnez le groupe musculaire</string>
+    <string name="select_difficulty">Sélectionnez la difficulté</string>
+    <string name="enter_training_days">Entrez les jours d’entraînement (séparés par des virgules)</string>
+    <string name="enter_image_url">Entrez l’URL de l’image</string>
+    <string name="enter_video_url">Entrez l’URL de la vidéo (facultatif)</string>
+    <string name="enter_section">Entrez la section</string>
+    <string name="enter_calories">Entrez les calories</string>
+    <string name="enter_frequency">Entrez la fréquence</string>
+    <string name="enter_percentage">Entrez le pourcentage (0.0–1.0)</string>
+    <string name="add_new_exercise">Ajouter un nouvel exercice</string>
+    <string name="required_field">Champ requis</string>
+    <string name="loading_muscle_groups_error">Échec du chargement des groupes musculaires</string>
+    <string name="loading_difficulty_error">Échec du chargement des niveaux de difficulté</string>
+    <string name="loading_sections_error">Échec du chargement des sections</string>
+    <string name="error_adding_exercise">Erreur lors de l’ajout de l’exercice</string>
+    <string name="error_deleting_exercise">Erreur lors de la suppression de l’exercice</string>
+    <string name="error_updating_exercise">Erreur lors de la mise à jour de l’exercice</string>
+    <string name="general_error">Une erreur inattendue s’est produite</string>
+
+    <string name="tab_community">Communauté</string>
+    <string name="admin_verification">Vérification administrateur</string>
+    <string name="admin_description">Veuillez vérifier votre identité pour accéder à la console d’administration.</string>
+    <string name="admin_password_label">Entrez votre mot de passe administrateur :</string>
+    <string name="admin_password_hint">Mot de passe</string>
+    <string name="admin_pin_label">Entrez votre PIN administrateur :</string>
+    <string name="admin_pin_hint">PIN administrateur</string>
+    <string name="verify_credentials">Vérifier les identifiants</string>
+    <string name="cancel_and_back">Annuler et retourner</string>
+    <string name="admin_first_time_credentials">Informations de première connexion :\n\nE-mail : %1$s\nMot de passe : %2$s\nPIN : %3$s\n\nVeuillez enregistrer ces identifiants dans un endroit sécurisé.</string>
+    <string name="show_admin_credentials">Afficher les identifiants administrateur</string>
+    <string name="debug_direct_access">DEBUG : Accès direct</string>
+    <string name="admin_pin_only">Veuillez entrer votre PIN administrateur pour continuer.</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="light_mode">Mode clair</string>
+    <string name="toggle_dark_mode">Activer/Désactiver le mode sombre</string>
+    <string name="appearance">Apparence</string>
+    <string name="follow_system">Suivre le système</string>
+    <string name="english">Anglais</string>
+    <string name="spanish">Espagnol</string>
+    <string name="german">Allemand</string>
+    <string name="french">Français</string>
+    <string name="japanese">Japonais</string>
+    <string name="about">À propos</string>
+    <string name="app_version">Version de l’application</string>
+    <string name="app_version_number">1.0.0</string>
+    <string name="home">Accueil</string>
+    <string name="admin_password">ad pwd</string>
+    <string name="verify">ad pwd</string>
+    <string name="admin_access_granted">ad pwd</string>
+    <string name="verify_title">ad pwd</string>
+    <string name="admin_access_denied">ad pwd</string>
+    <string name="enter_admin_password">ad pwd</string>
+    <string name="admin_verify_credentials">Veuillez vérifier vos identifiants administrateur</string>
+    <string name="invalid_email">E-mail invalide</string>
+    <string name="invalid_password">Le mot de passe doit contenir au moins 6 caractères</string>
+    <string name="required_name">Le nom est requis</string>
+    <string name="passwords_dont_match">Les mots de passe ne correspondent pas</string>
+
+    <!-- Muscle Groups -->
+    <string name="muscle_group_demo">Démo</string>
+    <string name="muscle_group_legs">Jambes</string>
+    <string name="muscle_group_arms">Bras</string>
+    <string name="muscle_group_core">Core</string>
+    <string name="muscle_group_multiple">Multiples</string>
+    <string name="muscle_group_shoulders">Épaules</string>
+    <string name="muscle_group_respiratory">Respiratoire</string>
+    <string name="muscle_group_forearms">Avant-bras</string>
+    <string name="muscle_group_core_legs">Core et Jambes</string>
+    <string name="muscle_group_chest">Poitrine</string>
+    <string name="muscle_group_back">Dos</string>
+    <string name="muscle_group_glutes">Fessiers</string>
+    <string name="muscle_group_full_body">Corps Entier</string>
+
+    <!-- Sections -->
+    <string name="section_demo">Démo</string>
+    <string name="section_elderly">Personnes âgées</string>
+    <string name="section_reduced_mobility">Mobilité réduite</string>
+    <string name="section_rehabilitation">Réhabilitation</string>
+    <string name="section_upper_body">Haut du corps</string>
+    <string name="section_lower_body">Bas du corps</string>
+    <string name="section_cardio">Cardio</string>
+
+    <!-- Training Days -->
+    <string name="day_monday">Lundi</string>
+    <string name="day_tuesday">Mardi</string>
+    <string name="day_wednesday">Mercredi</string>
+    <string name="day_thursday">Jeudi</string>
+    <string name="day_friday">Vendredi</string>
+    <string name="day_saturday">Samedi</string>
+    <string name="day_sunday">Dimanche</string>
+    <string name="days_all">Tous les jours</string>
+    <string name="days_monday_wednesday_friday">Lundi, Mercredi, Vendredi</string>
+    <string name="days_tuesday_thursday">Mardi, Jeudi</string>
+    <string name="days_monday_thursday">Lundi, Jeudi</string>
+    <string name="days_tuesday_friday">Mardi, Vendredi</string>
+    <string name="days_wednesday_saturday">Mercredi, Samedi</string>
+    <string name="days_tuesday_thursday_saturday">Mardi, Jeudi, Samedi</string>
+    <string name="days_wednesday_saturday_sunday">Mercredi, Samedi, Dimanche</string>
+    <string name="days_all_week">Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche</string>
+
+    <!-- Difficulty -->
+    <string name="difficulty_adaptable">Adaptable</string>
+    <string name="account_locked_message">Trop de tentatives échouées</string>
+</resources>

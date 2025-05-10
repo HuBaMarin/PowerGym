@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PowerGym</string>
+    <!-- General -->
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    <string name="accept">承認</string>
+
+    <!-- Main Navigation -->
+    <string name="nav_home">ホーム</string>
+    <string name="nav_search">検索</string>
+    <string name="nav_statistics">統計</string>
+    <string name="nav_profile">プロフィール</string>
+
+    <!-- Settings -->
+    <string name="settings">設定</string>
+    <string name="language">言語</string>
+    <string name="sound">サウンド</string>
+    <string name="notifications">通知</string>
+    <string name="reminder_frequency">リマインダー頻度</string>
+    <string name="enable_reminders">リマインダーを有効にする</string>
+    <string name="dark_mode">ダークモード</string>
+    <string name="light_mode">ライトモード</string>
+    <string name="toggle_dark_mode">ダークモード切り替え</string>
+    <string name="appearance">外観</string>
+    <string name="follow_system">システム設定に従う</string>
+
+    <!-- Statistics -->
+    <string name="most_frequent_exercises">最も頻繁な運動</string>
+    <string name="muscles_to_work">トレーニングが必要な筋肉群</string>
+    <string name="exercise_history">運動履歴</string>
+    <string name="no_statistics">統計データがありません</string>
+    <string name="load_more">さらに読み込む</string>
+    <string name="calories">カロリー</string>
+    <string name="time">時間</string>
+    <string name="date">日付</string>
+    <string name="exercise_details">運動詳細</string>
+    <string name="muscle_group">筋肉群</string>
+    <string name="difficulty">難易度</string>
+    <string name="training_days">トレーニング日</string>
+    <string name="week">週間</string>
+    <string name="month">月間</string>
+    <string name="year">年間</string>
+    <string name="all">すべて</string>
+    <string name="register">登録</string>
+    <string name="enter">ログイン</string>
+
+    <!-- Reminder Frequencies -->
+    <string name="frequency_daily">毎日</string>
+    <string name="frequency_every_other_day">1日おき</string>
+    <string name="frequency_twice_weekly">週2回</string>
+    <string name="frequency_weekly">毎週</string>
+    <string name="frequency_monthly">毎月</string>
+
+    <!-- Search -->
+    <string name="search_hint">エクササイズを検索…</string>
+    <string name="search_results">検索結果</string>
+    <string name="empty_search">検索結果なし</string>
+    <string name="empty_search_message">別の検索語やフィルターをお試しください</string>
+    <string name="empty_search_query_message">「%1$s」に一致する結果はありません。別の検索語をお試しください。</string>
+    <plurals name="search_results_count">
+        <item quantity="one">「%2$s」の検索結果: %1$d件</item>
+        <item quantity="other">「%2$s」の検索結果: %1$d件</item>
+    </plurals>
+    <string name="try_another_search">別の検索を試す</string>
+    <string name="search_history">検索履歴</string>
+    <string name="history_cleared">検索履歴を消去しました</string>
+    <string name="search_empty_message">別のキーワードを試すか、運動カテゴリーを閲覧してください</string>
+    <string name="search_suggestions">検索候補</string>
+
+    <!-- Exercise Details -->
+    <string name="show_statistics">統計を表示</string>
+    <string name="complete_exercise">運動完了</string>
+    <string name="reps_per_set">セットごとの回数</string>
+    <string name="time_minutes">時間（分）</string>
+    <string name="exercises_count">%1$d 運動</string>
+    <string name="calories_count">%1$d カロリー</string>
+    <string name="max_calories">%1$d カロリー最大</string>
+    <string name="average_exercises">平均 %1$d 運動</string>
+    <string name="average_time">平均 %1$d 分</string>
+
+    <!-- Profile -->
+    <string name="profile_image">プロフィール画像</string>
+    <string name="exercises">運動</string>
+    <string name="empty_exercises">利用可能な運動はありません</string>
+
+    <!-- Statistics -->
+    <string name="times_completed">%1$d 回</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="series_count">セット数: %1$d</string>
+    <string name="reps_count">回数: %1$d</string>
+    <string name="watch_video">ビデオを見る</string>
+    <string name="delete_account">アカウント削除</string>
+    <string name="edit_name">名前を編集</string>
+    <string name="email">メール</string>
+    <string name="edit_email">メールを編集</string>
+    <string name="change_password">パスワードを変更</string>
+    <string name="profile">プロフィール</string>
+    <string name="log_out">ログアウト</string>
+    <string name="name">名前</string>
+    <string name="create_account">アカウントを作成</string>
+    <string name="repeat_password">パスワード再入力</string>
+    <string name="password">パスワード</string>
+    <string name="log_in">ログイン</string>
+    <string name="no_exercises_available">利用可能な運動はありません</string>
+    <string name="basic">基本</string>
+    <string name="medium">中級</string>
+    <string name="advanced">上級</string>
+    <string name="search">検索</string>
+    <string name="statistics">統計</string>
+    <string name="configuration">構成</string>
+    <string name="language_spanish">スペイン語</string>
+    <string name="language_english">英語</string>
+    <string name="language_french">フランス語</string>
+    <string name="language_german">ドイツ語</string>
+    <string name="language_japanese">日本語</string>
+    <string name="selected_difficulty">難易度</string>
+    <string name="error_login">ユーザーが見つかりません</string>
+    <string name="choose_difficulty">難易度を選択</string>
+    <string name="apply">適用</string>
+    <string name="exercise_image">エクササイズ画像</string>
+    <string name="new_password">新しいパスワード</string>
+    <string name="confirm_password">パスワード確認</string>
+
+    <string name="difficulty_basic">初級</string>
+    <string name="difficulty_intermediate">中級</string>
+    <string name="difficulty_advanced">上級</string>
+    <string name="translations">翻訳</string>
+    <string name="muscle_groups">筋肉群</string>
+    <string name="muscle_groups_to_work">鍛える筋肉群</string>
+    <string name="no_muscle_groups">まだ鍛えられた筋肉群はありません</string>
+    <string name="all_muscle_groups">すべての筋肉群</string>
+    <string name="muscle_group_icon">筋肉群アイコン</string>
+    <string name="reps_series_format">%1$dシリーズ x %2$dレップ</string>
+    <string name="training_frequency">トレーニング頻度</string>
+    <string name="no_chart_data">利用可能なトレーニングデータがありません</string>
+    <string name="complete_exercise_stats">完全な運動履歴</string>
+    <string name="no_exercise_stats">まだ完了した運動はありません</string>
+    <string name="no_training_data">利用可能なトレーニングデータがありません</string>
+    <string name="complete_workout_details">完全なワークアウト詳細</string>
+    <string name="training_sessions">トレーニングセッション</string>
+    <string name="no_exercise_selected">エクササイズが選択されていません</string>
+    <string name="performed_count">実施回数: %d 回</string>
+    <!-- Notifications -->
+    <string name="reminder_message">運動の時間です！今日のトレーニングをお忘れなく。</string>
+    <string name="channel_name">トレーニングリマインダー</string>
+    <string name="channel_description">予定されたトレーニングセッションのリマインダー</string>
+
+    <!-- Admin Panel -->
+    <string name="admin_control_panel">管理者コントロールパネル</string>
+    <string name="admin_dashboard">管理者ダッシュボード</string>
+    <string name="search_users">ユーザー検索</string>
+    <string name="add_admin">管理者を追加</string>
+    <string name="refresh">更新</string>
+    <string name="back">戻る</string>
+    <string name="no_users_found">ユーザーが見つかりません</string>
+    <string name="edit_user">ユーザーを編集</string>
+    <string name="delete_user">ユーザーを削除</string>
+    <string name="admin_key">管理者キー</string>
+    <string name="manage_exercises">エクササイズ管理</string>
+
+    <!-- Exercise Management -->
+    <string name="exercise_management">エクササイズ管理</string>
+    <string name="add_exercise">エクササイズを追加</string>
+    <string name="edit_exercise">エクササイズを編集</string>
+    <string name="delete_exercise">エクササイズを削除</string>
+    <string name="search_exercises">エクササイズを検索</string>
+    <string name="no_exercises_found">エクササイズが見つかりません</string>
+
+    <!-- Admin verification strings -->
+    <string name="admin_verification_title">管理者認証</string>
+    <string name="admin_verification_description">続行するには管理者パスワードとPINを入力してください</string>
+    <string name="enter_all_credentials">PINとパスワードの両方を入力してください</string>
+    <string name="wrong_credentials">認証情報が正しくありません。残りの試行回数: %1$d</string>
+    <string name="account_locked">試行回数が多すぎます。アカウントは %1$d 秒間ロックされます</string>
+    <string name="time_remaining">残り時間: %1$d 秒</string>
+    <string name="retries_available">利用可能な再試行</string>
+    <string name="feature_coming_soon">機能は近日公開予定</string>
+    <string name="feature_next_update">この機能は次回のアップデートで利用可能になります</string>
+    <string name="confirm_deletion">削除の確認</string>
+    <string name="confirm_delete_exercise">このエクササイズを削除してもよろしいですか？この操作は元に戻せません。</string>
+    <string name="delete">削除</string>
+    <string name="all_sections">すべてのセクション</string>
+    <string name="access_denied">アクセス拒否</string>
+    <string name="admin_access_required">このセクションにアクセスする管理者権限がありません。</string>
+    <string name="exercise_details_form">エクササイズ詳細</string>
+    <string name="enter_exercise_name">エクササイズ名を入力</string>
+    <string name="enter_description">説明を入力</string>
+    <string name="select_muscle_group">筋肉グループを選択</string>
+    <string name="select_difficulty">難易度を選択</string>
+    <string name="enter_training_days">トレーニング日を入力（カンマ区切り）</string>
+    <string name="enter_image_url">画像URLを入力</string>
+    <string name="enter_video_url">動画URLを入力（任意）</string>
+    <string name="enter_section">セクションを入力</string>
+    <string name="enter_calories">カロリーを入力</string>
+    <string name="enter_frequency">頻度を入力</string>
+    <string name="enter_percentage">パーセンテージを入力（0.0–1.0）</string>
+    <string name="add_new_exercise">新しいエクササイズを追加</string>
+    <string name="required_field">必須フィールド</string>
+    <string name="loading_muscle_groups_error">筋肉グループの読み込みに失敗しました</string>
+    <string name="loading_difficulty_error">難易度レベルの読み込みに失敗しました</string>
+    <string name="loading_sections_error">セクションの読み込みに失敗しました</string>
+    <string name="error_adding_exercise">エクササイズの追加中にエラーが発生しました</string>
+    <string name="error_deleting_exercise">エクササイズの削除中にエラーが発生しました</string>
+    <string name="error_updating_exercise">エクササイズの更新中にエラーが発生しました</string>
+    <string name="general_error">予期しないエラーが発生しました</string>
+
+    <string name="admin_description">管理者コンソールにアクセスするには、本人確認を行ってください。</string>
+    <string name="admin_password_label">管理者パスワードを入力してください：</string>
+    <string name="admin_password_hint">パスワード</string>
+    <string name="admin_pin_label">管理者PINを入力してください：</string>
+    <string name="admin_pin_hint">管理者PIN</string>
+    <string name="verify_credentials">認証情報を確認</string>
+    <string name="cancel_and_back">キャンセルして戻る</string>
+    <string name="admin_first_time_credentials">初回ログイン情報：\n\nメール：%1$s\nパスワード：%2$s\nPIN：%3$s\n\nこれらの資格情報を安全な場所に保存してください。</string>
+    <string name="show_admin_credentials">管理者資格情報を表示</string>
+    <string name="debug_direct_access">デバッグ：直接アクセス</string>
+    <string name="admin_pin_only">続行するには管理者PINを入力してください。</string>
+    <string name="english">英語</string>
+    <string name="spanish">スペイン語</string>
+    <string name="german">ドイツ語</string>
+    <string name="french">フランス語</string>
+    <string name="about">アプリについて</string>
+    <string name="app_version">アプリバージョン</string>
+    <string name="app_version_number">1.0.0</string>
+    <string name="home">ホーム</string>
+    <string name="clear_all">すべてクリア</string>
+    <string name="japanese">日本語</string>
+    <!-- Exercise Names and Descriptions -->
+    <string name="account_locked_title">アカウントロック</string>
+    <string name="exercise_demo_name">デモエクササイズ</string>
+    <string name="exercise_demo_desc">これはテスト用のデモエクササイズです</string>
+
+    <string name="exercise_knee_stretch_name">膝のストレッチ</string>
+    <string name="exercise_knee_stretch_desc">膝関節の可動性を向上させるための優しいストレッチ</string>
+
+    <string name="exercise_seated_arm_extensions_name">座位腕伸ばし</string>
+    <string name="exercise_seated_arm_extensions_desc">快適さを保ちながら腕を強化する座位エクササイズ</string>
+
+    <string name="exercise_various_exercises_name">様々なコアエクササイズ</string>
+    <string name="exercise_various_exercises_desc">コア筋肉群をターゲットにしたエクササイズのコレクション</string>
+
+    <string name="exercise_resistance_band_name">レジスタンスバンドワークアウト</string>
+    <string name="exercise_resistance_band_desc">筋力と柔軟性向上のためのレジスタンスバンドを使用したエクササイズ</string>
+
+    <string name="exercise_elevacion_lateral_de_brazos_sentado_name">座位横腕上げ</string>
+    <string name="exercise_elevacion_lateral_de_brazos_sentado_desc">横方向の腕の動きで肩の筋肉を強化する座位エクササイズ</string>
+
+    <string name="exercise_respiratory_exercises_name">呼吸エクササイズ</string>
+    <string name="exercise_respiratory_exercises_desc">肺活量とリラクゼーションを向上させるためのテクニック</string>
+
+    <string name="exercise_flexiones_de_muneca_name">手首の屈伸</string>
+    <string name="exercise_flexiones_de_muneca_desc">手首と前腕の筋肉を強化するエクササイズ</string>
+
+    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_name">サポート付きバランスエクササイズ</string>
+    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_desc">安定性と安全のためのサポートを使用したバランスエクササイズ</string>
+
+    <string name="exercise_estiramientos_suaves_name">やさしいストレッチ</string>
+    <string name="exercise_estiramientos_suaves_desc">柔軟性と可動性を向上させるためのやさしいストレッチルーティン</string>
+
+    <string name="exercise_yoga_adaptado_en_silla_name">チェアヨガ</string>
+    <string name="exercise_yoga_adaptado_en_silla_desc">椅子に座りながら行うように適合させたヨガのポーズ</string>
+
+    <string name="exercise_military_press_name">ミリタリープレス</string>
+    <string name="exercise_military_press_desc">頭上に重量を持ち上げる肩の強化エクササイズ</string>
+
+    <string name="exercise_lateral_raises_name">サイドレイズ</string>
+    <string name="exercise_lateral_raises_desc">横方向の腕の動きによる肩の発達のためのエクササイズ</string>
+
+    <string name="exercise_press_de_banca_name">ベンチプレス</string>
+    <string name="exercise_press_de_banca_desc">ベンチに横になって行う古典的な胸部エクササイズ</string>
+
+    <string name="exercise_aperturas_con_mancuernas_name">ダンベルフライ</string>
+    <string name="exercise_aperturas_con_mancuernas_desc">ダンベルを使用した広い腕の動きの胸部エクササイズ</string>
+
+    <string name="exercise_dominadas_name">懸垂</string>
+    <string name="exercise_dominadas_desc">バーを使って体を引き上げる上半身のエクササイズ</string>
+
+    <string name="exercise_remo_con_barra_name">バーベルロウ</string>
+    <string name="exercise_remo_con_barra_desc">バーベルを使った曲げる動きの背中のエクササイズ</string>
+
+    <string name="exercise_sentadillas_name">スクワット</string>
+    <string name="exercise_sentadillas_desc">大腿四頭筋、ハムストリングス、お尻をターゲットにした下半身のエクササイズ</string>
+
+    <string name="exercise_extensiones_de_pierna_name">レッグエクステンション</string>
+    <string name="exercise_extensiones_de_pierna_desc">脚を伸ばす動きによる大腿四頭筋の単独エクササイズ</string>
+
+    <string name="exercise_hip_thrust_name">ヒップスラスト</string>
+    <string name="exercise_hip_thrust_desc">股関節の上向き動作を伴うお尻に焦点を当てたエクササイズ</string>
+
+    <string name="exercise_puente_de_gluteos_name">グルートブリッジ</string>
+    <string name="exercise_puente_de_gluteos_desc">仰向けからのブリッジポジションでのお尻のエクササイズ</string>
+
+    <string name="exercise_burpees_name">バーピー</string>
+    <string name="exercise_burpees_desc">有酸素運動と筋力のためにプッシュアップとジャンプを組み合わせた全身エクササイズ</string>
+
+    <string name="exercise_salto_a_la_comba_name">縄跳び</string>
+    <string name="exercise_salto_a_la_comba_desc">調整力と持久力のためのジャンプロープを使用した有酸素運動</string>
+
+    <string name="exercise_cable_row_name">ケーブルロウ</string>
+    <string name="exercise_cable_row_desc">シートに座ってケーブルマシンを使用して行う背中の複合エクササイズで、中背筋、広背筋、腕を強化します。</string>
+
+    <!-- Search Empty State -->
+    <string name="no_results">結果が見つかりません</string>
+    <string name="no_results_description">別の検索語やフィルターをお試しください</string>
+
+    <string name="tab_community">コミュニティ</string>
+    <string name="admin_verification">管理者認証</string>
+    <string name="admin_password">管理者パスワード</string>
+    <string name="verify">検証</string>
+    <string name="admin_access_granted">管理者権限が付与されました</string>
+    <string name="verify_title">管理者アクセスが必要</string>
+    <string name="admin_access_denied">アクセスが拒否されました。もう一度お試しください。</string>
+    <string name="enter_admin_password">管理者パスワードを入力</string>
+    <string name="admin_verify_credentials">管理者認証情報を確認してください</string>
+    <string name="invalid_email">無効なメールアドレス</string>
+    <string name="invalid_password">パスワードは6文字以上である必要があります</string>
+    <string name="required_name">名前は必須です</string>
+    <string name="passwords_dont_match">パスワードが一致しません</string>
+
+    <!-- Muscle Groups -->
+    <string name="muscle_group_demo">デモ</string>
+    <string name="muscle_group_legs">脚</string>
+    <string name="muscle_group_arms">腕</string>
+    <string name="muscle_group_core">コア</string>
+    <string name="muscle_group_multiple">複数</string>
+    <string name="muscle_group_shoulders">肩</string>
+    <string name="muscle_group_respiratory">呼吸器</string>
+    <string name="muscle_group_forearms">前腕</string>
+    <string name="muscle_group_core_legs">コアと脚</string>
+    <string name="muscle_group_chest">胸</string>
+    <string name="muscle_group_back">背中</string>
+    <string name="muscle_group_glutes">臀部</string>
+    <string name="muscle_group_full_body">全身</string>
+
+    <!-- Sections -->
+    <string name="section_demo">デモ</string>
+    <string name="section_elderly">高齢者</string>
+    <string name="section_reduced_mobility">運動機能低下</string>
+    <string name="section_rehabilitation">リハビリ</string>
+    <string name="section_upper_body">上半身</string>
+    <string name="section_lower_body">下半身</string>
+    <string name="section_cardio">有酸素運動</string>
+
+    <!-- Training Days -->
+    <string name="day_monday">月曜日</string>
+    <string name="day_tuesday">火曜日</string>
+    <string name="day_wednesday">水曜日</string>
+    <string name="day_thursday">木曜日</string>
+    <string name="day_friday">金曜日</string>
+    <string name="day_saturday">土曜日</string>
+    <string name="day_sunday">日曜日</string>
+    <string name="days_all">すべての日</string>
+    <string name="days_monday_wednesday_friday">月曜日、水曜日、金曜日</string>
+    <string name="days_tuesday_thursday">火曜日、木曜日</string>
+    <string name="days_monday_thursday">月曜日、木曜日</string>
+    <string name="days_tuesday_friday">火曜日、金曜日</string>
+    <string name="days_wednesday_saturday">水曜日、土曜日</string>
+    <string name="days_tuesday_thursday_saturday">火曜日、木曜日、土曜日</string>
+    <string name="days_wednesday_saturday_sunday">水曜日、土曜日、日曜日</string>
+    <string name="days_all_week">月曜日、火曜日、水曜日、木曜日、金曜日、土曜日、日曜日</string>
+
+    <!-- Difficulty -->
+    <string name="difficulty_adaptable">適応可能</string>
+    <string name="account_locked_message">失敗しすぎた試行</string>
+</resources>
