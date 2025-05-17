@@ -1,9 +1,5 @@
 package com.amarina.powergym.database
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.amarina.powergym.database.dao.EjercicioDao
 import com.amarina.powergym.database.dao.EstadisticaDao
 import com.amarina.powergym.database.dao.PreferenciaDao

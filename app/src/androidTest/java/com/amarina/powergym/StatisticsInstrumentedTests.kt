@@ -20,26 +20,24 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Instrumented tests for the Statistics feature of PowerGym application.
+ * Pruebas instrumentadas para la funcionalidad de Estadísticas de la aplicación PowerGym.
  *
- * These tests verify that statistics functionality works correctly in a real device
- * or emulator environment. Testing includes data retrieval, calculation accuracy,
- * UI display, and user interaction with the statistics screens.
+ * Estas pruebas verifican que la funcionalidad de estadísticas funciona correctamente
+ * en un dispositivo real o emulador.
  */
 @RunWith(AndroidJUnit4::class)
 class StatisticsInstrumentedTests {
 
-    
     /**
-     * Tests that the Statistics activity launches properly and
-     * shows the expected header.
+     * Comprueba que la actividad de Estadísticas se lanza correctamente y
+     * muestra el encabezado esperado.
      */
     @Test
     fun testStatisticsActivityLaunch() {
-        // Launch the activity
+        // Inicia la actividad
         ActivityScenario.launch(StatisticsActivity::class.java)
         
-        // Verify the header is displayed
+        // Verifica que se muestra el encabezado
         onView(withId(R.id.tvMostFrequentExercises))
             .check(matches(isDisplayed()))
         
@@ -48,27 +46,24 @@ class StatisticsInstrumentedTests {
     }
     
     /**
-     * Tests that the most frequent exercises list is displayed and populated with data.
+     * Comprueba que la lista de ejercicios más frecuentes se muestra y está
+     * poblada con datos.
      */
     @Test
     fun testMostFrequentExercisesListDisplayed() {
         ActivityScenario.launch(StatisticsActivity::class.java)
         
-        // Verify exercises list container is displayed
+        // Verifica que el contenedor de la lista de ejercicios se muestra
         onView(withId(R.id.rvGruposATrabajar))
             .check(matches(isDisplayed()))
             
-        // Verify list contains at least one valid item
+        // Verifica que la lista contiene al menos un elemento válido
         onView(withId(R.id.rvGruposATrabajar))
             .check(matches(hasMinimumChildCount(1)))
             
-        // Validate first item's content
+        // Valida el contenido del primer elemento
         onView(withId(R.id.rvGruposATrabajar))
             .check(matches(hasDescendant(withText(startsWith("grupoMuscular: piernas")))))
 
     }
-    
-   
-    
-
 }
