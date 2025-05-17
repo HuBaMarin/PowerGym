@@ -19,6 +19,9 @@
     <string name="notifications">Notificaciones</string>
     <string name="reminder_frequency">Frecuencia de recordatorios</string>
     <string name="enable_reminders">Habilitar recordatorios</string>
+    <string name="change_language">Cambiar Idioma</string>
+    <string name="change_language_confirmation">¿Estás seguro que deseas cambiar el idioma de la aplicación a %1$s?</string>
+    <string name="change">Cambiar</string>
 
     <!-- Statistics -->
     <string name="most_frequent_exercises">Ejercicios más frecuentes</string>

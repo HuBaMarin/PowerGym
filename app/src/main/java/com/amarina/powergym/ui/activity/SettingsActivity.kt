@@ -120,16 +120,24 @@ class SettingsActivity : AppCompatActivity() {
             radioButton.setTextColor(getColor(R.color.on_surface))
             radioButton.setPadding(16, 16, 16, 16)
 
-            // Add click listener
             radioButton.setOnClickListener {
-                setLanguage(langCode)
-                recreate()
+                if (langCode != currentLanguage) {
+                    radioButton.isChecked = false
+                    showLanguageConfirmationDialog(langCode, langName) { confirmed ->
+                        if (confirmed) {
+                            radioButton.isChecked = true
+                            setLanguage(langCode)
+                        } else {
+                            radioGroup.findViewWithTag<RadioButton>(currentLanguage)?.isChecked =
+                                true
+                        }
+                    }
+                }
             }
 
-            // Add to radio group
+            radioButton.tag = langCode
             radioGroup.addView(radioButton)
 
-            // Add divider except after the last item
             if (langCode != languages.keys.last()) {
                 val divider = View(this)
                 val params = LinearLayout.LayoutParams(
@@ -144,17 +152,33 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLanguageConfirmationDialog(
+        langCode: String,
+        langName: String,
+        callback: (Boolean) -> Unit
+    ) {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.change_language))
+            .setMessage(getString(R.string.change_language_confirmation, langName))
+            .setPositiveButton(getString(R.string.change)) { _, _ ->
+                callback(true)
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                callback(false)
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
     private fun setupNotifications() {
-        // Get current notification settings
         val notificationsEnabled = prefs.getBoolean(NOTIFICATIONS_ENABLED, true)
         val notificationFrequency =
             prefs.getString(NOTIFICATION_FREQUENCY, getString(R.string.frequency_daily))
 
-        // Set up UI
         binding.switchNotifications.isChecked = notificationsEnabled
         binding.tvReminderFrequency.text = notificationFrequency
 
-        // Set click listeners
         binding.notificationsContainer.setOnClickListener {
             val newValue = !binding.switchNotifications.isChecked
             binding.switchNotifications.isChecked = newValue

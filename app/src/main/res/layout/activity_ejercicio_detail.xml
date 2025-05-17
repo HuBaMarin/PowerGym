@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textColor="@color/white"
                         tools:text="Chest" />
 
                     <TextView
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textColor="@color/white"
                         tools:text="Intermediate" />
 
                     <TextView
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="?attr/colorPrimaryVariant"
+                        android:textColor="@color/white"
                         tools:text="Mon, Wed" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

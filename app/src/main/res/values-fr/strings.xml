@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PowerGym</string>
     <string name="save">Sauvegarder</string>
@@ -105,6 +104,9 @@
     <string name="language_french">Français</string>
     <string name="language_german">Allemand</string>
     <string name="language_japanese">Japonais</string>
+    <string name="change_language">Changer de langue</string>
+    <string name="change_language_confirmation">Êtes-vous sûr de vouloir changer la langue de l\'application en %1$s ?</string>
+    <string name="change">Changer</string>
     <string name="selected_difficulty">Difficulté</string>
     <string name="error_login">Utilisateur non trouvé</string>
     <string name="choose_difficulty">Choisir la difficulté</string>
@@ -160,8 +162,8 @@
     <string name="exercise_flexiones_de_muneca_name">Flexions des poignets</string>
     <string name="exercise_flexiones_de_muneca_desc">Exercice pour renforcer les muscles du poignet et de l’avant-bras</string>
 
-    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_name">Exercices d’équilibre avec soutien</string>
-    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_desc">Exercices d’équilibre utilisant un soutien pour la stabilité et la sécurité</string>
+    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_name">Exercices d\'équilibre avec soutien</string>
+    <string name="exercise_ejercicios_de_equilibrio_con_apoyo_desc">Exercices d\'équilibre utilisant un soutien pour la stabilité et la sécurité</string>
 
     <string name="exercise_estiramientos_suaves_name">Étirements doux</string>
     <string name="exercise_estiramientos_suaves_desc">Routine d’étirement douce pour améliorer la flexibilité et la mobilité</string>

@@ -15,6 +15,9 @@
     <!-- Settings -->
     <string name="settings">Einstellungen</string>
     <string name="language">Sprache</string>
+    <string name="change_language">Sprache ändern</string>
+    <string name="change_language_confirmation">Sind Sie sicher, dass Sie die App-Sprache zu %1$s ändern möchten?</string>
+    <string name="change">Ändern</string>
     <string name="sound">Ton</string>
     <string name="notifications">Benachrichtigungen</string>
     <string name="reminder_frequency">Erinnerungshäufigkeit</string>

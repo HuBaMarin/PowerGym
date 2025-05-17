@@ -578,19 +578,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     frecuencia = 8,
                     porcentaje = 0.2f
                 ),
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_seated_arm_extensions_name),
-                    descripcion = resources.getString(R.string.exercise_seated_arm_extensions_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_arms),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_tuesday_thursday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/ASXzHrWwJxI/hqdefault.jpg",
-                    videoUrl = "https://www.youtube.com/watch?v=ASXzHrWwJxI",
-                    seccion = resources.getString(R.string.section_elderly),
-                    calorias = 35,
-                    frecuencia = 10,
-                    porcentaje = 0.15f
-                ),
+
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_various_exercises_name),
                     descripcion = resources.getString(R.string.exercise_various_exercises_desc),
@@ -617,19 +605,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     frecuencia = 15,
                     porcentaje = 0.25f
                 ),
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_elevacion_lateral_de_brazos_sentado_name),
-                    descripcion = resources.getString(R.string.exercise_elevacion_lateral_de_brazos_sentado_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_shoulders),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_tuesday_thursday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/wFYnizn--6o/hqdefault.jpg",
-                    videoUrl = "https://www.youtube.com/watch?v=wFYnizn--6o",
-                    seccion = resources.getString(R.string.section_reduced_mobility),
-                    calorias = 40,
-                    frecuencia = 12,
-                    porcentaje = 0.2f
-                ),
+
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_respiratory_exercises_name),
                     descripcion = resources.getString(R.string.exercise_respiratory_exercises_desc),
@@ -675,8 +651,8 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     grupoMuscular = resources.getString(R.string.muscle_group_multiple),
                     dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_all),
-                    imagenEjercicio = "https://i.ytimg.com/vi/1lMhH8chKpE/hqdefault.jpg",
-                    videoUrl = "https://www.youtube.com/watch?v=1lMhH8chKpE",
+                    imagenEjercicio = "https://media.istockphoto.com/id/468978675/es/vector/cuerpo-de-estiramiento-ejercicio-stick-figura-pictograma-icono.jpg",
+                    videoUrl = "https://www.youtube.com/watch?v=kfjVFQWWiZw",
                     seccion = resources.getString(R.string.section_rehabilitation),
                     calorias = 25,
                     frecuencia = 15,
@@ -717,8 +693,8 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     grupoMuscular = resources.getString(R.string.muscle_group_shoulders),
                     dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_thursday),
-                    imagenEjercicio = "https://training.fit/wp-content/uploads/2020/03/seitenheben-kurzhanteln.png",
-                    videoUrl = "https://www.youtube.com/shorts/TuY1eKCo9l0",
+                    imagenEjercicio = "https://cdn.shopify.com/s/files/1/0269/5551/3900/files/Dumbbell-Lateral-Raise_31c81eee-81c4-4ffe-890d-ee13dd5bbf20_600x600.png",
+                    videoUrl = "https://www.youtube.com/watch?v=xyK8UiC-BUw",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 80,
                     frecuencia = 15,
@@ -737,19 +713,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     frecuencia = 10,
                     porcentaje = 0.45f
                 ),
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_aperturas_con_mancuernas_name),
-                    descripcion = resources.getString(R.string.exercise_aperturas_con_mancuernas_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_chest),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_tuesday_friday),
-                    imagenEjercicio = "https://images.pexels.com/photos/3775566/pexels-photo-3775566.jpeg",
-                    videoUrl = "https://www.youtube.com/shorts/rk8YayRoTRQ",
-                    seccion = resources.getString(R.string.section_upper_body),
-                    calorias = 100,
-                    frecuencia = 12,
-                    porcentaje = 0.35f
-                ),
+
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_dominadas_name),
                     descripcion = resources.getString(R.string.exercise_dominadas_desc),
@@ -878,33 +842,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
             )
 
             val newExercises = listOf(
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_seated_arm_curl_name),
-                    descripcion = resources.getString(R.string.exercise_seated_arm_curl_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_arms),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_monday_wednesday_friday),
-                    imagenEjercicio = "https://morelifehealth.com/hubfs/Screenshot%202021-12-08%20at%2014.40.50.png",
-                    videoUrl = "https://www.youtube.com/watch?v=kDqklk1ZESo",
-                    seccion = resources.getString(R.string.section_reduced_mobility),
-                    calorias = 40,
-                    frecuencia = 12,
-                    porcentaje = 0.2f
-                ),
 
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_seated_marching_name),
-                    descripcion = resources.getString(R.string.exercise_seated_marching_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_monday_wednesday_friday),
-                    imagenEjercicio = "https://www.flintrehab.com/wp-content/uploads/2023/01/seated-marching-stroke-exercise.jpg",
-                    videoUrl = "https://www.youtube.com/watch?v=DfDIQ5IwLDM",
-                    seccion = resources.getString(R.string.section_lower_body),
-                    calorias = 35,
-                    frecuencia = 15,
-                    porcentaje = 0.15f
-                ),
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_balance_support_name),
                     descripcion = resources.getString(R.string.exercise_balance_support_desc),
@@ -919,32 +857,6 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     porcentaje = 0.15f
                 ),
 
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_knee_extension_name),
-                    descripcion = resources.getString(R.string.exercise_knee_extension_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_tuesday_thursday),
-                    imagenEjercicio = "https://www.hingehealth.com/resources/static/f544c3dfa0c41156255696af1dcf6be4/leg-strengthening-exercises-for-seniors-1.webp",
-                    videoUrl = "https://www.youtube.com/watch?v=5HZGS-8JcE8",
-                    seccion = resources.getString(R.string.section_lower_body),
-                    calorias = 40,
-                    frecuencia = 12,
-                    porcentaje = 0.2f
-                ),
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_tabletop_circle_name),
-                    descripcion = resources.getString(R.string.exercise_tabletop_circle_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_arms),
-                    dificultad = resources.getString(R.string.difficulty_basic),
-                    dias = resources.getString(R.string.days_monday_wednesday_friday),
-                    imagenEjercicio = "https://www.flintrehab.com/wp-content/uploads/2023/01/tabletop-circle-stroke-exercise.jpg",
-                    videoUrl = "https://www.youtube.com/watch?v=lvwixnrxPJE",
-                    seccion = resources.getString(R.string.section_rehabilitation),
-                    calorias = 25,
-                    frecuencia = 15,
-                    porcentaje = 0.15f
-                )
             )
 
             database.ejercicioDao().insertarTodos(newExercises)

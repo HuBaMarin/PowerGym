@@ -32,7 +32,7 @@ class PowerGymDatabaseTest {
     private lateinit var db: PowerGymDatabase
 
     @Before
-    fun createDb() {
+    fun crearBaseDeDatos() {
         // Usar mocks en lugar de la base de datos real para las pruebas unitarias
         db = mockk(relaxed = true)
         userDao = mockk(relaxed = true)
@@ -49,7 +49,7 @@ class PowerGymDatabaseTest {
 
     @After
     @Throws(IOException::class)
-    fun closeDb() {
+    fun cerrarBaseDeDatos() {
         // No es necesario cerrar la base de datos cuando se utilizan mocks
     }
 
@@ -57,7 +57,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetUser() = runBlocking {
+    fun insertarYObtenerUsuario() = runBlocking {
         // Configuración
         val user = Usuario(
             email = "test@example.com",
@@ -85,7 +85,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun updateUser() = runBlocking {
+    fun actualizarUsuario() = runBlocking {
         // Insertar un usuario
         val user = Usuario(
             email = "update@example.com",
@@ -113,12 +113,12 @@ class PowerGymDatabaseTest {
         val retrievedUpdatedUser = userDao.obtenerUsuarioPorId(resultId.toInt())
         assertNotNull(retrievedUpdatedUser)
         assertEquals("Updated Name", retrievedUpdatedUser.nombre)
-        assertEquals(user.email, retrievedUpdatedUser.email) 
+        assertEquals(user.email, retrievedUpdatedUser.email)
     }
 
     @Test
     @Throws(Exception::class)
-    fun deleteUser() = runBlocking {
+    fun eliminarUsuario() = runBlocking {
         // Insertar un usuario
         val user = Usuario(
             email = "delete@example.com",
@@ -150,7 +150,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun getUserByEmail() = runBlocking {
+    fun obtenerUsuarioPorEmail() = runBlocking {
         val user = Usuario(
             email = "email@example.com",
             password = "password123",
@@ -179,7 +179,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun loginUser_withValidCredentials_returnsUser() = runBlocking {
+    fun iniciarSesion_credencialesValidas_devuelveUsuario() = runBlocking {
         val user = Usuario(
             email = "test@example.com",
             password = "password123",
@@ -202,7 +202,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun loginUser_withInvalidCredentials_returnsNull() = runBlocking {
+    fun iniciarSesion_credencialesInvalidas_devuelveNulo() = runBlocking {
         val user = Usuario(
             email = "test@example.com",
             password = "password123",
@@ -234,7 +234,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun getAllUsers() = runBlocking {
+    fun obtenerTodosLosUsuarios() = runBlocking {
         // Insertar múltiples usuarios
         val users = listOf(
             Usuario(
@@ -280,7 +280,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetEjercicio() = runBlocking {
+    fun insertarYObtenerEjercicio() = runBlocking {
         val ejercicio = Ejercicio(
             nombre = "Press de banca",
             descripcion = "Ejercicio para pecho",
@@ -315,7 +315,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertMultipleEjercicios() = runBlocking {
+    fun insertarVariosEjercicios() = runBlocking {
         val ejercicios = listOf(
             Ejercicio(
                 nombre = "Press de banca",
@@ -358,7 +358,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun deleteEjercicio() = runBlocking {
+    fun eliminarEjercicio() = runBlocking {
         val ejercicio = Ejercicio(
             nombre = "Ejercicio a eliminar",
             descripcion = "Este ejercicio será eliminado",
@@ -393,7 +393,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun getDistinctSections() = runBlocking {
+    fun obtenerSeccionesDistintas() = runBlocking {
         val ejercicios = listOf(
             Ejercicio(
                 nombre = "Ejercicio 1",
@@ -456,7 +456,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun getMuscleGroups() = runBlocking {
+    fun obtenerGruposMusculares() = runBlocking {
         val ejercicios = listOf(
             Ejercicio(
                 nombre = "Ejercicio Pecho 1",
@@ -506,7 +506,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun getDifficultyValues() = runBlocking {
+    fun obtenerValoresDeDificultad() = runBlocking {
         val ejercicios = listOf(
             Ejercicio(
                 nombre = "Ejercicio Básico",
@@ -569,7 +569,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun filterEjercicios_returnsMatchingEjercicios() = runBlocking {
+    fun filtrarEjercicios_devuelveEjerciciosCoincidentes() = runBlocking {
         // Insertar ejercicios
         val ejercicio1 = Ejercicio(
             nombre = "Press de banca",
@@ -660,7 +660,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetEstadistica() = runBlocking {
+    fun insertarYObtenerEstadistica() = runBlocking {
         // Crear usuario y ejercicio primero
         val user =
             Usuario(email = "stats@example.com", password = "password", nombre = "Stats User")
@@ -718,7 +718,7 @@ class PowerGymDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetPreferencia() = runBlocking {
+    fun insertarYObtenerPreferencia() = runBlocking {
         // Crear usuario primero
         val user =
             Usuario(email = "prefs@example.com", password = "password", nombre = "Prefs User")
