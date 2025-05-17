@@ -4,6 +4,5 @@
 
 PowerGym es una aplicación de entrenamiento físico diseñada para usuarios con diferentes niveles de
 condición física. Permite realizar seguimiento de ejercicios, establecer rutinas personalizadas y
-monitorizar el progreso a lo largo del tiempo. Este documento explica en detalle la estructura y
-funcionamiento de la aplicación.
+monitorizar el progreso a lo largo del tiempo.
 
