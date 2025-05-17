@@ -39,12 +39,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
     abstract fun preferenciaDao(): PreferenciaDao
 
 
-    enum class Dificultad(val clave: String) {
 
-        BASICO("basico"),
-        INTERMEDIO("intermedio"),
-        AVANZADO("avanzado")
-    }
 
     companion object {
         @Volatile
@@ -65,9 +60,8 @@ abstract class PowerGymDatabase : RoomDatabase() {
         }
 
         /**
-         * Updates exercise names and descriptions to the current locale
-         * Call this method when language is changed in the app
-         */
+         * Actualiza los nombres y descripciones de los ejercicios al idioma actual
+          */
         fun updateExerciseTranslations(context: Context) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -77,18 +71,18 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         "PowerGymDatabase",
                         "Updating exercises to locale: ${Locale.getDefault().language}"
                     )
-                    
-                    // Get all exercises
+
+                    // Obtener todos los ejercicios
                     val allExercises = database.ejercicioDao().obtenerTodosEjercicios()
-                    
-                    // Update each exercise with the translated name and description
+
+                    // Actualizar cada ejercicio con el nombre y la descripción traducidos
                     for (exercise in allExercises) {
                         try {
-                            // Direct mapping between exercise keys and resource IDs
+                            // Mapeo directo entre claves de ejercicio e IDs de recursos
                             val (nameResId, descResId) = getResourceIdsForExercise(exercise.nombre)
 
                             if (nameResId != 0 && descResId != 0) {
-                                // Get translated strings directly using resource IDs
+                                // Obtener cadenas traducidas directamente usando IDs de recursos
                                 val translatedName = resources.getString(nameResId)
                                 val translatedDesc = resources.getString(descResId)
 
@@ -97,13 +91,13 @@ abstract class PowerGymDatabase : RoomDatabase() {
                                     "Updating '${exercise.nombre}' to '$translatedName'"
                                 )
 
-                                // Use the newly added method to update the translation
+                                // Usar actualizar traducción de EjercicioDao
                                 database.ejercicioDao().actualizarTraduccion(
                                     exercise.id,
                                     translatedName,
                                     translatedDesc
                                 )
-                                // Update any statistics referencing this exercise
+                                // Actualizar cualquier estadística que haga referencia a este ejercicio
                                 database.estadisticaDao().actualizarNombreEjercicio(
                                     exercise.id,
                                     translatedName
@@ -115,7 +109,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                                 )
                             }
 
-                            // Also update muscle group translation
+                            // También actualizar la traducción del grupo muscular
                             val muscleGroupResId =
                                 getResourceIdForMuscleGroup(exercise.grupoMuscular)
                             if (muscleGroupResId != 0) {
@@ -126,13 +120,13 @@ abstract class PowerGymDatabase : RoomDatabase() {
                                     "Updating muscle group '${exercise.grupoMuscular}' to '$translatedMuscleGroup'"
                                 )
 
-                                // Update muscle group in the exercise
+                                // Actualizar grupo muscular en el ejercicio
                                 database.ejercicioDao().actualizarGrupoMuscular(
                                     exercise.id,
                                     translatedMuscleGroup
                                 )
 
-                                // Update muscle group in any statistics referencing this exercise
+                                // Actualizar grupo muscular en estadística
                                 database.estadisticaDao().actualizarGrupoMuscular(
                                     exercise.id,
                                     translatedMuscleGroup
@@ -154,15 +148,15 @@ abstract class PowerGymDatabase : RoomDatabase() {
         }
         
         /**
-         * Get resource IDs for an exercise name without using resource reflection
-         * Returns a Pair of (nameResourceId, descriptionResourceId)
+         * Obtener IDs de recursos para un nombre de ejercicio sin usar reflexión de recursos
+         * Devuelve un Par de (idRecursoNombre, idRecursoDescripción)
          */
         private fun getResourceIdsForExercise(exerciseName: String): Pair<Int, Int> {
-            // Create a simplified, lowercase version of the name for comparison
+            // Crear una versión simplificada en minúsculas del nombre para comparación
             val simpleName = exerciseName.lowercase().trim()
 
             return when {
-                // Military Press
+                // Press Militar
                 simpleName.contains("military press") ||
                         simpleName.contains("press militar") ||
                         simpleName.contains("overhead press") ->
@@ -171,7 +165,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_military_press_desc
                     )
 
-                // Lateral raises
+                // Elevaciones laterales
                 simpleName.contains("lateral raise") ||
                         simpleName.contains("elevaciones laterales") ||
                         simpleName.contains("elevation lateral") ||
@@ -181,7 +175,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_lateral_raises_desc
                     )
 
-                // Bench press
+                // Press de banca
                 simpleName.contains("press de banca") ||
                         simpleName.contains("bench press") ||
                         simpleName.contains("développé couché") ||
@@ -191,7 +185,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_press_de_banca_desc
                     )
 
-                // Chest fly / Aperturas
+                // Pecho fly / Aperturas
                 simpleName.contains("aperturas") ||
                         simpleName.contains("chest fly") ||
                         simpleName.contains("butterfly") ||
@@ -212,7 +206,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         simpleName.contains("traction") ->
                     Pair(R.string.exercise_dominadas_name, R.string.exercise_dominadas_desc)
 
-                // Barbell row
+                // Remo con barra
                 simpleName.contains("remo con barra") ||
                         simpleName.contains("barbell row") ||
                         simpleName.contains("bent over row") ||
@@ -223,14 +217,14 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_remo_con_barra_desc
                     )
 
-                // Squats
+                // Sentadillas
                 simpleName.contains("sentadillas") ||
                         simpleName.contains("squat") ||
                         simpleName.contains("kniebeuge") ||
                         simpleName.contains("accroupissement") ->
                     Pair(R.string.exercise_sentadillas_name, R.string.exercise_sentadillas_desc)
 
-                // Leg extensions
+                // Extensiones de pierna
                 simpleName.contains("extensiones de pierna") ||
                         simpleName.contains("leg extension") ||
                         simpleName.contains("beinstrecker") ||
@@ -240,14 +234,14 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_extensiones_de_pierna_desc
                     )
 
-                // Hip thrust
+                // Empuje de cadera
                 simpleName.contains("hip thrust") ||
                         simpleName.contains("empuje de cadera") ||
                         simpleName.contains("relevé de bassin") ||
                         simpleName.contains("beckenbrücke") ->
                     Pair(R.string.exercise_hip_thrust_name, R.string.exercise_hip_thrust_desc)
 
-                // Glute bridge
+                // Puente de glúteos
                 simpleName.contains("puente de gluteos") ||
                         simpleName.contains("glute bridge") ||
                         simpleName.contains("pont fessier") ||
@@ -264,7 +258,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         simpleName.contains("burpee") ->
                     Pair(R.string.exercise_burpees_name, R.string.exercise_burpees_desc)
 
-                // Jump rope
+                // Salto a la comba
                 simpleName.contains("salto a la comba") ||
                         simpleName.contains("jump rope") ||
                         simpleName.contains("seilspringen") ||
@@ -275,7 +269,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_salto_a_la_comba_desc
                     )
 
-                // Knee stretch
+                // Estiramiento de rodilla
                 simpleName.contains("knee stretch") ||
                         simpleName.contains("estiramiento de rodilla") ||
                         simpleName.contains("estiramientos de rodilla") ||
@@ -283,7 +277,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         simpleName.contains("étirement du genou") ->
                     Pair(R.string.exercise_knee_stretch_name, R.string.exercise_knee_stretch_desc)
 
-                // Seated arm extensions
+                // Extensiones de brazo sentado
                 simpleName.contains("seated arm extension") ||
                         simpleName.contains("extension de brazo sentado") ||
                         simpleName.contains("extension de brazos sentado") ||
@@ -294,7 +288,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_seated_arm_extensions_desc
                     )
 
-                // Various exercises
+                // Ejercicios varios
                 simpleName.contains("various exercise") ||
                         simpleName.contains("ejercicios varios") ||
                         simpleName.contains("ejercicios de core") ||
@@ -306,7 +300,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_various_exercises_desc
                     )
 
-                // Resistance band
+                // Banda elástica
                 simpleName.contains("resistance band") ||
                         simpleName.contains("banda elastica") ||
                         simpleName.contains("banda de resistencia") ||
@@ -318,7 +312,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_resistance_band_desc
                     )
 
-                // Seated lateral arm raises
+                // Elevaciones laterales de brazos sentado
                 simpleName.contains("elevacion lateral") ||
                         simpleName.contains("lateral raise seated") ||
                         simpleName.contains("elevaciones laterales sentado") ||
@@ -330,7 +324,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_elevacion_lateral_de_brazos_sentado_desc
                     )
 
-                // Respiratory exercises
+                // Ejercicios respiratorios
                 simpleName.contains("respiratory") ||
                         simpleName.contains("respirator") ||
                         simpleName.contains("breathing") ||
@@ -343,7 +337,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_respiratory_exercises_desc
                     )
 
-                // Wrist flexions
+                // Flexiones de muñeca
                 simpleName.contains("flexiones de muneca") ||
                         simpleName.contains("wrist flex") ||
                         simpleName.contains("handgelenk") ||
@@ -354,7 +348,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_flexiones_de_muneca_desc
                     )
 
-                // Balance exercises
+                // Ejercicios de equilibrio
                 simpleName.contains("equilibrio") ||
                         simpleName.contains("balance") ||
                         simpleName.contains("ejercicios de equilibrio") ||
@@ -365,7 +359,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_ejercicios_de_equilibrio_con_apoyo_desc
                     )
 
-                // Gentle stretches
+                // Estiramientos suaves
                 simpleName.contains("estiramientos") ||
                         simpleName.contains("stretch") ||
                         simpleName.contains("stretching") ||
@@ -377,7 +371,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_estiramientos_suaves_desc
                     )
 
-                // Chair yoga
+                // Yoga en silla
                 simpleName.contains("yoga") ||
                         simpleName.contains("silla") ||
                         simpleName.contains("chair") ||
@@ -388,7 +382,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_yoga_adaptado_en_silla_desc
                     )
 
-                // Cable row
+                // Remo con cable
                 simpleName.contains("cable row") ||
                         simpleName.contains("remo con cable") ->
                     Pair(
@@ -396,10 +390,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         R.string.exercise_cable_row_desc
                     )
 
-                // If no match is found, return demo strings as default
+                // Si no se encuentra coincidencia, devolver valores 0 para indicar que no hay coincidencia
                 else -> {
-                    
-                    Pair(R.string.exercise_demo_name, R.string.exercise_demo_desc)
+                    Pair(0, 0)
                 }
             }
         }
@@ -407,89 +400,111 @@ abstract class PowerGymDatabase : RoomDatabase() {
 
 
         /**
-         * Get resource ID for a muscle group name
-         * Returns the resource ID for the given muscle group
+         * Obtiene el ID del recurso para un nombre de grupo muscular
+         * Devuelve el ID del recurso para el grupo muscular dado
          */
         private fun getResourceIdForMuscleGroup(muscleGroup: String): Int {
-            // Create a simplified, lowercase version of the muscle group for comparison
             val simpleName = muscleGroup.lowercase().trim()
 
-            return when {
-                simpleName.contains("demo") -> R.string.muscle_group_back
+            // Mapa de palabras clave a IDs de recursos
+            val muscleGroupMap = mapOf(
+                // Piernas
+                "legs" to R.string.muscle_group_legs,
+                "pierna" to R.string.muscle_group_legs,
+                "beine" to R.string.muscle_group_legs,
+                "jambe" to R.string.muscle_group_legs,
+                "脚" to R.string.muscle_group_legs,
 
-                simpleName.contains("legs") ||
-                        simpleName.contains("pierna") ||
-                        simpleName.contains("beine") ||
-                        simpleName.contains("jambe") ||
-                        simpleName.contains("脚") -> R.string.muscle_group_legs
+                // Brazos
+                "arms" to R.string.muscle_group_arms,
+                "brazo" to R.string.muscle_group_arms,
+                "arme" to R.string.muscle_group_arms,
+                "腕" to R.string.muscle_group_arms,
 
-                simpleName.contains("arms") ||
-                        simpleName.contains("brazo") ||
-                        simpleName.contains("arme") ||
-                        simpleName.contains("腕") -> R.string.muscle_group_arms
+                // Core
+                "core" to R.string.muscle_group_core,
+                "rumpf" to R.string.muscle_group_core,
+                "noyau" to R.string.muscle_group_core,
+                "núcleo" to R.string.muscle_group_core,
+                "コア" to R.string.muscle_group_core,
 
-                simpleName.contains("core") ||
-                        simpleName.contains("rumpf") ||
-                        simpleName.contains("noyau") ||
-                        simpleName.contains("núcleo") ||
-                        simpleName.contains("コア") -> R.string.muscle_group_core
+                // Múltiple
+                "multiple" to R.string.muscle_group_multiple,
+                "múltiple" to R.string.muscle_group_multiple,
+                "mehrere" to R.string.muscle_group_multiple,
+                "複数" to R.string.muscle_group_multiple,
 
-                simpleName.contains("multiple") ||
-                        simpleName.contains("múltiple") ||
-                        simpleName.contains("mehrere") ||
-                        simpleName.contains("複数") -> R.string.muscle_group_multiple
+                // Hombros
+                "shoulder" to R.string.muscle_group_shoulders,
+                "hombro" to R.string.muscle_group_shoulders,
+                "schulter" to R.string.muscle_group_shoulders,
+                "épaule" to R.string.muscle_group_shoulders,
+                "肩" to R.string.muscle_group_shoulders,
 
-                simpleName.contains("shoulder") ||
-                        simpleName.contains("hombro") ||
-                        simpleName.contains("schulter") ||
-                        simpleName.contains("épaule") ||
-                        simpleName.contains("肩") -> R.string.muscle_group_shoulders
+                // Respiratorio
+                "respiratory" to R.string.muscle_group_respiratory,
+                "respirat" to R.string.muscle_group_respiratory,
+                "breathing" to R.string.muscle_group_respiratory,
+                "atmung" to R.string.muscle_group_respiratory,
+                "呼吸" to R.string.muscle_group_respiratory,
 
-                simpleName.contains("respiratory") ||
-                        simpleName.contains("respirat") ||
-                        simpleName.contains("breathing") ||
-                        simpleName.contains("atmung") ||
-                        simpleName.contains("呼吸") -> R.string.muscle_group_respiratory
+                // Antebrazos
+                "forearm" to R.string.muscle_group_forearms,
+                "antebrazo" to R.string.muscle_group_forearms,
+                "unterarm" to R.string.muscle_group_forearms,
+                "avant-bras" to R.string.muscle_group_forearms,
+                "前腕" to R.string.muscle_group_forearms,
 
-                simpleName.contains("forearm") ||
-                        simpleName.contains("antebrazo") ||
-                        simpleName.contains("unterarm") ||
-                        simpleName.contains("avant-bras") ||
-                        simpleName.contains("前腕") -> R.string.muscle_group_forearms
+                // Pecho
+                "chest" to R.string.muscle_group_chest,
+                "pecho" to R.string.muscle_group_chest,
+                "brust" to R.string.muscle_group_chest,
+                "poitrine" to R.string.muscle_group_chest,
+                "胸" to R.string.muscle_group_chest,
 
-                simpleName.contains("core") && (simpleName.contains("leg") ||
-                        simpleName.contains("pierna") ||
-                        simpleName.contains("beine") ||
-                        simpleName.contains("jambe") ||
-                        simpleName.contains("脚")) -> R.string.muscle_group_core_legs
+                // Espalda
+                "back" to R.string.muscle_group_back,
+                "espalda" to R.string.muscle_group_back,
+                "rücken" to R.string.muscle_group_back,
+                "dos" to R.string.muscle_group_back,
+                "背中" to R.string.muscle_group_back,
 
-                simpleName.contains("chest") ||
-                        simpleName.contains("pecho") ||
-                        simpleName.contains("brust") ||
-                        simpleName.contains("poitrine") ||
-                        simpleName.contains("胸") -> R.string.muscle_group_chest
+                // Glúteos
+                "glute" to R.string.muscle_group_glutes,
+                "glúteo" to R.string.muscle_group_glutes,
+                "gesäß" to R.string.muscle_group_glutes,
+                "fessier" to R.string.muscle_group_glutes,
+                "臀部" to R.string.muscle_group_glutes,
 
-                simpleName.contains("back") ||
-                        simpleName.contains("espalda") ||
-                        simpleName.contains("rücken") ||
-                        simpleName.contains("dos") ||
-                        simpleName.contains("背中") -> R.string.muscle_group_back
+                // Cuerpo completo
+                "full body" to R.string.muscle_group_full_body,
+                "whole body" to R.string.muscle_group_full_body,
+                "cuerpo completo" to R.string.muscle_group_full_body,
+                "ganzkörper" to R.string.muscle_group_full_body,
+                "corps entier" to R.string.muscle_group_full_body,
+                "全身" to R.string.muscle_group_full_body
+            )
 
-                simpleName.contains("glute") ||
-                        simpleName.contains("glúteo") ||
-                        simpleName.contains("gesäß") ||
-                        simpleName.contains("fessier") ||
-                        simpleName.contains("臀部") -> R.string.muscle_group_glutes
-
-                simpleName.contains("full body") ||
-                        simpleName.contains("whole body") ||
-                        simpleName.contains("cuerpo completo") ||
-                        simpleName.contains("ganzkörper") ||
-                        simpleName.contains("corps entier") ||
-                        simpleName.contains("全身") -> R.string.muscle_group_full_body
-
-                else -> R.string.muscle_group_multiple // Default to multiple as a fallback
+            // Caso especial para "core_legs"
+            if (simpleName.contains("core") && (
+                        simpleName.contains("leg") ||
+                                simpleName.contains("pierna") ||
+                                simpleName.contains("beine") ||
+                                simpleName.contains("jambe") ||
+                                simpleName.contains("脚"))
+            ) {
+                return R.string.muscle_group_core_legs
             }
+
+            // Encuentra la primera palabra clave coincidente
+            for ((keyword, resourceId) in muscleGroupMap) {
+                if (simpleName.contains(keyword)) {
+                    return resourceId
+                }
+            }
+
+            // Valor predeterminado a múltiple como respaldo
+            return R.string.muscle_group_multiple
         }
     }
 
@@ -505,8 +520,8 @@ abstract class PowerGymDatabase : RoomDatabase() {
 
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
-            // Update exercise translations each time database is opened
-            // with the current locale context
+            // Actualizar las traducciones de ejercicios cada vez que se abre la base de datos
+            // con el contexto de idioma actual
             updateExerciseTranslations(context)
         }
 
@@ -529,7 +544,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_cable_row_name),
                     descripcion = resources.getString(R.string.exercise_cable_row_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_back),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_tuesday_friday),
                     imagenEjercicio = "https://training.fit/wp-content/uploads/2020/02/rudern-kabelzug-800x448.png",
                     videoUrl = "https://www.youtube.com/watch?v=GZbfZ033f74",
@@ -554,7 +569,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_knee_stretch_name),
                     descripcion = resources.getString(R.string.exercise_knee_stretch_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://img.youtube.com/vi/rfMWJcWXhZo/maxresdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=rfMWJcWXhZo",
@@ -567,7 +582,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_seated_arm_extensions_name),
                     descripcion = resources.getString(R.string.exercise_seated_arm_extensions_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_arms),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_thursday),
                     imagenEjercicio = "https://i.ytimg.com/vi/ASXzHrWwJxI/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=ASXzHrWwJxI",
@@ -580,7 +595,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_various_exercises_name),
                     descripcion = resources.getString(R.string.exercise_various_exercises_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_core),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://img.youtube.com/vi/DYOTthcWj8g/maxresdefault.jpg",
                     videoUrl = "https://youtu.be/DYOTthcWj8g",
@@ -606,7 +621,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_elevacion_lateral_de_brazos_sentado_name),
                     descripcion = resources.getString(R.string.exercise_elevacion_lateral_de_brazos_sentado_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_shoulders),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_thursday),
                     imagenEjercicio = "https://i.ytimg.com/vi/wFYnizn--6o/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=wFYnizn--6o",
@@ -619,9 +634,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_respiratory_exercises_name),
                     descripcion = resources.getString(R.string.exercise_respiratory_exercises_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_respiratory),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_all),
-                    imagenEjercicio = "https://i.ytimg.com/vi/rqGS9UvXrJU/hqdefault.jpg",
+                    imagenEjercicio = "https://static.thenounproject.com/png/4372426-200.png",
                     videoUrl = "https://www.youtube.com/watch?v=rqGS9UvXrJU",
                     seccion = resources.getString(R.string.section_reduced_mobility),
                     calorias = 20,
@@ -632,9 +647,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_flexiones_de_muneca_name),
                     descripcion = resources.getString(R.string.exercise_flexiones_de_muneca_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_forearms),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_thursday_saturday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/T-QSZZPFn0g/hqdefault.jpg",
+                    imagenEjercicio = "https://static.vecteezy.com/system/resources/previews/004/331/543/non_2x/hand-holding-gym-barbell-linear-icon-thin-line-illustration-fitness-and-workout-contour-symbol-isolated-outline-drawing-vector.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=T-QSZZPFn0g",
                     seccion = resources.getString(R.string.section_reduced_mobility),
                     calorias = 15,
@@ -645,7 +660,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_ejercicios_de_equilibrio_con_apoyo_name),
                     descripcion = resources.getString(R.string.exercise_ejercicios_de_equilibrio_con_apoyo_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_core_legs),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://www.performancehealthacademy.com/media/catalog/product/cache/16/image/9df78eab33525d08d6e5fb8d27136e95/S/c/Screen-Shot-2013-10-15-at-10.36.08-AM.png",
                     videoUrl = "https://www.youtube.com/watch?v=jcbXETCpEcM",
@@ -658,7 +673,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_estiramientos_suaves_name),
                     descripcion = resources.getString(R.string.exercise_estiramientos_suaves_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_multiple),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_all),
                     imagenEjercicio = "https://i.ytimg.com/vi/1lMhH8chKpE/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=1lMhH8chKpE",
@@ -671,7 +686,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_yoga_adaptado_en_silla_name),
                     descripcion = resources.getString(R.string.exercise_yoga_adaptado_en_silla_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_multiple),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_thursday_saturday),
                     imagenEjercicio = "https://i.ytimg.com/vi/KEjiXtb2hRg/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=KEjiXtb2hRg",
@@ -687,9 +702,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_military_press_name),
                     descripcion = resources.getString(R.string.exercise_military_press_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_shoulders),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_monday_thursday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/o5M9RZ-vWrc/hqdefault.jpg",
+                    imagenEjercicio = "https://images.pexels.com/photos/2261485/pexels-photo-2261485.jpeg",
                     videoUrl = "https://www.youtube.com/watch?v=5yWaNOvgFCM",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 120,
@@ -700,9 +715,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_lateral_raises_name),
                     descripcion = resources.getString(R.string.exercise_lateral_raises_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_shoulders),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_thursday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/3VcKaXpzqRo/hqdefault.jpg",
+                    imagenEjercicio = "https://training.fit/wp-content/uploads/2020/03/seitenheben-kurzhanteln.png",
                     videoUrl = "https://www.youtube.com/shorts/TuY1eKCo9l0",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 80,
@@ -713,9 +728,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_press_de_banca_name),
                     descripcion = resources.getString(R.string.exercise_press_de_banca_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_chest),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_tuesday_friday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/gRVjAtPip0Y/hqdefault.jpg",
+                    imagenEjercicio = "https://s3assets.skimble.com/assets/2289478/image_iphone.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=gRVjAtPip0Y",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 150,
@@ -726,9 +741,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_aperturas_con_mancuernas_name),
                     descripcion = resources.getString(R.string.exercise_aperturas_con_mancuernas_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_chest),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_friday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/eozdVDA78K0/hqdefault.jpg",
+                    imagenEjercicio = "https://images.pexels.com/photos/3775566/pexels-photo-3775566.jpeg",
                     videoUrl = "https://www.youtube.com/shorts/rk8YayRoTRQ",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 100,
@@ -739,9 +754,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_dominadas_name),
                     descripcion = resources.getString(R.string.exercise_dominadas_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_back),
-                    dificultad = Dificultad.AVANZADO.clave,
+                    dificultad = resources.getString(R.string.difficulty_advanced),
                     dias = resources.getString(R.string.days_wednesday_saturday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/eDP_OOhMTZ4/hqdefault.jpg",
+                    imagenEjercicio = "https://anabolicaliens.com/cdn/shop/articles/199990.png",
                     videoUrl = "https://www.youtube.com/shorts/eDP_OOhMTZ4",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 200,
@@ -752,9 +767,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_remo_con_barra_name),
                     descripcion = resources.getString(R.string.exercise_remo_con_barra_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_back),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_wednesday_saturday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/7B5Exks1KJE/hqdefault.jpg",
+                    imagenEjercicio = "https://training.fit/wp-content/uploads/2020/02/rudern-langhantel-800x448.png",
                     videoUrl = "https://www.youtube.com/watch?v=7B5Exks1KJE",
                     seccion = resources.getString(R.string.section_upper_body),
                     calorias = 130,
@@ -765,9 +780,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_sentadillas_name),
                     descripcion = resources.getString(R.string.exercise_sentadillas_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_monday_thursday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/gcNh17Ckjgg/hqdefault.jpg",
+                    imagenEjercicio = "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg",
                     videoUrl = "https://www.youtube.com/watch?v=gcNh17Ckjgg",
                     seccion = resources.getString(R.string.section_lower_body),
                     calorias = 180,
@@ -778,7 +793,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_extensiones_de_pierna_name),
                     descripcion = resources.getString(R.string.exercise_extensiones_de_pierna_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_thursday),
                     imagenEjercicio = "https://i.ytimg.com/vi/m0iMPJbp03w/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/shorts/m0iMPJbp03w",
@@ -791,7 +806,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_hip_thrust_name),
                     descripcion = resources.getString(R.string.exercise_hip_thrust_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_glutes),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_tuesday_friday),
                     imagenEjercicio = "https://i.ytimg.com/vi/5S8SApGU_Lk/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=5S8SApGU_Lk",
@@ -804,7 +819,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_puente_de_gluteos_name),
                     descripcion = resources.getString(R.string.exercise_puente_de_gluteos_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_glutes),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_friday),
                     imagenEjercicio = "https://i.ytimg.com/vi/jFQIewEEf9o/hqdefault.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=jFQIewEEf9o",
@@ -817,9 +832,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_burpees_name),
                     descripcion = resources.getString(R.string.exercise_burpees_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_full_body),
-                    dificultad = Dificultad.AVANZADO.clave,
+                    dificultad = resources.getString(R.string.difficulty_advanced),
                     dias = resources.getString(R.string.days_wednesday_saturday_sunday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/TU8QYVW0gDU/hqdefault.jpg",
+                    imagenEjercicio = "https://images.pexels.com/photos/6456176/pexels-photo-6456176.jpeg",
                     videoUrl = "https://www.youtube.com/watch?v=TU8QYVW0gDU",
                     seccion = resources.getString(R.string.section_cardio),
                     calorias = 250,
@@ -830,9 +845,9 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_salto_a_la_comba_name),
                     descripcion = resources.getString(R.string.exercise_salto_a_la_comba_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_full_body),
-                    dificultad = Dificultad.INTERMEDIO.clave,
+                    dificultad = resources.getString(R.string.difficulty_intermediate),
                     dias = resources.getString(R.string.days_wednesday_saturday_sunday),
-                    imagenEjercicio = "https://i.ytimg.com/vi/AnQwqHgZdoQ/hqdefault.jpg",
+                    imagenEjercicio = "https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg",
                     videoUrl = "https://www.youtube.com/watch?v=AnQwqHgZdoQ&pp=ygURc2FsdGFyIGEgbGEgY29tYmE%3D",
                     seccion = resources.getString(R.string.section_cardio),
                     calorias = 220,
@@ -844,7 +859,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
             database.ejercicioDao().insertarTodos(ejercicios)
             database.ejercicioDao().insertarTodos(ejerciciosAdaptados)
 
-            // Store reference to one of the inserted exercises for statistics
+            // Guardar referencia a uno de los ejercicios insertados para estadísticas
             val burpeesEjercicio = database.ejercicioDao().obtenerEjercicioPorNombre(
                 resources.getString(R.string.exercise_burpees_name)
             )
@@ -862,13 +877,12 @@ abstract class PowerGymDatabase : RoomDatabase() {
                 )
             )
 
-            // Add our new exercises
             val newExercises = listOf(
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_seated_arm_curl_name),
                     descripcion = resources.getString(R.string.exercise_seated_arm_curl_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_arms),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://morelifehealth.com/hubfs/Screenshot%202021-12-08%20at%2014.40.50.png",
                     videoUrl = "https://www.youtube.com/watch?v=kDqklk1ZESo",
@@ -877,24 +891,12 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     frecuencia = 12,
                     porcentaje = 0.2f
                 ),
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_wall_pushup_name),
-                    descripcion = resources.getString(R.string.exercise_wall_pushup_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_chest),
-                    dificultad = Dificultad.BASICO.clave,
-                    dias = resources.getString(R.string.days_tuesday_thursday),
-                    imagenEjercicio = "https://morelifehealth.com/hubfs/Screenshot%202021-12-07%20at%2011.40.51.png",
-                    videoUrl = "https://www.youtube.com/watch?v=OBPuG7EM8Cg",
-                    seccion = resources.getString(R.string.section_upper_body),
-                    calorias = 50,
-                    frecuencia = 10,
-                    porcentaje = 0.25f
-                ),
+
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_seated_marching_name),
                     descripcion = resources.getString(R.string.exercise_seated_marching_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://www.flintrehab.com/wp-content/uploads/2023/01/seated-marching-stroke-exercise.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=DfDIQ5IwLDM",
@@ -907,7 +909,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_balance_support_name),
                     descripcion = resources.getString(R.string.exercise_balance_support_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_core_legs),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_friday),
                     imagenEjercicio = "https://www.performancehealthacademy.com/media/catalog/product/cache/16/image/9df78eab33525d08d6e5fb8d27136e95/S/c/Screen-Shot-2013-10-15-at-10.36.08-AM.png",
                     videoUrl = "https://www.youtube.com/watch?v=4YOBIEOobCE",
@@ -916,24 +918,12 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     frecuencia = 8,
                     porcentaje = 0.15f
                 ),
-                Ejercicio(
-                    nombre = resources.getString(R.string.exercise_shoulder_rolls_name),
-                    descripcion = resources.getString(R.string.exercise_shoulder_rolls_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_shoulders),
-                    dificultad = Dificultad.BASICO.clave,
-                    dias = resources.getString(R.string.days_all),
-                    imagenEjercicio = "https://morelifehealth.com/hubfs/Screenshot%202021-12-08%20at%2014.39.52.png",
-                    videoUrl = "https://www.youtube.com/watch?v=JmzxJZRCzVk",
-                    seccion = resources.getString(R.string.section_upper_body),
-                    calorias = 20,
-                    frecuencia = 20,
-                    porcentaje = 0.1f
-                ),
+
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_knee_extension_name),
                     descripcion = resources.getString(R.string.exercise_knee_extension_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_legs),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_thursday),
                     imagenEjercicio = "https://www.hingehealth.com/resources/static/f544c3dfa0c41156255696af1dcf6be4/leg-strengthening-exercises-for-seniors-1.webp",
                     videoUrl = "https://www.youtube.com/watch?v=5HZGS-8JcE8",
@@ -946,7 +936,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                     nombre = resources.getString(R.string.exercise_tabletop_circle_name),
                     descripcion = resources.getString(R.string.exercise_tabletop_circle_desc),
                     grupoMuscular = resources.getString(R.string.muscle_group_arms),
-                    dificultad = Dificultad.BASICO.clave,
+                    dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://www.flintrehab.com/wp-content/uploads/2023/01/tabletop-circle-stroke-exercise.jpg",
                     videoUrl = "https://www.youtube.com/watch?v=lvwixnrxPJE",

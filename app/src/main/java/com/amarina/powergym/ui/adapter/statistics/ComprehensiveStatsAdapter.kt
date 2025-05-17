@@ -1,5 +1,6 @@
 package com.amarina.powergym.ui.adapter.statistics
 
+import android.content.Context
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +54,7 @@ class ComprehensiveStatsAdapter :
             exerciseNameText.text = item.ejercicio.nombre
             muscleGroupText.text = item.ejercicio.grupoMuscular
             difficultyText.text = item.ejercicio.dificultad
-            daysText.text = item.ejercicio.dias
+            daysText.text = translateDays(itemView.context, item.ejercicio.dias)
 
             // Stats data
             caloriesText.text = itemView.context.getString(
@@ -77,6 +78,38 @@ class ComprehensiveStatsAdapter :
             } else {
                 repsSeriesText.visibility = View.GONE
             }
+        }
+
+        private fun translateDays(context: Context, days: String): String {
+            return days.split(",").map { day ->
+                when (day.trim()) {
+                    // Spanish days
+                    "Lunes" -> context.getString(R.string.day_monday)
+                    "Martes" -> context.getString(R.string.day_tuesday)
+                    "Miércoles" -> context.getString(R.string.day_wednesday)
+                    "Jueves" -> context.getString(R.string.day_thursday)
+                    "Viernes" -> context.getString(R.string.day_friday)
+                    "Sábado" -> context.getString(R.string.day_saturday)
+                    "Domingo" -> context.getString(R.string.day_sunday)
+                    // English days
+                    "Monday" -> context.getString(R.string.day_monday)
+                    "Tuesday" -> context.getString(R.string.day_tuesday)
+                    "Wednesday" -> context.getString(R.string.day_wednesday)
+                    "Thursday" -> context.getString(R.string.day_thursday)
+                    "Friday" -> context.getString(R.string.day_friday)
+                    "Saturday" -> context.getString(R.string.day_saturday)
+                    "Sunday" -> context.getString(R.string.day_sunday)
+                    // Abbreviated days
+                    "Mon" -> context.getString(R.string.day_mon)
+                    "Tue" -> context.getString(R.string.day_tue)
+                    "Wed" -> context.getString(R.string.day_wed)
+                    "Thu" -> context.getString(R.string.day_thu)
+                    "Fri" -> context.getString(R.string.day_fri)
+                    "Sat" -> context.getString(R.string.day_sat)
+                    "Sun" -> context.getString(R.string.day_sun)
+                    else -> day.trim()
+                }
+            }.joinToString(", ")
         }
     }
 }

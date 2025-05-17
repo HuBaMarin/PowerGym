@@ -37,14 +37,14 @@ class PowerGymDatabaseTest {
 
     @Before
     fun createDb() {
-        // Use mocks instead of real database for unit tests
+        // Usar mocks en lugar de la base de datos real para las pruebas unitarias
         db = mockk(relaxed = true)
         userDao = mockk(relaxed = true)
         ejercicioDao = mockk(relaxed = true)
         estadisticaDao = mockk(relaxed = true)
         preferenciaDao = mockk(relaxed = true)
 
-        // Configure db mock to return our DAOs
+        // Configurar el mock de la base de datos para devolver nuestros DAOs
         every { db.userDao() } returns userDao
         every { db.ejercicioDao() } returns ejercicioDao
         every { db.estadisticaDao() } returns estadisticaDao
@@ -54,15 +54,15 @@ class PowerGymDatabaseTest {
     @After
     @Throws(IOException::class)
     fun closeDb() {
-        // No need to close db when using mocks
+        // No es necesario cerrar la base de datos cuando se utilizan mocks
     }
 
-    // USER TESTS
+    // PRUEBAS DE USUARIO
 
     @Test
     @Throws(Exception::class)
     fun insertAndGetUser() = runBlocking {
-        // Setup
+        // Configuración
         val user = Usuario(
             email = "test@example.com",
             password = "password123",
@@ -71,15 +71,15 @@ class PowerGymDatabaseTest {
         )
         val userId = 1L
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns userId
         every { runBlocking { userDao.obtenerUsuarioPorId(userId.toInt()) } } returns user.copy(id = userId.toInt())
 
-        // Execute
+        // Ejecutar
         val resultId = userDao.insertar(user)
         val retrievedUser = userDao.obtenerUsuarioPorId(resultId.toInt())
 
-        // Verify
+        // Verificar
         assertEquals(userId, resultId)
         assertNotNull(retrievedUser)
         assertEquals(user.email, retrievedUser?.email)
@@ -90,7 +90,7 @@ class PowerGymDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun updateUser() = runBlocking {
-        // Insert a user
+        // Insertar un usuario
         val user = Usuario(
             email = "update@example.com",
             password = "password123",
@@ -101,29 +101,29 @@ class PowerGymDatabaseTest {
         val userWithId = user.copy(id = userId.toInt())
         val updatedUser = userWithId.copy(nombre = "Updated Name")
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns userId
         every { runBlocking { userDao.obtenerUsuarioPorId(userId.toInt()) } } returns userWithId andThen updatedUser
 
-        // Execute
+        // Ejecutar
         val resultId = userDao.insertar(user)
         val retrievedUser = userDao.obtenerUsuarioPorId(resultId.toInt())
         assertNotNull(retrievedUser)
 
-        // Update the user
+        // Actualizar el usuario
         userDao.actualizar(retrievedUser.copy(nombre = "Updated Name"))
 
-        // Verify update
+        // Verificar actualización
         val retrievedUpdatedUser = userDao.obtenerUsuarioPorId(resultId.toInt())
         assertNotNull(retrievedUpdatedUser)
-        assertEquals("Updated Name", retrievedUpdatedUser?.nombre)
-        assertEquals(user.email, retrievedUpdatedUser?.email) // Email should remain the same
+        assertEquals("Updated Name", retrievedUpdatedUser.nombre)
+        assertEquals(user.email, retrievedUpdatedUser.email) 
     }
 
     @Test
     @Throws(Exception::class)
     fun deleteUser() = runBlocking {
-        // Insert a user
+        // Insertar un usuario
         val user = Usuario(
             email = "delete@example.com",
             password = "password123",
@@ -133,21 +133,21 @@ class PowerGymDatabaseTest {
         val userId = 3L
         val userWithId = user.copy(id = userId.toInt())
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns userId
         every { runBlocking { userDao.obtenerUsuarioPorId(userId.toInt()) } } returns userWithId andThen null
 
-        // Execute
+        // Ejecutar
         val resultId = userDao.insertar(user)
 
-        // Verify user exists
+        // Verificar que el usuario existe
         val retrievedUser = userDao.obtenerUsuarioPorId(resultId.toInt())
         assertNotNull(retrievedUser)
 
-        // Delete user
+        // Eliminar usuario
         userDao.eliminar(retrievedUser)
 
-        // Verify user was deleted
+        // Verificar que el usuario fue eliminado
         val deletedUser = userDao.obtenerUsuarioPorId(resultId.toInt())
         assertNull(deletedUser)
     }
@@ -162,21 +162,21 @@ class PowerGymDatabaseTest {
             rol = "usuario"
         )
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns 4L
         every { runBlocking { userDao.obtenerUsuarioPorEmail("email@example.com") } } returns user
         every { runBlocking { userDao.obtenerUsuarioPorEmail("nonexistent@example.com") } } returns null
 
-        // Execute
+        // Ejecutar
         userDao.insertar(user)
 
         val retrievedUser = userDao.obtenerUsuarioPorEmail("email@example.com")
 
         assertNotNull(retrievedUser)
-        assertEquals(user.email, retrievedUser?.email)
-        assertEquals(user.nombre, retrievedUser?.nombre)
+        assertEquals(user.email, retrievedUser.email)
+        assertEquals(user.nombre, retrievedUser.nombre)
 
-        // Test non-existent email
+        // Probar email inexistente
         val nonExistentUser = userDao.obtenerUsuarioPorEmail("nonexistent@example.com")
         assertNull(nonExistentUser)
     }
@@ -191,17 +191,17 @@ class PowerGymDatabaseTest {
             rol = "usuario"
         )
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns 5L
-        every { runBlocking { userDao.login("test@example.com", "password123") } } returns user
+        every { runBlocking { userDao.iniciarSesion("test@example.com", "password123") } } returns user
 
-        // Execute
+        // Ejecutar
         userDao.insertar(user)
 
-        val retrievedUser = userDao.login("test@example.com", "password123")
+        val retrievedUser = userDao.iniciarSesion("test@example.com", "password123")
 
         assertNotNull(retrievedUser)
-        assertEquals(user.email, retrievedUser?.email)
+        assertEquals(user.email, retrievedUser.email)
     }
 
     @Test
@@ -214,32 +214,32 @@ class PowerGymDatabaseTest {
             rol = "usuario"
         )
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns 6L
-        every { runBlocking { userDao.login("test@example.com", "wrongpassword") } } returns null
+        every { runBlocking { userDao.iniciarSesion("test@example.com", "wrongpassword") } } returns null
         every {
             runBlocking {
-                userDao.login(
+                userDao.iniciarSesion(
                     "nonexistent@example.com",
                     "password123"
                 )
             }
         } returns null
 
-        // Execute
+        // Ejecutar
         userDao.insertar(user)
 
-        val retrievedUser = userDao.login("test@example.com", "wrongpassword")
+        val retrievedUser = userDao.iniciarSesion("test@example.com", "wrongpassword")
         assertNull(retrievedUser)
 
-        val nonExistentEmailUser = userDao.login("nonexistent@example.com", "password123")
+        val nonExistentEmailUser = userDao.iniciarSesion("nonexistent@example.com", "password123")
         assertNull(nonExistentEmailUser)
     }
 
     @Test
     @Throws(Exception::class)
     fun getAllUsers() = runBlocking {
-        // Insert multiple users
+        // Insertar múltiples usuarios
         val users = listOf(
             Usuario(
                 email = "user1@example.com",
@@ -261,26 +261,26 @@ class PowerGymDatabaseTest {
             )
         )
 
-        // Mock return values
+        // Valores de retorno simulados
         users.forEachIndexed { index, user ->
             every { runBlocking { userDao.insertar(user) } } returns (index + 7).toLong()
         }
         every { runBlocking { userDao.obtenerTodos() } } returns users
 
-        // Execute
+        // Ejecutar
         users.forEach { userDao.insertar(it) }
 
-        // Get all users
+        // Obtener todos los usuarios
         val retrievedUsers = userDao.obtenerTodos()
 
-        // Verify results
+        // Verificar resultados
         assertEquals(users.size, retrievedUsers.size)
         assertTrue(retrievedUsers.any { it.email == "user1@example.com" })
         assertTrue(retrievedUsers.any { it.email == "user2@example.com" })
         assertTrue(retrievedUsers.any { it.email == "admin@example.com" })
     }
 
-    // EJERCICIO TESTS
+    // PRUEBAS DE EJERCICIOS
 
     @Test
     @Throws(Exception::class)
@@ -301,20 +301,20 @@ class PowerGymDatabaseTest {
         val id = 1L
         val ejercicioWithId = ejercicio.copy(id = id.toInt())
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { ejercicioDao.insertar(ejercicio) } } returns id
         every { runBlocking { ejercicioDao.obtenerEjercicioPorId(id.toInt()) } } returns ejercicioWithId
 
-        // Execute
+        // Ejecutar
         val resultId = ejercicioDao.insertar(ejercicio)
         val retrievedEjercicio = ejercicioDao.obtenerEjercicioPorId(resultId.toInt())
 
         assertNotNull(retrievedEjercicio)
-        assertEquals(ejercicio.nombre, retrievedEjercicio?.nombre)
-        assertEquals(ejercicio.grupoMuscular, retrievedEjercicio?.grupoMuscular)
-        assertEquals(ejercicio.calorias, retrievedEjercicio?.calorias)
-        assertEquals(ejercicio.frecuencia, retrievedEjercicio?.frecuencia)
-        assertEquals(ejercicio.porcentaje, retrievedEjercicio?.porcentaje)
+        assertEquals(ejercicio.nombre, retrievedEjercicio.nombre)
+        assertEquals(ejercicio.grupoMuscular, retrievedEjercicio.grupoMuscular)
+        assertEquals(ejercicio.calorias, retrievedEjercicio.calorias)
+        assertEquals(ejercicio.frecuencia, retrievedEjercicio.frecuencia)
+        assertEquals(ejercicio.porcentaje, retrievedEjercicio.porcentaje)
     }
 
     @Test
@@ -349,11 +349,11 @@ class PowerGymDatabaseTest {
             )
         )
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { ejercicioDao.insertarTodos(ejercicios) } } returns Unit
         every { runBlocking { ejercicioDao.obtenerTodosEjercicios() } } returns ejercicios
 
-        // Execute
+        // Ejecutar
         ejercicioDao.insertarTodos(ejercicios)
 
         val retrievedEjercicios = ejercicioDao.obtenerTodosEjercicios()
@@ -379,11 +379,11 @@ class PowerGymDatabaseTest {
         val id = 2L
         val ejercicioWithId = ejercicio.copy(id = id.toInt())
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { ejercicioDao.insertar(ejercicio) } } returns id
         every { runBlocking { ejercicioDao.obtenerEjercicioPorId(id.toInt()) } } returns ejercicioWithId andThen null
 
-        // Execute
+        // Ejecutar
         val resultId = ejercicioDao.insertar(ejercicio)
 
         val retrievedEjercicio = ejercicioDao.obtenerEjercicioPorId(resultId.toInt())
@@ -574,7 +574,7 @@ class PowerGymDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun filterEjercicios_returnsMatchingEjercicios() = runBlocking {
-        // Insert ejercicios
+        // Insertar ejercicios
         val ejercicio1 = Ejercicio(
             nombre = "Press de banca",
             descripcion = "Ejercicio para pecho",
@@ -602,78 +602,70 @@ class PowerGymDatabaseTest {
             porcentaje = 0.5f
         )
 
-        // Mock return values for insertions
         every { runBlocking { ejercicioDao.insertar(ejercicio1) } } returns 3L
         every { runBlocking { ejercicioDao.insertar(ejercicio2) } } returns 4L
 
-        // Mock filter results
-        every { runBlocking { ejercicioDao.getFilteredEjercicios(dificultad = "Medio") } } returns listOf(
+        every { runBlocking { ejercicioDao.obtenerEjerciciosFiltrados(dificultad = "Medio") } } returns listOf(
             ejercicio1
         )
-        every { runBlocking { ejercicioDao.getFilteredEjercicios(grupoMuscular = "Piernas") } } returns listOf(
+        every { runBlocking { ejercicioDao.obtenerEjerciciosFiltrados(grupoMuscular = "Piernas") } } returns listOf(
             ejercicio2
         )
-        every { runBlocking { ejercicioDao.getFilteredEjercicios(query = "piernas") } } returns listOf(
+        every { runBlocking { ejercicioDao.obtenerEjerciciosFiltrados(query = "piernas") } } returns listOf(
             ejercicio2
         )
-        every { runBlocking { ejercicioDao.getFilteredEjercicios(dias = "Lunes") } } returns listOf(
+        every { runBlocking { ejercicioDao.obtenerEjerciciosFiltrados(dias = "Lunes") } } returns listOf(
             ejercicio1
         )
         every {
             runBlocking {
-                ejercicioDao.getFilteredEjercicios(
+                ejercicioDao.obtenerEjerciciosFiltrados(
                     dificultad = "Avanzado",
                     grupoMuscular = "Piernas"
                 )
             }
         } returns emptyList()
 
-        // Execute
         ejercicioDao.insertar(ejercicio1)
         ejercicioDao.insertar(ejercicio2)
 
-        // Filter by dificultad
-        val ejerciciosMedio = ejercicioDao.getFilteredEjercicios(
+        val ejerciciosMedio = ejercicioDao.obtenerEjerciciosFiltrados(
             dificultad = "Medio"
         )
         assertEquals(1, ejerciciosMedio.size)
         assertEquals("Press de banca", ejerciciosMedio.first().nombre)
 
-        // Filter by grupoMuscular
-        val ejerciciosPiernas = ejercicioDao.getFilteredEjercicios(
+        val ejerciciosPiernas = ejercicioDao.obtenerEjerciciosFiltrados(
             grupoMuscular = "Piernas"
         )
         assertEquals(1, ejerciciosPiernas.size)
         assertEquals("Sentadillas", ejerciciosPiernas.first().nombre)
 
-        // Filter by query
-        val ejerciciosByQuery = ejercicioDao.getFilteredEjercicios(
+        val ejerciciosByQuery = ejercicioDao.obtenerEjerciciosFiltrados(
             query = "piernas"
         )
         assertEquals(1, ejerciciosByQuery.size)
         assertEquals("Sentadillas", ejerciciosByQuery.first().nombre)
 
-        // Filter by day
-        val ejerciciosByDay = ejercicioDao.getFilteredEjercicios(
+        val ejerciciosByDay = ejercicioDao.obtenerEjerciciosFiltrados(
             dias = "Lunes"
         )
         assertEquals(1, ejerciciosByDay.size)
         assertEquals("Press de banca", ejerciciosByDay.first().nombre)
 
-        // Combined filters - should return no results
-        val combinedFilter = ejercicioDao.getFilteredEjercicios(
+        val combinedFilter = ejercicioDao.obtenerEjerciciosFiltrados(
             dificultad = "Avanzado",
             grupoMuscular = "Piernas"
         )
         assertEquals(0, combinedFilter.size)
     }
 
-    // ESTADISTICA TESTS
+    // PRUEBAS DE ESTADÍSTICAS
 
     @Test
     @Throws(Exception::class)
     fun insertAndGetEstadistica() = runBlocking {
-        // Create user and ejercicio first
+        // Crear usuario y ejercicio primero
         val user =
             Usuario(email = "stats@example.com", password = "password", nombre = "Stats User")
         val userId = 10
@@ -691,7 +683,7 @@ class PowerGymDatabaseTest {
         )
         val ejercicioId = 20
 
-        // Now create and insert estadistica
+        // Ahora crear e insertar estadística
         val timestamp = System.currentTimeMillis()
         val estadistica = Estadistica(
             userId = userId,
@@ -699,14 +691,14 @@ class PowerGymDatabaseTest {
             fecha = timestamp,
             ejerciciosCompletados = 10,
             caloriasQuemadas = 150,
-            tiempoTotal = 1800000, // 30 minutes
+            tiempoTotal = 1800000, // 30 minutos
             nombreEjercicio = ejercicio.nombre,
             grupoMuscular = ejercicio.grupoMuscular
         )
         val estadisticaId = 30L
         val estadisticaWithId = estadistica.copy(id = estadisticaId.toInt())
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns userId.toLong()
         every { runBlocking { ejercicioDao.insertar(ejercicio) } } returns ejercicioId.toLong()
         every { runBlocking { estadisticaDao.insertarEstadistica(estadistica) } } returns estadisticaId
@@ -716,27 +708,27 @@ class PowerGymDatabaseTest {
 
         val estadisticaIdResult = estadisticaDao.insertarEstadistica(estadistica)
 
-        // Verify estadistica was inserted correctly
+        // Verificar que la estadística se insertó correctamente
         val retrievedEstadistica =
             estadisticaDao.obtenerEstadisticaPorId(estadisticaIdResult.toInt())
         assertNotNull(retrievedEstadistica)
-        assertEquals(userId, retrievedEstadistica?.userId)
-        assertEquals(ejercicioId, retrievedEstadistica?.ejercicioId)
-        assertEquals(10, retrievedEstadistica?.ejerciciosCompletados)
-        assertEquals(150, retrievedEstadistica?.caloriasQuemadas)
+        assertEquals(userId, retrievedEstadistica.userId)
+        assertEquals(ejercicioId, retrievedEstadistica.ejercicioId)
+        assertEquals(10, retrievedEstadistica.ejerciciosCompletados)
+        assertEquals(150, retrievedEstadistica.caloriasQuemadas)
     }
 
-    // PREFERENCIA TESTS
+    // PRUEBAS DE PREFERENCIAS
 
     @Test
     @Throws(Exception::class)
     fun insertAndGetPreferencia() = runBlocking {
-        // Create user first
+        // Crear usuario primero
         val user =
             Usuario(email = "prefs@example.com", password = "password", nombre = "Prefs User")
         val userId = 50
 
-        // Create and insert preferencia
+        // Crear e insertar preferencia
         val preferencia = Preferencia(
             usuarioId = userId,
             notificacionesHabilitadas = true,
@@ -746,19 +738,19 @@ class PowerGymDatabaseTest {
         )
         val preferenciaId = 60L
 
-        // Mock return values
+        // Valores de retorno simulados
         every { runBlocking { userDao.insertar(user) } } returns userId.toLong()
         every { runBlocking { preferenciaDao.insertar(preferencia) } } returns preferenciaId
         every { runBlocking { preferenciaDao.obtenerPreferenciaSync(userId) } } returns preferencia
 
 
-        // Verify preferencia was inserted correctly
+        // Verificar que la preferencia se insertó correctamente
         val retrievedPreferencia = preferenciaDao.obtenerPreferenciaSync(userId)
         assertNotNull(retrievedPreferencia)
-        assertEquals(userId, retrievedPreferencia?.usuarioId)
-        assertEquals(true, retrievedPreferencia?.notificacionesHabilitadas)
-        assertEquals(false, retrievedPreferencia?.temaOscuro)
-        assertEquals(true, retrievedPreferencia?.recordatorios)
-        assertEquals("DIARIA", retrievedPreferencia?.frecuencia)
+        assertEquals(userId, retrievedPreferencia.usuarioId)
+        assertEquals(true, retrievedPreferencia.notificacionesHabilitadas)
+        assertEquals(false, retrievedPreferencia.temaOscuro)
+        assertEquals(true, retrievedPreferencia.recordatorios)
+        assertEquals("DIARIA", retrievedPreferencia.frecuencia)
     }
 }

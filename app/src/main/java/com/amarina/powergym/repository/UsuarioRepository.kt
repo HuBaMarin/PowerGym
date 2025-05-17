@@ -144,12 +144,12 @@ class UserRepository(private val userDao: UsuarioDao, private val appContext: Co
     suspend fun actualizarUsuario(user: Usuario): Result<Unit> = withContext(Dispatchers.IO) {
         try {
             // Primero obtener el usuario existente
-            val existingUser = userDao.obtenerUsuarioPorId(user.id)
+            val usuarioExistente = userDao.obtenerUsuarioPorId(user.id)
                 ?: return@withContext Result.failure(Exception("Usuario no encontrado"))
 
             // Actualizar usuario con hash de contraseña si la contraseña fue cambiada
             val updatedUser =
-                if (user.password.isNotEmpty() && user.password != existingUser.password) {
+                if (user.password.isNotEmpty() && user.password != usuarioExistente.password) {
                     // Reset failed attempts and unlock account on password change
                     user.copy(
                         password = hashPassword(user.password),
@@ -158,7 +158,7 @@ class UserRepository(private val userDao: UsuarioDao, private val appContext: Co
                     )
                 } else {
                     // Mantener el hash de contraseña existente
-                    user.copy(password = existingUser.password)
+                    user.copy(password = usuarioExistente.password)
                 }
 
             userDao.actualizar(updatedUser)
@@ -177,25 +177,6 @@ class UserRepository(private val userDao: UsuarioDao, private val appContext: Co
     suspend fun eliminarUsuario(user: Usuario): Result<Unit> = withContext(Dispatchers.IO) {
         try {
             userDao.eliminar(user)
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    /**
-     * Desbloquea una cuenta de usuario.
-     *
-     * @param userId ID del usuario a desbloquear
-     * @return Result con éxito o un error
-     */
-    suspend fun desbloquearCuenta(userId: Int): Result<Unit> = withContext(Dispatchers.IO) {
-        try {
-            val user = userDao.obtenerUsuarioPorId(userId)
-                ?: return@withContext Result.failure(Exception("Usuario no encontrado"))
-
-            val updatedUser = user.copy(accountLocked = false, failedLoginAttempts = 0)
-            userDao.actualizar(updatedUser)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)

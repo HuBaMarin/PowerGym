@@ -13,6 +13,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimaryVariant"
         android:elevation="4dp"
+        app:navigationIcon="@drawable/nav_back"
+        app:title="@string/exercise_details"
+        app:titleTextColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

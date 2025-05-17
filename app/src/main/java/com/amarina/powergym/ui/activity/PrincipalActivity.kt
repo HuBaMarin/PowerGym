@@ -24,6 +24,8 @@ class PrincipalActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: EjercicioAdapter
     private var currentDifficulty: String? = null
+    private var currentSection: String? = null
+    private var currentMuscleGroup: String? = null
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LanguageHelper.establecerIdioma(newBase))
@@ -56,10 +58,10 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter() {
-        adapter = EjercicioAdapter { ejercicio ->
+        adapter = EjercicioAdapter { ejercicioId ->
             // Navegar a la pantalla de detalles del ejercicio
             val intent = Intent(this, EjercicioDetailActivity::class.java)
-            intent.putExtra("ejercicio_id", ejercicio)
+            intent.putExtra("ejercicio_id", ejercicioId)
             startActivity(intent)
         }
     }
@@ -80,7 +82,6 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupFilters() {
         binding.chipDificultad.setOnClickListener {
             showDificultadDialog()
@@ -93,8 +94,31 @@ class PrincipalActivity : AppCompatActivity() {
             viewModel.clearDificultadFilter()
             binding.chipDificultad.isChecked = false
         }
-    }
 
+        binding.chipGroupSection.setOnClickListener {
+            showSectionDialog()
+        }
+
+        binding.chipGroupSection.setOnCloseIconClickListener {
+            currentSection = null
+            binding.chipGroupSection.text = getString(R.string.group_section)
+            binding.chipGroupSection.isCloseIconVisible = false
+            viewModel.clearSectionFilter()
+            binding.chipGroupSection.isChecked = false
+        }
+
+        binding.chipMuscleGroup.setOnClickListener {
+            showMuscleGroupDialog()
+        }
+
+        binding.chipMuscleGroup.setOnCloseIconClickListener {
+            currentMuscleGroup = null
+            binding.chipMuscleGroup.text = getString(R.string.muscle_group)
+            binding.chipMuscleGroup.isCloseIconVisible = false
+            viewModel.clearMuscleGroupFilter()
+            binding.chipMuscleGroup.isChecked = false
+        }
+    }
 
     private fun showDificultadDialog() {
         // Opciones visibles para el usuario
@@ -151,11 +175,111 @@ class PrincipalActivity : AppCompatActivity() {
         viewModel.setDificultadFilter(dbValue)
     }
 
+    private fun showSectionDialog() {
+        // Get sections from resources
+        val sectionsDisplay = arrayOf(
+            getString(R.string.section_elderly),
+            getString(R.string.section_reduced_mobility),
+            getString(R.string.section_rehabilitation),
+            getString(R.string.section_upper_body),
+            getString(R.string.section_lower_body),
+            getString(R.string.section_cardio)
+        )
 
+        // Corresponding DB values (must match the values in the database)
+        // Must use the exact values used in the PowerGymDatabase.kt initialization
+        val sectionsDB = arrayOf(
+            getString(R.string.section_elderly),
+            getString(R.string.section_reduced_mobility),
+            getString(R.string.section_rehabilitation),
+            getString(R.string.section_upper_body),
+            getString(R.string.section_lower_body),
+            getString(R.string.section_cardio)
+        )
 
+        // Determine current selection index
+        val currentDisplayValue = currentSection
 
+        val currentIndex = if (currentDisplayValue != null) {
+            sectionsDisplay.indexOf(currentDisplayValue)
+        } else {
+            -1
+        }
 
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.filter_by_group))
+            .setSingleChoiceItems(sectionsDisplay, currentIndex) { dialog, which ->
+                // Use DB value for filtering
+                val dbValue = sectionsDB[which]
+                val displayValue = sectionsDisplay[which]
 
+                // Save selection and apply filter
+                currentSection = dbValue
+                applySectionFilter(dbValue, displayValue)
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
+
+    private fun applySectionFilter(dbValue: String, displayValue: String) {
+        // Update chip UI
+        binding.chipGroupSection.text = "${getString(R.string.group_section)}: $displayValue"
+        binding.chipGroupSection.isCloseIconVisible = true
+        binding.chipGroupSection.isChecked = true
+
+        // Apply filter using DB value
+        viewModel.setSectionFilter(dbValue)
+    }
+
+    private fun showMuscleGroupDialog() {
+        lifecycleScope.launch {
+            try {
+                // Get muscle groups from viewModel
+                val muscleGroups = viewModel.musculos.value
+
+                if (muscleGroups.isEmpty()) {
+                    return@launch
+                }
+
+                // Determine current selection index
+                val currentIndex = if (currentMuscleGroup != null) {
+                    muscleGroups.indexOf(currentMuscleGroup)
+                } else {
+                    -1
+                }
+
+                AlertDialog.Builder(this@PrincipalActivity)
+                    .setTitle(getString(R.string.filter_by_group))
+                    .setSingleChoiceItems(
+                        muscleGroups.toTypedArray(),
+                        currentIndex
+                    ) { dialog, which ->
+                        // Use the selected muscle group for filtering
+                        val selectedMuscleGroup = muscleGroups[which]
+
+                        // Save selection and apply filter
+                        currentMuscleGroup = selectedMuscleGroup
+                        applyMuscleGroupFilter(selectedMuscleGroup)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton(getString(R.string.cancel), null)
+                    .show()
+            } catch (e: Exception) {
+                // Handle any errors
+            }
+        }
+    }
+
+    private fun applyMuscleGroupFilter(muscleGroup: String) {
+        // Update chip UI
+        binding.chipMuscleGroup.text = "${getString(R.string.muscle_group)}: $muscleGroup"
+        binding.chipMuscleGroup.isCloseIconVisible = true
+        binding.chipMuscleGroup.isChecked = true
+
+        // Apply filter using muscle group
+        viewModel.setMuscleGroupFilter(muscleGroup)
+    }
 
     private fun setupNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
@@ -215,5 +339,4 @@ class PrincipalActivity : AppCompatActivity() {
             }
         }
     }
-
 }

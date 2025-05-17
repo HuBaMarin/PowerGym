@@ -24,14 +24,7 @@ interface UsuarioDao {
     @Query("SELECT * FROM usuarios WHERE email = :email")
     suspend fun obtenerUsuarioPorEmail(email: String): Usuario?
 
-    /**
-     * Iniciar sesión a un usuario con su correo y contraseña para
-     * las pruebas de la aplicación.
-     *
-     * @param email El correo electrónico del usuario
-     * @param password La contraseña del usuario
-     * @return El usuario autenticado o null si las credenciales son incorrectas
-     */
+
     @Query("SELECT * FROM usuarios WHERE email = :email AND password = :password")
-    suspend fun login(email: String, password: String): Usuario?
+    suspend fun iniciarSesion(email: String, password: String): Usuario?
 }

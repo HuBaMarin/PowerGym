@@ -26,14 +26,21 @@
     <string name="exercise_history">Historial de ejercicios</string>
     <string name="no_statistics">No hay estadísticas</string>
     <string name="load_more">Cargar más</string>
-    <string name="calories">Calorías: %1$d</string>
-    <string name="time">Tiempo: %1$d min</string>
-    <string name="date">Fecha: %1$s</string>
+    <string name="calories">Calorías</string>
+    <string name="calories_per_session">%1$d calorías por sesión</string>
+    <string name="time">Tiempo</string>
+    <string name="date">Fecha</string>
+    <string name="enable_notifications">Habilitar notificaciones</string>
+    <string name="daily">Diariamente</string>
+    <string name="group_section">Sección de grupo</string>
+    <string name="filter_by_group">Filtrar por grupo</string>
+    <string name="clear_filters">Limpiar filtros</string>
+    <string name="sort_by">Ordenar por</string>
 
     <!-- Exercise Details -->
     <string name="exercise_details">Detalles del ejercicio</string>
     <string name="muscle_group">Grupo muscular</string>
-    <string name="difficulty">Dificultad</string>
+    <string name="difficulty">Nivel de dificultad</string>
     <string name="training_days">Días de entrenamiento</string>
 
     <!-- Time Ranges -->
@@ -59,7 +66,6 @@
     <plurals name="search_results_count">
         <item quantity="one">%1$d resultado para \"%2$s\"</item>
         <item quantity="other">%1$d resultados para \"%2$s\"</item>
-        <item quantity="many">%1$d resultados para \"%2$s\"</item>
     </plurals>
 
     <!-- Exercise Details -->
@@ -68,6 +74,9 @@
     <string name="complete_exercise">Completar ejercicio</string>
     <string name="reps_per_set">Repeticiones por serie</string>
     <string name="time_minutes">Tiempo (minutos)</string>
+    <string name="series">Series</string>
+    <string name="repetitions">Repeticiones</string>
+    <string name="training_time">Tiempo de entrenamiento</string>
     <string name="exercises_count">%1$d ejercicios</string>
     <string name="calories_count">%1$d cal</string>
     <string name="max_calories">%1$d cal max</string>
@@ -75,8 +84,8 @@
     <string name="average_time">%1$d min promedio</string>
     <string name="home">Inicio</string>
     <!-- Profile -->
-    <string name="profile_image">imagen de perfil</string>
-    <string name="exercises">ejercicios</string>
+    <string name="profile_image">Imagen de perfil</string>
+    <string name="exercises">Ejercicios</string>
     <string name="empty_exercises">No hay ejercicios disponibles</string>
 
     <!-- Statistics -->
@@ -134,6 +143,7 @@
     <string name="no_exercise_stats">No se han completado ejercicios aún</string>
     <string name="no_training_data">No hay datos de entrenamiento disponibles</string>
     <string name="complete_workout_details">Detalles del entrenamiento completo</string>
+    <string name="complete_exercise_details">Detalles para completar ejercicio</string>
     <string name="training_sessions">Sesiones de entrenamiento</string>
     <string name="no_exercise_selected">Ningún ejercicio seleccionado</string>
     <string name="performed_count">Realizado: %d veces</string>
@@ -213,8 +223,29 @@
     <string name="account_locked_title">Cuenta bloqueada</string>
     <string name="exercise_demo_name">Ejercicio de demostración</string>
     <string name="exercise_demo_desc">Este es un ejercicio de demostración para pruebas</string>
-    <string name="exercise_cable_row_name">Remo con Cable</string>
-    <string name="exercise_cable_row_desc">Un ejercicio compuesto para la espalda que se realiza con una máquina de cable sentado y fortalece los músculos de la espalda media, dorsales y brazos.</string>
+    <string name="exercise_cable_row_name">Remo con Polea</string>
+    <string name="exercise_cable_row_desc">Ejercicio compuesto para la espalda que se realiza en máquina de polea, fortaleciendo los músculos dorsales, trapecios y bíceps.</string>
+
+    <string name="exercise_seated_arm_curl_name">Curl de Brazos Sentado</string>
+    <string name="exercise_seated_arm_curl_desc">Un ejercicio simple para fortalecer los músculos del brazo mientras se está sentado.</string>
+
+    <string name="exercise_wall_pushup_name">Flexiones en Pared</string>
+    <string name="exercise_wall_pushup_desc">Un ejercicio de la parte superior del cuerpo que fortalece el pecho y los brazos.</string>
+
+    <string name="exercise_seated_marching_name">Marcha Sentada</string>
+    <string name="exercise_seated_marching_desc">Un ejercicio para las piernas que mejora la fuerza desde una posición sentada.</string>
+
+    <string name="exercise_balance_support_name">Ejercicios de Equilibrio con Soporte</string>
+    <string name="exercise_balance_support_desc">Ejercicios que mejoran el equilibrio utilizando apoyo para mayor seguridad.</string>
+
+    <string name="exercise_shoulder_rolls_name">Rotaciones de Hombros</string>
+    <string name="exercise_shoulder_rolls_desc">Movimientos circulares del hombro que reducen la tensión.</string>
+
+    <string name="exercise_knee_extension_name">Extensiones de Rodilla</string>
+    <string name="exercise_knee_extension_desc">Un ejercicio sentado que fortalece los músculos del muslo.</string>
+
+    <string name="exercise_tabletop_circle_name">Círculos en Mesa</string>
+    <string name="exercise_tabletop_circle_desc">Un ejercicio de rehabilitación para la coordinación del brazo.</string>
 
     <string name="exercise_knee_stretch_name">Estiramientos de Rodilla</string>
     <string name="exercise_knee_stretch_desc">Un estiramiento suave para la articulación de la rodilla para mejorar la movilidad</string>
@@ -289,7 +320,7 @@
     <string name="admin_password">Contraseña del administrador</string>
     <string name="verify">Verificar</string>
     <string name="admin_access_granted">Acceso permitido</string>
-    <string name="verify_title">Error al acceder al recurso</string>
+    <string name="verify_title">Se requiere acceso de administrador</string>
     <string name="admin_first_time_credentials">Información de primer inicio de sesión:\n\nEmail: %1$s\nContraseña: %2$s\nPIN: %3$s\n\nPor favor, guarda estas credenciales en un lugar seguro.</string>
     <string name="show_admin_credentials">Mostrar Credenciales de Administrador</string>
     <string name="debug_direct_access">DEPURACIÓN: Acceso Directo</string>
@@ -306,13 +337,13 @@
     <string name="japanese">Japonés</string>
     <string name="about">Acerca de</string>
     <string name="app_version">Versión de la aplicación</string>
-    <string name="app_version_number">1.0.0</string>
+    <string name="app_version_number">1.1</string>
     <string name="admin_description">Por favor, verifica tu identidad para acceder a la consola de administración.</string>
     <string name="admin_password_label">Introduce tu contraseña de administrador:</string>
     <string name="admin_password_hint">Contraseña</string>
     <string name="admin_pin_label">Introduce tu PIN de administrador:</string>
     <string name="tab_community">Comunidad</string>
-    <string name="admin_verification">Verificacion de administrador</string>
+    <string name="admin_verification">Verificación de administrador</string>
 
     <!-- Muscle Groups -->
     <string name="muscle_group_demo">Demostración</string>
@@ -340,12 +371,19 @@
 
     <!-- Training Days -->
     <string name="day_monday">Lunes</string>
+    <string name="day_mon">Lun</string>
     <string name="day_tuesday">Martes</string>
+    <string name="day_tue">Mar</string>
     <string name="day_wednesday">Miércoles</string>
+    <string name="day_wed">Mié</string>
     <string name="day_thursday">Jueves</string>
+    <string name="day_thu">Jue</string>
     <string name="day_friday">Viernes</string>
+    <string name="day_fri">Vie</string>
     <string name="day_saturday">Sábado</string>
+    <string name="day_sat">Sáb</string>
     <string name="day_sunday">Domingo</string>
+    <string name="day_sun">Dom</string>
     <string name="days_all">Todos los días</string>
     <string name="days_monday_wednesday_friday">Lunes, Miércoles, Viernes</string>
     <string name="days_tuesday_thursday">Martes, Jueves</string>
@@ -362,5 +400,5 @@
     <string name="required_name">El nombre es requerido</string>
     <string name="passwords_dont_match">Las contraseñas no coinciden</string>
     <string name="invalid_email">Correo electrónico incorrecto</string>
-    <string name="account_locked_message">Demasiados intentos. Inténtalo de nuevo más tarde.</string>
+    <string name="account_locked_message">Demasiados intentos fallidos. Inténtalo de nuevo más tarde.</string>
 </resources>

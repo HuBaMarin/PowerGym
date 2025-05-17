@@ -1,10 +1,12 @@
 package com.amarina.powergym.ui.adapter.exercise
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.amarina.powergym.R
 import com.amarina.powergym.database.entities.Ejercicio
 import com.amarina.powergym.databinding.ItemExerciseBinding
 import com.amarina.powergym.databinding.ItemExerciseListBinding
@@ -25,17 +27,12 @@ class EjercicioAdapter(
 
     private var sections = emptyMap<String, List<Ejercicio>>()
 
-
-    /**Actualizar con secciones*/
     fun updateSections(ejercicios: List<Ejercicio>) {
-        // Agrupar ejercicios por sección
         val groupedEjercicios = ejercicios.groupBy { it.seccion }
-
         sections = groupedEjercicios
 
         val items = mutableListOf<EjercicioAdapterItem>()
         for ((sectionTitle, ejerciciosList) in sections) {
-            // Solo añadir secciones que tengan ejercicios
             if (ejerciciosList.isNotEmpty()) {
                 items.add(EjercicioAdapterItem.SectionHeader(sectionTitle))
                 items.addAll(ejerciciosList.map { EjercicioAdapterItem.EjercicioItem(it) })
@@ -131,21 +128,51 @@ class EjercicioAdapter(
         private val binding: SectionHeaderBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(title: String) {
-            binding.tvHeaderTitle.text = title
+            val context = binding.root.context
+            val resourceId = getSectionResourceId(title, context)
+            if (resourceId != 0) {
+                binding.tvHeaderTitle.text = context.getString(resourceId)
+            } else {
+                binding.tvHeaderTitle.text = title
+            }
+        }
+
+        private fun getSectionResourceId(sectionTitle: String, context: Context): Int {
+            val simpleName = sectionTitle.lowercase().trim()
+            return when {
+                simpleName.contains("elderly") || simpleName.contains("tercera edad") || simpleName.contains(
+                    "ältere"
+                ) -> R.string.section_elderly
+
+                simpleName.contains("reduced mobility") || simpleName.contains("movilidad reducida") || simpleName.contains(
+                    "mobilité réduite"
+                ) -> R.string.section_reduced_mobility
+
+                simpleName.contains("rehab") || simpleName.contains("rehabilitation") || simpleName.contains(
+                    "rehabilitación"
+                ) -> R.string.section_rehabilitation
+
+                simpleName.contains("upper body") || simpleName.contains("tren superior") || simpleName.contains(
+                    "oberkörper"
+                ) -> R.string.section_upper_body
+
+                simpleName.contains("lower body") || simpleName.contains("tren inferior") || simpleName.contains(
+                    "unterkörper"
+                ) -> R.string.section_lower_body
+
+                simpleName.contains("cardio") || simpleName.contains("cardiovascular") -> R.string.section_cardio
+                else -> 0
+            }
         }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<EjercicioAdapterItem>() {
         override fun areItemsTheSame(oldItem: EjercicioAdapterItem, newItem: EjercicioAdapterItem): Boolean {
             return when {
-                oldItem is EjercicioAdapterItem.SectionHeader && newItem is EjercicioAdapterItem.SectionHeader ->
-                    oldItem.title == newItem.title
-                oldItem is EjercicioAdapterItem.EjercicioItem && newItem is EjercicioAdapterItem.EjercicioItem ->
-                    oldItem.ejercicio.id == newItem.ejercicio.id
-                oldItem is EjercicioAdapterItem.EjercicioItemList && newItem is EjercicioAdapterItem.EjercicioItemList ->
-                    oldItem.ejercicio.id == newItem.ejercicio.id
-                oldItem is EjercicioAdapterItem.EjercicioGridItem && newItem is EjercicioAdapterItem.EjercicioGridItem ->
-                    oldItem.ejercicio.id == newItem.ejercicio.id
+                oldItem is EjercicioAdapterItem.SectionHeader && newItem is EjercicioAdapterItem.SectionHeader -> oldItem.title == newItem.title
+                oldItem is EjercicioAdapterItem.EjercicioItem && newItem is EjercicioAdapterItem.EjercicioItem -> oldItem.ejercicio.id == newItem.ejercicio.id
+                oldItem is EjercicioAdapterItem.EjercicioItemList && newItem is EjercicioAdapterItem.EjercicioItemList -> oldItem.ejercicio.id == newItem.ejercicio.id
+                oldItem is EjercicioAdapterItem.EjercicioGridItem && newItem is EjercicioAdapterItem.EjercicioGridItem -> oldItem.ejercicio.id == newItem.ejercicio.id
                 else -> false
             }
         }

@@ -21,14 +21,15 @@
     <string name="enable_reminders">Erinnerungen aktivieren</string>
 
     <!-- Statistics -->
+    <string name="sort_by">Sortieren</string>
     <string name="most_frequent_exercises">Häufigste Übungen</string>
     <string name="muscles_to_work">Zu trainierende Muskelgruppen</string>
     <string name="exercise_history">Übungsverlauf</string>
     <string name="no_statistics">Keine Statistiken vorhanden</string>
     <string name="load_more">Mehr laden</string>
-    <string name="calories">Kalorien: %1$d</string>
-    <string name="time">Zeit: %1$d min</string>
-    <string name="date">Datum: %1$s</string>
+    <string name="calories">Kalorien</string>
+    <string name="time">Zeit</string>
+    <string name="date">Datum</string>
 
     <!-- Exercise Details -->
     <string name="exercise_details">Übungsdetails</string>
@@ -65,6 +66,7 @@
     <string name="complete_exercise">Übung abschließen</string>
     <string name="reps_per_set">Wiederholungen pro Satz</string>
     <string name="time_minutes">Zeit (Minuten)</string>
+    <string name="training_time">Trainingszeit</string>
     <string name="exercises_count">%1$d Übungen</string>
     <string name="calories_count">%1$d kal</string>
     <string name="max_calories">%1$d kal max</string>
@@ -76,6 +78,7 @@
     <string name="exercises">Übungen</string>
     <string name="empty_exercises">Keine Übungen verfügbar</string>
     <string name="delete_account">Konto löschen</string>
+    <string name="calories_per_session">%1$d Kalorien</string>
     <string name="edit_name">Name bearbeiten</string>
     <string name="email">E-Mail</string>
     <string name="edit_email">E-Mail bearbeiten</string>
@@ -95,7 +98,7 @@
     <string name="log_in">Anmelden</string>
     <string name="no_exercises_available">Keine Übungen verfügbar</string>
     <string name="search">Suchen</string>
-    <string name="statistics">Statistics</string>
+    <string name="statistics">Statistiken</string>
     <string name="configuration">Konfiguration</string>
     <string name="language_spanish">Spanisch</string>
     <string name="language_english">Englisch</string>
@@ -126,6 +129,7 @@
     <string name="complete_exercise_stats">Complete Exercise History</string>
     <string name="no_exercise_stats">No exercises completed yet</string>
     <string name="no_training_data">No training data available</string>
+    <string name="complete_exercise_details">Übungsdetails</string>
     <string name="complete_workout_details">Complete Workout Details</string>
     <string name="training_sessions">Trainingssitzungen</string>
     <string name="no_exercise_selected">Keine Übung ausgewählt</string>
@@ -198,7 +202,7 @@
     <string name="admin_pin_hint">Admin-PIN</string>
     <string name="verify_credentials">Anmeldedaten überprüfen</string>
     <string name="cancel_and_back">Abbrechen und zurück</string>
-    <string name="tab_community">ad pwd</string>
+    <string name="tab_community">Gemeinschaft</string>
     <string name="admin_verification">Admin-Verifizierung</string>
     <string name="admin_description">Bitte verifizieren Sie Ihre Identität, um auf die Admin-Konsole zuzugreifen.</string>
     <string name="admin_password_label">Geben Sie Ihr Admin-Passwort ein:</string>
@@ -298,8 +302,29 @@
     <string name="exercise_salto_a_la_comba_name">Seilspringen</string>
     <string name="exercise_salto_a_la_comba_desc">Cardio-Übung mit einem Springseil für Koordination und Ausdauer</string>
 
-    <string name="exercise_cable_row_name">Kabelzug-Rudern</string>
-    <string name="exercise_cable_row_desc">Eine Rückenübung, die mit einer Kabelzugmaschine durchgeführt wird.</string>
+    <string name="exercise_cable_row_name">Kabelzug Rudern</string>
+    <string name="exercise_cable_row_desc">Eine Rückenübung mit einer Kabelzugmaschine, die den mittleren Rücken, Latissimus und Arme stärkt.</string>
+
+    <string name="exercise_seated_arm_curl_name">Sitzende Armbeugen</string>
+    <string name="exercise_seated_arm_curl_desc">Eine einfache Übung zur Stärkung der Armmuskulatur im Sitzen.</string>
+
+    <string name="exercise_wall_pushup_name">Wand-Liegestütze</string>
+    <string name="exercise_wall_pushup_desc">Eine Übung für den Oberkörper, die Brust und Arme stärkt.</string>
+
+    <string name="exercise_seated_marching_name">Sitzmarsch</string>
+    <string name="exercise_seated_marching_desc">Eine Beinübung, die die Kraft im Sitzen verbessert.</string>
+
+    <string name="exercise_balance_support_name">Unterstützte Gleichgewichtsübungen</string>
+    <string name="exercise_balance_support_desc">Übungen, die das Gleichgewicht mit Unterstützung für zusätzliche Sicherheit verbessern.</string>
+
+    <string name="exercise_shoulder_rolls_name">Schulterkreisen</string>
+    <string name="exercise_shoulder_rolls_desc">Kreisförmige Schulterbewegungen, die Spannungen reduzieren.</string>
+
+    <string name="exercise_knee_extension_name">Kniestreckungen</string>
+    <string name="exercise_knee_extension_desc">Eine sitzende Übung zur Stärkung der Oberschenkelmuskulatur.</string>
+
+    <string name="exercise_tabletop_circle_name">Tischkreise</string>
+    <string name="exercise_tabletop_circle_desc">Eine Rehabilitation-Übung für die Armkoordination.</string>
 
     <!-- Search Empty State -->
     <string name="empty_search">Keine Treffer gefunden</string>
@@ -313,12 +338,12 @@
     <string name="admin_pin_only">Bitte geben Sie Ihre Admin-PIN ein, um fortzufahren.</string>
     <string name="home">Startseite</string>
     <string name="clear_all">Alles löschen</string>
-    <string name="admin_password">ad pwd</string>
-    <string name="verify">ad pwd</string>
-    <string name="admin_access_granted">ad pwd</string>
-    <string name="verify_title">ad pwd</string>
-    <string name="admin_access_denied">ad pwd</string>
-    <string name="enter_admin_password">ad pwd</string>
+    <string name="admin_password">Admin-Passwort</string>
+    <string name="verify">Überprüfen</string>
+    <string name="admin_access_granted">Admin-Zugriff gewährt</string>
+    <string name="verify_title">Admin-Zugriff erforderlich</string>
+    <string name="admin_access_denied">Zugriff verweigert. Bitte versuchen Sie es erneut.</string>
+    <string name="enter_admin_password">Admin-Passwort eingeben</string>
 
     <!-- Muscle Groups -->
     <string name="muscle_group_demo">Demo</string>
@@ -352,6 +377,7 @@
     <string name="day_friday">Freitag</string>
     <string name="day_saturday">Samstag</string>
     <string name="day_sunday">Sonntag</string>
+    <string name="day_sun">So</string>
     <string name="days_all">Jeden Tag</string>
     <string name="days_monday_wednesday_friday">Montag, Mittwoch, Freitag</string>
     <string name="days_tuesday_thursday">Dienstag, Donnerstag</string>
@@ -369,4 +395,17 @@
     <string name="required_name">Name ist erforderlich</string>
     <string name="passwords_dont_match">Passwörter stimmen nicht überein</string>
     <string name="account_locked_message">Zu viele fehlgeschlagene Versuche</string>
+    <string name="enable_notifications">Benachrichtigungen</string>
+    <string name="day_mon">Mo</string>
+    <string name="day_tue">Di</string>
+    <string name="day_wed">Mi</string>
+    <string name="day_thu">Do</string>
+    <string name="day_fri">Fr</string>
+    <string name="day_sat">Sa</string>
+    <string name="daily">Täglich</string>
+    <string name="group_section">Gruppen</string>
+    <string name="filter_by_group">Gruppen filtern</string>
+    <string name="clear_filters">Filter löschen</string>
+    <string name="series">Serien</string>
+    <string name="repetitions">Wiederholungen</string>
 </resources>

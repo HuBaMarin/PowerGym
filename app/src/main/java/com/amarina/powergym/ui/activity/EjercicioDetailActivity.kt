@@ -38,9 +38,11 @@ class EjercicioDetailActivity : AppCompatActivity() {
         // Obtener el ID del ejercicio de los extras del intent
         ejercicioId = intent.getIntExtra("ejercicio_id", -1)
 
-        // Configurar la toolbar
+        // Configurar la toolbar con back arrow
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbar.setNavigationIcon(R.drawable.nav_back)
 
         // Inicializar el ViewModel
         val app = application as PowerGymApplication
@@ -76,29 +78,37 @@ class EjercicioDetailActivity : AppCompatActivity() {
 
                         // Actualizar UI con los datos del ejercicio
                         val ejercicio = state.ejercicio
-                        binding.apply {
-                            tvNombreEjercicio.text = ejercicio.nombre
-                            tvDescripcion.text = ejercicio.descripcion
-                            tvGrupoMuscular.text = ejercicio.grupoMuscular
-                            tvDificultad.text = ejercicio.dificultad
-                            tvDias.text = ejercicio.dias
-                            tvCalorias.text = "${ejercicio.calorias} calorías por sesión"
+                        try {
+                            binding.apply {
+                                tvNombreEjercicio.text = ejercicio.nombre
+                                tvDescripcion.text = ejercicio.descripcion
+                                tvGrupoMuscular.text = translateMuscleGroup(ejercicio.grupoMuscular)
+                                tvDificultad.text = translateDifficulty(ejercicio.dificultad)
+                                tvDias.text = translateTrainingDays(ejercicio.dias)
+                                tvCalorias.text =
+                                    getString(R.string.calories_per_session, ejercicio.calorias)
 
-                            // Cargar imagen con Picasso
-                            if (ejercicio.imagenEjercicio.isNotEmpty()) {
-                                Picasso.get()
-                                    .load(ejercicio.imagenEjercicio)
-                                    .into(ivEjercicio)
-                            }
+                                // Cargar imagen con Picasso
+                                if (ejercicio.imagenEjercicio.isNotEmpty()) {
+                                    Picasso.get()
+                                        .load(ejercicio.imagenEjercicio)
+                                        .placeholder(R.drawable.workout_placeholder_image)
+                                        .error(R.drawable.baseline_error_24)
+                                        .into(ivEjercicio)
+                                }
 
-                            // Configurar botón para ver video
-                            btnVerVideo.setOnClickListener {
-                                if (ejercicio.videoUrl.isNotEmpty()) {
-                                    openVideo(ejercicio.videoUrl)
-                                } else {
-                                    mostrarToast("No hay video disponible")
+                                // Configurar botón para ver video
+                                btnVerVideo.setOnClickListener {
+                                    if (ejercicio.videoUrl.isNotEmpty()) {
+                                        openVideo(ejercicio.videoUrl)
+                                    } else {
+                                        mostrarToast("No hay video disponible")
+                                    }
                                 }
                             }
+                        } catch (e: Exception) {
+                            mostrarToast("Error displaying exercise details: ${e.message}")
+                            finish()
                         }
                     }
 
@@ -164,9 +174,9 @@ class EjercicioDetailActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_complete_exercise, null)
 
         val dialog = AlertDialog.Builder(this@EjercicioDetailActivity)
-            .setTitle("Completar ejercicio")
+            .setTitle(R.string.complete_exercise)
             .setView(dialogView)
-            .setPositiveButton("Guardar") { _, _ ->
+            .setPositiveButton(R.string.save) { _, _ ->
                 val seriesEditText = dialogView.findViewById<TextInputEditText>(R.id.etSeries)
                 val repeticionesEditText =
                     dialogView.findViewById<TextInputEditText>(R.id.etRepeticiones)
@@ -184,7 +194,7 @@ class EjercicioDetailActivity : AppCompatActivity() {
                     tiempo
                 )
             }
-            .setNegativeButton("Cancelar", null)
+            .setNegativeButton(R.string.cancel, null)
             .create()
 
         dialog.show()
@@ -199,10 +209,63 @@ class EjercicioDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun translateTrainingDays(days: String): String {
+        // Split the days string by commas
+        val daysList = days.split(",").map { it.trim() }
+
+        return daysList.map { day ->
+            when (day) {
+                "Monday" -> getString(R.string.day_monday)
+                "Tuesday" -> getString(R.string.day_tuesday)
+                "Wednesday" -> getString(R.string.day_wednesday)
+                "Thursday" -> getString(R.string.day_thursday)
+                "Friday" -> getString(R.string.day_friday)
+                "Saturday" -> getString(R.string.day_saturday)
+                "Sunday" -> getString(R.string.day_sunday)
+                "Mon" -> getString(R.string.day_mon)
+                "Tue" -> getString(R.string.day_tue)
+                "Wed" -> getString(R.string.day_wed)
+                "Thu" -> getString(R.string.day_thu)
+                "Fri" -> getString(R.string.day_fri)
+                "Sat" -> getString(R.string.day_sat)
+                "Sun" -> getString(R.string.day_sun)
+                else -> day
+            }
+        }.joinToString(", ")
+    }
+
+    private fun translateDifficulty(difficulty: String): String {
+        return when (difficulty.lowercase()) {
+            "beginner", "basico", "básico" -> getString(R.string.difficulty_basic)
+            "intermediate", "intermedio" -> getString(R.string.difficulty_intermediate)
+            "advanced", "avanzado" -> getString(R.string.difficulty_advanced)
+            "adaptable" -> getString(R.string.difficulty_adaptable)
+            else -> difficulty
+        }
+    }
+
+    private fun translateMuscleGroup(muscleGroup: String): String {
+        return when (muscleGroup.lowercase()) {
+            "legs", "piernas" -> getString(R.string.muscle_group_legs)
+            "arms", "brazos" -> getString(R.string.muscle_group_arms)
+            "core" -> getString(R.string.muscle_group_core)
+            "multiple", "múltiple", "multiples", "múltiples" -> getString(R.string.muscle_group_multiple)
+            "shoulders", "hombros" -> getString(R.string.muscle_group_shoulders)
+            "respiratory", "respiratorio" -> getString(R.string.muscle_group_respiratory)
+            "forearms", "antebrazos" -> getString(R.string.muscle_group_forearms)
+            "core and legs", "core y piernas" -> getString(R.string.muscle_group_core_legs)
+            "chest", "pecho" -> getString(R.string.muscle_group_chest)
+            "back", "espalda" -> getString(R.string.muscle_group_back)
+            "glutes", "glúteos" -> getString(R.string.muscle_group_glutes)
+            "full body", "cuerpo completo" -> getString(R.string.muscle_group_full_body)
+            else -> muscleGroup
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                onBackPressedDispatcher.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)

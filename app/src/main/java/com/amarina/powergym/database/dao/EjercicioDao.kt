@@ -9,12 +9,7 @@ import com.amarina.powergym.database.entities.Ejercicio
  */
 @Dao
 interface EjercicioDao {
-    /**
-     * Inserta un nuevo ejercicio en la base de datos.
-     *
-     * @param ejercicio El ejercicio a insertar
-     * @return El ID generado para el nuevo ejercicio
-     */
+
     @Insert
     suspend fun insertar(ejercicio: Ejercicio): Long
 
@@ -26,19 +21,11 @@ interface EjercicioDao {
     @Insert
     suspend fun insertarTodos(ejercicios: List<Ejercicio>)
 
-    /**
-     * Elimina un ejercicio de la base de datos.
-     *
-     * @param ejercicio El ejercicio a eliminar
-     */
+
     @Delete
     suspend fun eliminar(ejercicio: Ejercicio)
 
-    /**
-     * Actualiza un ejercicio existente en la base de datos.
-     *
-     * @param ejercicio El ejercicio con los datos actualizados
-     */
+
     @Update
     suspend fun actualizar(ejercicio: Ejercicio)
 
@@ -85,13 +72,15 @@ interface EjercicioDao {
     suspend fun obtenerEjercicioPorNombre(nombre: String): Ejercicio?
 
     /**
-     * Obtiene ejercicios filtrados según varios criterios opcionales.
+     * Obtiene ejercicios filtrados según varios criterios.
+     * Es utilizado tanto en producción como en pruebas para
+     * obtener ejercicios.
      *
-     * @param dias Filtro por días (opcional)
-     * @param dificultad Filtro por nivel de dificultad (opcional)
-     * @param grupoMuscular Filtro por grupo muscular (opcional)
-     * @param query Texto de búsqueda para nombre o descripción (opcional)
-     * @return Lista de ejercicios que cumplen los criterios de filtrado
+     * @param dias Filtro por días
+     * @param dificultad Filtro por nivel de dificultad
+     * @param grupoMuscular Filtro por grupo muscular
+     * @param query Texto de búsqueda para nombre o descripción
+     * @return Lista de ejercicios con los filtros aplicados
      */
     @Query("""
         SELECT * FROM ejercicios 
@@ -107,16 +96,6 @@ interface EjercicioDao {
         grupoMuscular: String? = null,
         query: String = ""
     ): List<Ejercicio>
-
-    /**
-     * Para pruebas que llama a obtenerEjerciciosFiltrados.
-     */
-    suspend fun getFilteredEjercicios(
-        dias: String? = null,
-        dificultad: String? = null,
-        grupoMuscular: String? = null,
-        query: String = ""
-    ): List<Ejercicio> = obtenerEjerciciosFiltrados(dias, dificultad, grupoMuscular, query)
 
     /**
      * Obtiene todos los valores únicos de dificultad.

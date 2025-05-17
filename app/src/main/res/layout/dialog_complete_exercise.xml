@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/complete_workout_details"
+        android:text="@string/complete_exercise_details"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="?attr/colorPrimary"
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Series">
+        android:hint="@string/series">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSeries"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Repeticiones por serie">
+        android:hint="@string/reps_per_set">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRepeticiones"
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Tiempo (minutos)">
+        android:hint="@string/time_minutes">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etTiempo"

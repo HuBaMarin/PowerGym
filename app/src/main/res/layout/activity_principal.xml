@@ -17,32 +17,76 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="12dp">
+        android:padding="8dp">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/filterChipGroup"
+        <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:chipSpacingHorizontal="8dp"
-            app:singleSelection="false">
+            android:scrollbars="none">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipDificultad"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filterChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/difficulty"
-                app:chipIcon="@drawable/chart_bar_svgrepo_com"
-                app:chipIconSize="18dp"
-                app:chipIconTint="?attr/colorPrimary"
-                app:closeIconEnabled="false"
-                app:chipStartPadding="12dp"
-                app:chipEndPadding="12dp"
-                app:chipBackgroundColor="?attr/colorSurface"
-                app:chipStrokeColor="?attr/colorPrimary"
-                app:chipStrokeWidth="1dp"
-                android:textColor="?attr/colorOnSurface" />
-        </com.google.android.material.chip.ChipGroup>
+                app:chipSpacingHorizontal="8dp"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDificultad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/difficulty"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:chipIcon="@drawable/chart_bar_svgrepo_com"
+                    app:chipIconSize="18dp"
+                    app:chipIconTint="?attr/colorPrimary"
+                    app:closeIconEnabled="false"
+                    app:chipStartPadding="12dp"
+                    app:chipEndPadding="12dp"
+                    app:chipBackgroundColor="?attr/colorSurface"
+                    app:chipStrokeColor="?attr/colorPrimary"
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipGroupSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/group_section"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:chipIcon="@drawable/chart_bar_svgrepo_com"
+                    app:chipIconSize="18dp"
+                    app:chipIconTint="?attr/colorPrimary"
+                    app:closeIconEnabled="false"
+                    app:chipStartPadding="12dp"
+                    app:chipEndPadding="12dp"
+                    app:chipBackgroundColor="?attr/colorSurface"
+                    app:chipStrokeColor="?attr/colorPrimary"
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMuscleGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/muscle_group"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:chipIcon="@drawable/chart_bar_svgrepo_com"
+                    app:chipIconSize="18dp"
+                    app:chipIconTint="?attr/colorPrimary"
+                    app:closeIconEnabled="false"
+                    app:chipStartPadding="12dp"
+                    app:chipEndPadding="12dp"
+                    app:chipBackgroundColor="?attr/colorSurface"
+                    app:chipStrokeColor="?attr/colorPrimary"
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="?attr/colorOnSurface" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvPerfil"

@@ -13,12 +13,6 @@ interface PreferenciaDao {
     @Update
     suspend fun actualizar(preferencia: Preferencia)
 
-    /**
-     * Obtiene las preferencias de un usuario de forma síncrona.
-     *
-     * @param usuarioId El ID del usuario
-     * @return Las preferencias del usuario o null si no existen
-     */
     @Query("SELECT * FROM preferencias WHERE usuarioId = :usuarioId")
     suspend fun obtenerPreferenciaSync(usuarioId: Int): Preferencia?
 }

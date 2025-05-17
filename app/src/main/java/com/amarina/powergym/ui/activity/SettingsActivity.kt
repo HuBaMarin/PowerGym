@@ -13,6 +13,7 @@ import androidx.core.content.edit
 import com.amarina.powergym.R
 import com.amarina.powergym.databinding.ActivitySettingsBinding
 import com.amarina.powergym.utils.LanguageHelper
+import com.amarina.powergym.utils.ReminderManager
 import java.util.Locale
 
 class SettingsActivity : AppCompatActivity() {
@@ -24,6 +25,8 @@ class SettingsActivity : AppCompatActivity() {
         const val PREFS_NAME = "app_settings"
         const val THEME_PREF = "theme_pref"
         const val LANGUAGE_PREF = "language_pref"
+        const val NOTIFICATIONS_ENABLED = "notifications_enabled"
+        const val NOTIFICATION_FREQUENCY = "notification_frequency"
 
         const val THEME_SYSTEM = 0
         const val THEME_LIGHT = 1
@@ -39,6 +42,7 @@ class SettingsActivity : AppCompatActivity() {
         setupToolbar()
         setupThemeToggles()
         setupLanguageSelection()
+        setupNotifications()
         setupAppVersion()
     }
 
@@ -140,9 +144,88 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupNotifications() {
+        // Get current notification settings
+        val notificationsEnabled = prefs.getBoolean(NOTIFICATIONS_ENABLED, true)
+        val notificationFrequency =
+            prefs.getString(NOTIFICATION_FREQUENCY, getString(R.string.frequency_daily))
+
+        // Set up UI
+        binding.switchNotifications.isChecked = notificationsEnabled
+        binding.tvReminderFrequency.text = notificationFrequency
+
+        // Set click listeners
+        binding.notificationsContainer.setOnClickListener {
+            val newValue = !binding.switchNotifications.isChecked
+            binding.switchNotifications.isChecked = newValue
+            setNotificationEnabled(newValue)
+        }
+
+        binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
+            setNotificationEnabled(isChecked)
+        }
+
+        binding.reminderFrequencyContainer.setOnClickListener {
+            if (binding.switchNotifications.isChecked) {
+                showFrequencySelectionDialog()
+            }
+        }
+    }
+
+    private fun setNotificationEnabled(enabled: Boolean) {
+        prefs.edit {
+            putBoolean(NOTIFICATIONS_ENABLED, enabled)
+        }
+
+        val reminderManager = ReminderManager(this)
+        if (enabled) {
+            val frequency =
+                prefs.getString(NOTIFICATION_FREQUENCY, getString(R.string.frequency_daily))
+                    ?: getString(R.string.frequency_daily)
+            reminderManager.programarRecordatorios(frequency)
+        } else {
+            reminderManager.cancelarRecordatorios()
+        }
+    }
+
+    private fun showFrequencySelectionDialog() {
+        val frequencies = arrayOf(
+            getString(R.string.frequency_daily),
+            getString(R.string.frequency_every_other_day),
+            getString(R.string.frequency_twice_weekly),
+            getString(R.string.frequency_weekly),
+            getString(R.string.frequency_monthly)
+        )
+
+        val currentFrequency =
+            prefs.getString(NOTIFICATION_FREQUENCY, getString(R.string.frequency_daily))
+        val currentIndex = frequencies.indexOf(currentFrequency)
+
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.reminder_frequency))
+            .setSingleChoiceItems(frequencies, currentIndex) { dialog, which ->
+                val selectedFrequency = frequencies[which]
+                prefs.edit {
+                    putString(NOTIFICATION_FREQUENCY, selectedFrequency)
+                }
+                binding.tvReminderFrequency.text = selectedFrequency
+
+                // Update the reminder schedule if notifications are enabled
+                if (prefs.getBoolean(NOTIFICATIONS_ENABLED, true)) {
+                    val reminderManager = ReminderManager(this)
+                    reminderManager.programarRecordatorios(selectedFrequency)
+                }
+
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     private fun setupAppVersion() {
-        val versionName = packageManager.getPackageInfo(packageName, 0).versionName
-        binding.appVersionNumber.text = versionName
+        binding.appVersionNumber.text = getString(R.string.app_version_number)
     }
 
     private fun isDarkModeActive(): Boolean {

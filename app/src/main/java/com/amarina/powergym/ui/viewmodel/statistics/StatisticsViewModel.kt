@@ -286,30 +286,26 @@ class StatisticsViewModel(
         return orderedMap
     }
 
-    /**
-     * Process statistics by month
-     */
     private fun processByMonth(
         stats: List<Estadistica>
     ): Map<String, Int> {
-        // Calculate the start date for the range (30 days ago)
+        val lastExerciseDate = stats.maxByOrNull { it.fecha }?.fecha
+            ?: return emptyMap()
+
+        val endCalendar = Calendar.getInstance()
+        if (lastExerciseDate > 0) {
+            endCalendar.timeInMillis = lastExerciseDate
+        }
+
         val startCalendar = Calendar.getInstance()
+        startCalendar.timeInMillis = endCalendar.timeInMillis
         startCalendar.add(Calendar.DAY_OF_YEAR, -30)
 
-        // Use the current calendar for end date
-        val endCalendar = Calendar.getInstance()
-
-        // Format with fully localized date format using the app's locale
         val dateFormat = getDateFormat("d MMM")
-
-        // Create an ordered map to maintain chronological order
         val orderedMap = linkedMapOf<String, Int>()
-
-        // Generate all days in the range
         val currentCal = Calendar.getInstance()
         currentCal.timeInMillis = startCalendar.timeInMillis
 
-        // Initialize all days in the range with zero
         while (currentCal.timeInMillis <= endCalendar.timeInMillis) {
             val formattedDate = dateFormat.format(currentCal.time)
             orderedMap[formattedDate] = 0

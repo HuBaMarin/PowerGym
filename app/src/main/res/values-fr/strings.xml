@@ -14,6 +14,7 @@
     <string name="notifications">Notifications</string>
     <string name="reminder_frequency">Fréquence de rappel</string>
     <string name="enable_reminders">Activer les rappels</string>
+    <string name="sort_by">Trier</string>
     <string name="most_frequent_exercises">Exercices les plus fréquents</string>
     <string name="muscles_to_work">Groupes musculaires à travailler</string>
     <string name="exercise_history">Historique des exercices</string>
@@ -53,15 +54,15 @@
     <plurals name="search_results_count">
         <item quantity="one">%1$d résultat pour "%2$s"</item>
         <item quantity="other">%1$d résultats pour "%2$s"</item>
-        <item quantity="many">%1$d résultats pour "%2$s"</item>
     </plurals>
 
     <!-- Exercise Details -->
-    <string name="search_empty_message">ad pwd</string>
+    <string name="search_empty_message">Essayez un autre mot-clé ou parcourez les catégories d\'exercices</string>
     <string name="show_statistics">Afficher les statistiques</string>
     <string name="complete_exercise">Compléter l’exercice</string>
     <string name="reps_per_set">Répétitions par série</string>
     <string name="time_minutes">Temps (minutes)</string>
+    <string name="training_time">Temps</string>
     <string name="exercises_count">%1$d exercices</string>
     <string name="calories_count">%1$d cal</string>
     <string name="max_calories">%1$d cal max</string>
@@ -80,6 +81,7 @@
     <string name="reps_count">Répétitions: %1$d</string>
     <string name="watch_video">Regarder la vidéo</string>
     <string name="delete_account">Supprimer le compte</string>
+    <string name="calories_per_session">%1$d calories</string>
     <string name="edit_name">Modifier le nom</string>
     <string name="email">Email</string>
     <string name="edit_email">Modifier l’email</string>
@@ -125,6 +127,7 @@
     <string name="complete_exercise_stats">Historique complet des exercices</string>
     <string name="no_exercise_stats">Aucun exercice complété pour le moment</string>
     <string name="no_training_data">Aucune donnée d’entraînement disponible</string>
+    <string name="complete_exercise_details">Détails</string>
     <string name="complete_workout_details">Détails complets de l’entraînement</string>
     <string name="training_sessions">Sessions d’entraînement</string>
     <string name="no_exercise_selected">Aucun exercice sélectionné</string>
@@ -202,8 +205,8 @@
     <string name="exercise_salto_a_la_comba_name">Corde à sauter</string>
     <string name="exercise_salto_a_la_comba_desc">Exercice cardio utilisant une corde à sauter pour la coordination et l’endurance</string>
 
-    <string name="exercise_cable_row_name">Rameur à Câble</string>
-    <string name="exercise_cable_row_desc">Un exercice pour le dos effectué avec une machine à câble.</string>
+    <string name="exercise_cable_row_name">Tirage à la Poulie</string>
+    <string name="exercise_cable_row_desc">Un exercice pour le dos effectué avec une machine à poulie qui renforce le milieu du dos, les grands dorsaux et les bras.</string>
 
     <string name="exercise_seated_arm_curl_name">Élévations des bras en position assise</string>
     <string name="exercise_seated_arm_curl_desc">Un exercice simple pour renforcer les muscles des bras en position assise.</string>
@@ -321,12 +324,12 @@
     <string name="app_version">Version de l’application</string>
     <string name="app_version_number">1.0.0</string>
     <string name="home">Accueil</string>
-    <string name="admin_password">ad pwd</string>
-    <string name="verify">ad pwd</string>
-    <string name="admin_access_granted">ad pwd</string>
-    <string name="verify_title">ad pwd</string>
-    <string name="admin_access_denied">ad pwd</string>
-    <string name="enter_admin_password">ad pwd</string>
+    <string name="admin_password">Mot de passe administrateur</string>
+    <string name="verify">Vérifier</string>
+    <string name="admin_access_granted">Accès administrateur accordé</string>
+    <string name="verify_title">Accès administrateur requis</string>
+    <string name="admin_access_denied">Accès refusé. Veuillez réessayer.</string>
+    <string name="enter_admin_password">Entrez le mot de passe administrateur</string>
     <string name="admin_verify_credentials">Veuillez vérifier vos identifiants administrateur</string>
     <string name="invalid_email">E-mail invalide</string>
     <string name="invalid_password">Le mot de passe doit contenir au moins 6 caractères</string>
@@ -365,6 +368,13 @@
     <string name="day_friday">Vendredi</string>
     <string name="day_saturday">Samedi</string>
     <string name="day_sunday">Dimanche</string>
+    <string name="day_mon">Lun</string>
+    <string name="day_tue">Mar</string>
+    <string name="day_wed">Mer</string>
+    <string name="day_thu">Jeu</string>
+    <string name="day_fri">Ven</string>
+    <string name="day_sat">Sam</string>
+    <string name="day_sun">Dim</string>
     <string name="days_all">Tous les jours</string>
     <string name="days_monday_wednesday_friday">Lundi, Mercredi, Vendredi</string>
     <string name="days_tuesday_thursday">Mardi, Jeudi</string>
@@ -377,5 +387,12 @@
 
     <!-- Difficulty -->
     <string name="difficulty_adaptable">Adaptable</string>
-    <string name="account_locked_message">Trop de tentatives échouées</string>
+    <string name="account_locked_message">Trop de tentatives échouées. Veuillez réessayer plus tard.</string>
+    <string name="enable_notifications">Activer les notifications</string>
+    <string name="daily">Quotidien</string>
+    <string name="group_section">Groupe</string>
+    <string name="filter_by_group">Filtrer groupe</string>
+    <string name="clear_filters">Effacer filtres</string>
+    <string name="series">Séries</string>
+    <string name="repetitions">Répétitions</string>
 </resources>

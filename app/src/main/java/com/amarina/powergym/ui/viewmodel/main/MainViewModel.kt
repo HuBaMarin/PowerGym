@@ -16,12 +16,14 @@ class MainViewModel(
     val ejercicios: StateFlow<EjerciciosState> = _ejerciciosState
 
     private val _musculosState = MutableStateFlow<List<String>>(emptyList())
-
+    val musculos: StateFlow<List<String>> = _musculosState
 
     private val _seccionesState = MutableStateFlow<List<String>>(emptyList())
+    val secciones: StateFlow<List<String>> = _seccionesState
 
     private val _filterDifficulty = MutableStateFlow<String?>(null)
-
+    private val _filterSection = MutableStateFlow<String?>(null)
+    private val _filterMuscleGroup = MutableStateFlow<String?>(null)
 
     // Filtros aplicados actualmente
     private val _diasSeleccionados = MutableStateFlow<Set<String>>(emptySet())
@@ -59,10 +61,12 @@ class MainViewModel(
 
     private fun loadMusculos() {
         viewModelScope.launch {
+            _musculosState.value = emptyList() // Reset while loading
             try {
                 val musculos = ejercicioDao.obtenerTodosGruposMusculares()
                 _musculosState.value = musculos
             } catch (exception: Exception) {
+                _musculosState.value = emptyList()
                 // Silenciar errores, solo log
             }
         }
@@ -84,9 +88,28 @@ class MainViewModel(
         refreshEjercicios()
     }
 
+    fun setSectionFilter(section: String?) {
+        _filterSection.value = section
+        refreshEjercicios()
+    }
+
+    fun setMuscleGroupFilter(muscleGroup: String?) {
+        _filterMuscleGroup.value = muscleGroup
+        refreshEjercicios()
+    }
 
     fun clearDificultadFilter() {
         _filterDifficulty.value = null
+        refreshEjercicios()
+    }
+
+    fun clearSectionFilter() {
+        _filterSection.value = null
+        refreshEjercicios()
+    }
+
+    fun clearMuscleGroupFilter() {
+        _filterMuscleGroup.value = null
         refreshEjercicios()
     }
 
@@ -97,12 +120,24 @@ class MainViewModel(
                 val allEjercicios = ejercicioDao.obtenerTodosEjercicios()
 
                 // Aplicar filtros usando los valores correctos de la BD
-                val filteredEjercicios = if (_filterDifficulty.value != null) {
-                    allEjercicios.filter { ejercicio ->
-                        ejercicio.dificultad == _filterDifficulty.value
-                    }
-                } else {
-                    allEjercicios
+                val filteredEjercicios = allEjercicios.filter { ejercicio ->
+                    // Apply difficulty filter if set
+                    val matchDifficulty = _filterDifficulty.value?.let {
+                        ejercicio.dificultad == it
+                    } ?: true
+
+                    // Apply section filter if set
+                    val matchSection = _filterSection.value?.let {
+                        ejercicio.seccion == it
+                    } ?: true
+
+                    // Apply muscle group filter if set
+                    val matchMuscleGroup = _filterMuscleGroup.value?.let {
+                        ejercicio.grupoMuscular == it
+                    } ?: true
+
+                    // Only include exercises that match all applied filters
+                    matchDifficulty && matchSection && matchMuscleGroup
                 }
 
                 // Agrupar por sección después de filtrar

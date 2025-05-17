@@ -34,19 +34,20 @@
     <string name="home">Home</string>
     
     <!-- Statistics -->
+    <string name="sort_by">Sort by</string>
     <string name="most_frequent_exercises">Most frequent exercises</string>
     <string name="muscles_to_work">Muscle groups to work on</string>
     <string name="exercise_history">Exercise history</string>
     <string name="no_statistics">No statistics available</string>
     <string name="load_more">Load more</string>
-    <string name="calories">Calories: %1$d</string>
-    <string name="time">Time: %1$d min</string>
-    <string name="date">Date: %1$s</string>
+    <string name="calories">Calories</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
     
     <!-- Exercise Details -->
     <string name="exercise_details">Exercise details</string>
     <string name="muscle_group">Muscle group</string>
-    <string name="difficulty">Difficulty</string>
+    <string name="difficulty">Difficulty level</string>
     <string name="training_days">Training days</string>
     
     <!-- Time Ranges -->
@@ -87,6 +88,9 @@
     <string name="complete_exercise">Complete exercise</string>
     <string name="reps_per_set">Repetitions per set</string>
     <string name="time_minutes">Time (minutes)</string>
+    <string name="series">Series</string>
+    <string name="repetitions">Repetitions</string>
+    <string name="training_time">Training time</string>
     <string name="exercises_count">%1$d exercises</string>
     <string name="calories_count">%1$d cal</string>
     <string name="max_calories">%1$d cal max</string>
@@ -94,8 +98,8 @@
     <string name="average_time">%1$d min average</string>
     
     <!-- Profile -->
-    <string name="profile_image">profile image</string>
-    <string name="exercises">exercises</string>
+    <string name="profile_image">Profile image</string>
+    <string name="exercises">Exercises</string>
     <string name="empty_exercises">No exercises available</string>
     <string name="delete_account">Delete account</string>
     <string name="edit_name">Edit Name</string>
@@ -115,6 +119,7 @@
     <string name="create_account">Create account</string>
     <string name="repeat_password">Repeat password</string>
     <string name="password">Password</string>
+    <string name="calories_per_session">%1$d calories per session</string>
     <string name="log_in">Log in</string>
     <string name="no_exercises_available">No exercises available</string>
     <string name="basic">Basic</string>
@@ -152,6 +157,7 @@
     <string name="no_exercise_stats">No exercises completed yet</string>
     <string name="no_training_data">No training data available</string>
     <string name="complete_workout_details">Complete Workout Details</string>
+    <string name="complete_exercise_details">Complete Exercise Details</string>
     <string name="training_sessions">Training Sessions</string>
     <string name="no_exercise_selected">No exercise selected</string>
     <string name="performed_count">Performed: %d times</string>
@@ -237,6 +243,27 @@
     <string name="account_locked_title">Account Locked</string>
     <string name="exercise_demo_name">Demo Exercise</string>
     <string name="exercise_demo_desc">This is a demo exercise for testing</string>
+
+    <string name="exercise_seated_arm_curl_name">Seated Arm Curls</string>
+    <string name="exercise_seated_arm_curl_desc">A simple exercise to strengthen arm muscles while seated.</string>
+
+    <string name="exercise_wall_pushup_name">Wall Push-ups</string>
+    <string name="exercise_wall_pushup_desc">An upper body exercise that strengthens chest and arms.</string>
+
+    <string name="exercise_seated_marching_name">Seated Marching</string>
+    <string name="exercise_seated_marching_desc">A leg exercise that improves strength from a seated position.</string>
+
+    <string name="exercise_balance_support_name">Supported Balance Exercises</string>
+    <string name="exercise_balance_support_desc">Exercises that improve balance using support for added safety.</string>
+
+    <string name="exercise_shoulder_rolls_name">Shoulder Rolls</string>
+    <string name="exercise_shoulder_rolls_desc">Circular shoulder movements that reduce tension.</string>
+
+    <string name="exercise_knee_extension_name">Knee Extensions</string>
+    <string name="exercise_knee_extension_desc">A seated exercise that strengthens thigh muscles.</string>
+
+    <string name="exercise_tabletop_circle_name">Tabletop Circles</string>
+    <string name="exercise_tabletop_circle_desc">A rehabilitation exercise for arm coordination.</string>
 
     <string name="exercise_knee_stretch_name">Knee Stretches</string>
     <string name="exercise_knee_stretch_desc">A gentle stretch for the knee joint to improve mobility</string>
@@ -352,6 +379,13 @@
     <string name="day_friday">Friday</string>
     <string name="day_saturday">Saturday</string>
     <string name="day_sunday">Sunday</string>
+    <string name="day_mon">Mon</string>
+    <string name="day_tue">Tue</string>
+    <string name="day_wed">Wed</string>
+    <string name="day_thu">Thu</string>
+    <string name="day_fri">Fri</string>
+    <string name="day_sat">Sat</string>
+    <string name="day_sun">Sun</string>
     <string name="days_all">All days</string>
     <string name="days_monday_wednesday_friday">Monday, Wednesday, Friday</string>
     <string name="days_tuesday_thursday">Tuesday, Thursday</string>
@@ -367,5 +401,10 @@
     <string name="account_locked_message">Too many failed attempts. Please try again later.</string>
 
     <string name="exercise_cable_row_name">Cable Row</string>
-    <string name="exercise_cable_row_desc">A compound back exercise performed using a seated cable machine that strengthens the middle back muscles, lats, and arms.</string>
+    <string name="exercise_cable_row_desc">A back exercise performed with a cable machine that strengthens the middle back, lats, and arms.</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="daily">Daily</string>
+    <string name="group_section">Group Section</string>
+    <string name="filter_by_group">Filter by group</string>
+    <string name="clear_filters">Clear filters</string>
 </resources>

@@ -164,7 +164,6 @@ class AdminExerciseViewModel(
         viewModelScope.launch {
             _loading.value = true
             try {
-                // Create the new exercise
                 val newExercise = Ejercicio(
                     nombre = name,
                     descripcion = description,
@@ -180,7 +179,7 @@ class AdminExerciseViewModel(
                 )
 
                 ejercicioDao.insertar(newExercise)
-                loadExercises() // Refresh the list
+                loadExercises() // Refrescar la lista
             } catch (e: Exception) {
                 _error.value = e.message ?: "Error adding exercise"
             } finally {

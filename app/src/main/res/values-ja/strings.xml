@@ -26,6 +26,7 @@
     <string name="follow_system">システム設定に従う</string>
 
     <!-- Statistics -->
+    <string name="sort_by">並べ替え</string>
     <string name="most_frequent_exercises">最も頻繁な運動</string>
     <string name="muscles_to_work">トレーニングが必要な筋肉群</string>
     <string name="exercise_history">運動履歴</string>
@@ -73,6 +74,7 @@
     <string name="complete_exercise">運動完了</string>
     <string name="reps_per_set">セットごとの回数</string>
     <string name="time_minutes">時間（分）</string>
+    <string name="training_time">トレーニング時間</string>
     <string name="exercises_count">%1$d 運動</string>
     <string name="calories_count">%1$d カロリー</string>
     <string name="max_calories">%1$d カロリー最大</string>
@@ -91,6 +93,7 @@
     <string name="reps_count">回数: %1$d</string>
     <string name="watch_video">ビデオを見る</string>
     <string name="delete_account">アカウント削除</string>
+    <string name="calories_per_session">%1$d カロリー</string>
     <string name="edit_name">名前を編集</string>
     <string name="email">メール</string>
     <string name="edit_email">メールを編集</string>
@@ -137,6 +140,7 @@
     <string name="complete_exercise_stats">完全な運動履歴</string>
     <string name="no_exercise_stats">まだ完了した運動はありません</string>
     <string name="no_training_data">利用可能なトレーニングデータがありません</string>
+    <string name="complete_exercise_details">エクササイズ詳細</string>
     <string name="complete_workout_details">完全なワークアウト詳細</string>
     <string name="training_sessions">トレーニングセッション</string>
     <string name="no_exercise_selected">エクササイズが選択されていません</string>
@@ -298,7 +302,28 @@
     <string name="exercise_salto_a_la_comba_desc">調整力と持久力のためのジャンプロープを使用した有酸素運動</string>
 
     <string name="exercise_cable_row_name">ケーブルロウ</string>
-    <string name="exercise_cable_row_desc">ケーブルマシンを使用して行う背中のエクササイズ。</string>
+    <string name="exercise_cable_row_desc">ケーブルマシンを使用して行う背中の運動で、背中中部、広背筋、腕を強化します。</string>
+
+    <string name="exercise_seated_arm_curl_name">座位アームカール</string>
+    <string name="exercise_seated_arm_curl_desc">座った姿勢で腕の筋肉を強化する簡単なエクササイズ。</string>
+
+    <string name="exercise_wall_pushup_name">壁腕立て伏せ</string>
+    <string name="exercise_wall_pushup_desc">胸と腕を強化する上半身のエクササイズ。</string>
+
+    <string name="exercise_seated_marching_name">座位マーチング</string>
+    <string name="exercise_seated_marching_desc">座った姿勢から脚の筋力を向上させるエクササイズ。</string>
+
+    <string name="exercise_balance_support_name">サポート付きバランスエクササイズ</string>
+    <string name="exercise_balance_support_desc">安全性を高めるためのサポートを使用してバランス感覚を向上させるエクササイズ。</string>
+
+    <string name="exercise_shoulder_rolls_name">肩回し</string>
+    <string name="exercise_shoulder_rolls_desc">肩の緊張を和らげる円を描く肩の動き。</string>
+
+    <string name="exercise_knee_extension_name">膝伸ばし</string>
+    <string name="exercise_knee_extension_desc">太もも筋肉を強化する座位エクササイズ。</string>
+
+    <string name="exercise_tabletop_circle_name">テーブルトップサークル</string>
+    <string name="exercise_tabletop_circle_desc">腕の協調性を高めるリハビリテーションエクササイズ。</string>
 
     <!-- Search Empty State -->
     <string name="no_results">結果が見つかりません</string>
@@ -350,6 +375,7 @@
     <string name="day_friday">金曜日</string>
     <string name="day_saturday">土曜日</string>
     <string name="day_sunday">日曜日</string>
+    <string name="day_sun">日</string>
     <string name="days_all">すべての日</string>
     <string name="days_monday_wednesday_friday">月曜日、水曜日、金曜日</string>
     <string name="days_tuesday_thursday">火曜日、木曜日</string>
@@ -362,5 +388,18 @@
 
     <!-- Difficulty -->
     <string name="difficulty_adaptable">適応可能</string>
-    <string name="account_locked_message">失敗しすぎた試行</string>
+    <string name="account_locked_message">試行回数が多すぎます。後でもう一度お試しください。</string>
+    <string name="enable_notifications">通知を有効にする</string>
+    <string name="daily">毎日</string>
+    <string name="group_section">グループ</string>
+    <string name="filter_by_group">グループでフィルタ</string>
+    <string name="clear_filters">フィルタークリア</string>
+    <string name="series">シリーズ</string>
+    <string name="repetitions">繰り返し</string>
+    <string name="day_mon">月</string>
+    <string name="day_tue">火</string>
+    <string name="day_wed">水</string>
+    <string name="day_thu">木</string>
+    <string name="day_fri">金</string>
+    <string name="day_sat">土</string>
 </resources>

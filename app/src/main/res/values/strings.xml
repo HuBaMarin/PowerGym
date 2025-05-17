@@ -13,6 +13,12 @@
     <string name="notifications">Notifications</string>
     <string name="reminder_frequency">Reminder frequency</string>
     <string name="enable_reminders">Enable reminders</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="daily">Daily</string>
+    <string name="group_section">Group Section</string>
+    <string name="filter_by_group">Filter by group</string>
+    <string name="clear_filters">Clear filters</string>
+    <string name="sort_by">Sort by</string>
     <string name="most_frequent_exercises">Most frequent exercises</string>
     <string name="muscles_to_work">Muscle groups to work</string>
     <string name="exercise_history">Exercise history</string>
@@ -60,6 +66,9 @@
     <string name="complete_exercise">Complete exercise</string>
     <string name="reps_per_set">Repetitions per set</string>
     <string name="time_minutes">Time (minutes)</string>
+    <string name="series">Series</string>
+    <string name="repetitions">Repetitions</string>
+    <string name="training_time">Training time</string>
     <string name="exercises_count">%1$d exercises</string>
     <string name="calories_count">%1$d cal</string>
     <string name="max_calories">%1$d cal max</string>
@@ -78,6 +87,7 @@
     <string name="reps_count">Repetitions: %1$d</string>
     <string name="watch_video">Watch video</string>
     <string name="delete_account">Delete account</string>
+    <string name="calories_per_session">%1$d calories per session</string>
     <string name="edit_name">Edit Name</string>
     <string name="email">Email</string>
     <string name="edit_email">Edit Email</string>
@@ -124,6 +134,7 @@
     <string name="complete_exercise_stats">Complete Exercise History</string>
     <string name="no_exercise_stats">No exercises completed yet</string>
     <string name="no_training_data">No training data available</string>
+    <string name="complete_exercise_details">Complete Exercise Details</string>
     <string name="complete_workout_details">Complete Workout Details</string>
     <string name="training_sessions">Training Sessions</string>
     <string name="no_exercise_selected">No exercise selected</string>
@@ -215,7 +226,7 @@
     <string name="japanese">日本語</string>
     <string name="about">About</string>
     <string name="app_version">App Version</string>
-    <string name="app_version_number">1.0.0</string>
+    <string name="app_version_number">1.1</string>
     <string name="home">Home</string>
     <string name="clear_all">Clear All</string>
     <string name="account_locked_message">Too many failed attempts. Please try again later.</string>
@@ -292,7 +303,7 @@
     <string name="exercise_salto_a_la_comba_desc">Cardio exercise using a jump rope for coordination and endurance</string>
 
     <string name="exercise_cable_row_name">Cable Row</string>
-    <string name="exercise_cable_row_desc">Un exercice pour le dos effectué avec une machine à câble.</string>
+    <string name="exercise_cable_row_desc">A back exercise performed with a cable machine that strengthens the middle back, lats, and arms.</string>
 
     <!-- New Exercise Names and Descriptions -->
     <string name="exercise_seated_arm_curl_name">Seated Arm Curls</string>
@@ -366,6 +377,13 @@
     <string name="day_friday">Friday</string>
     <string name="day_saturday">Saturday</string>
     <string name="day_sunday">Sunday</string>
+    <string name="day_mon">Mon</string>
+    <string name="day_tue">Tue</string>
+    <string name="day_wed">Wed</string>
+    <string name="day_thu">Thu</string>
+    <string name="day_fri">Fri</string>
+    <string name="day_sat">Sat</string>
+    <string name="day_sun">Sun</string>
     <string name="days_all">All days</string>
     <string name="days_monday_wednesday_friday">Monday, Wednesday, Friday</string>
     <string name="days_tuesday_thursday">Tuesday, Thursday</string>

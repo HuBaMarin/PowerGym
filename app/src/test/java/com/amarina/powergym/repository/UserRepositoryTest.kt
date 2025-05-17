@@ -10,26 +10,28 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-@ExperimentalCoroutinesApi
+@RunWith(JUnit4::class)
 class UserRepositoryTest {
 
     private lateinit var userDao: UsuarioDao
     private lateinit var userRepository: UserRepository
 
     @Before
-    fun setup() {
+    fun preparar() {
         userDao = mockk()
         userRepository = UserRepository(userDao, mockk())
     }
 
     @Test
-    fun login_withValidCredentials_returnsUser() = runTest {
+    fun iniciarSesion_conCredencialesValidas_devuelveUsuario() = runTest {
         val email = "test@example.com"
         val password = "password123"
-        val expectedUser = Usuario(
+        val usuarioEsperado = Usuario(
             id = 1,
             email = email,
             password = password,
@@ -37,52 +39,52 @@ class UserRepositoryTest {
             rol = "usuario"
         )
 
-        coEvery { userDao.login(email, password) } returns expectedUser
+        coEvery { userDao.iniciarSesion(email, password) } returns usuarioEsperado
 
-        val result = userRepository.login(email, password)
+        val resultado = userRepository.iniciarSesion(email, password)
 
-        coVerify { userDao.login(email, password) }
-        assertTrue(result.isSuccess)
-        assertEquals(expectedUser, result.getOrNull())
+        coVerify { userDao.iniciarSesion(email, password) }
+        assertTrue(resultado.isSuccess)
+        assertEquals(usuarioEsperado, resultado.getOrNull())
     }
 
     @Test
-    fun login_withInvalidCredentials_returnsFailure() = runTest {
+    fun iniciarSesion_conCredencialesInvalidas_devuelveFallo() = runTest {
         val email = "test@example.com"
         val password = "wrongpassword"
 
-        coEvery { userDao.login(email, password) } returns null
+        coEvery { userDao.iniciarSesion(email, password) } returns null
 
-        val result = userRepository.login(email, password)
+        val resultado = userRepository.iniciarSesion(email, password)
 
-        coVerify { userDao.login(email, password) }
-        assertTrue(result.isFailure)
-        assertEquals("Credenciales incorrectas", result.exceptionOrNull()?.message)
+        coVerify { userDao.iniciarSesion(email, password) }
+        assertTrue(resultado.isFailure)
+        assertEquals("Credenciales incorrectas", resultado.exceptionOrNull()?.message)
     }
 
     @Test
-    fun register_withNewEmail_returnsUserId() = runTest {
+    fun registrar_conEmailNuevo_devuelveIdUsuario() = runTest {
         val email = "new@example.com"
         val password = "password123"
-        val name = "New User"
+        val nombre = "New User"
 
         coEvery { userDao.obtenerUsuarioPorEmail(email) } returns null
         coEvery { userDao.insertar(any()) } returns 42L
 
-        val result = userRepository.register(email, password, name)
+        val resultado = userRepository.registrar(email, password, nombre)
 
         coVerify { userDao.obtenerUsuarioPorEmail(email) }
         coVerify { userDao.insertar(any()) }
-        assertTrue(result.isSuccess)
-        assertEquals(42L, result.getOrNull())
+        assertTrue(resultado.isSuccess)
+        assertEquals(42L, resultado.getOrNull())
     }
 
     @Test
-    fun register_withExistingEmail_returnsFailure() = runTest {
+    fun registrar_conEmailExistente_devuelveFallo() = runTest {
         val email = "existing@example.com"
         val password = "password123"
-        val name = "Existing User"
-        val existingUser = Usuario(
+        val nombre = "Existing User"
+        val usuarioExistente = Usuario(
             id = 1,
             email = email,
             password = "oldpassword",
@@ -90,13 +92,13 @@ class UserRepositoryTest {
             rol = "usuario"
         )
 
-        coEvery { userDao.obtenerUsuarioPorEmail(email) } returns existingUser
+        coEvery { userDao.obtenerUsuarioPorEmail(email) } returns usuarioExistente
 
-        val result = userRepository.register(email, password, name)
+        val resultado = userRepository.registrar(email, password, nombre)
 
         coVerify { userDao.obtenerUsuarioPorEmail(email) }
         coVerify(exactly = 0) { userDao.insertar(any()) }
-        assertTrue(result.isFailure)
-        assertEquals("El email ya está registrado", result.exceptionOrNull()?.message)
+        assertTrue(resultado.isFailure)
+        assertEquals("El email ya está registrado", resultado.exceptionOrNull()?.message)
     }
 }
