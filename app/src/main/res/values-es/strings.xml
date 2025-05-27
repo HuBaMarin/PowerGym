@@ -404,4 +404,6 @@
     <string name="passwords_dont_match">Las contraseñas no coinciden</string>
     <string name="invalid_email">Correo electrónico incorrecto</string>
     <string name="account_locked_message">Demasiados intentos fallidos. Inténtalo de nuevo más tarde.</string>
+    <string name="test_notification">Probar notificación</string>
+    <string name="test_notification_sent">¡Notificación de prueba enviada con éxito!</string>
 </resources>

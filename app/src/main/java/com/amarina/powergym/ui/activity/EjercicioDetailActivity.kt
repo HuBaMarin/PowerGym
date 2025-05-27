@@ -1,5 +1,6 @@
 package com.amarina.powergym.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import com.amarina.powergym.PowerGymApplication
 import com.amarina.powergym.R
 import com.amarina.powergym.databinding.ActivityEjercicioDetailBinding
 import com.amarina.powergym.ui.viewmodel.exercise.EjercicioDetailViewModel
+import com.amarina.powergym.utils.LanguageHelper
 import com.amarina.powergym.utils.SessionManager
 import com.amarina.powergym.utils.mostrarToast
 import com.google.android.material.textfield.TextInputEditText
@@ -26,6 +28,10 @@ class EjercicioDetailActivity : AppCompatActivity() {
     private lateinit var viewModel: EjercicioDetailViewModel
     private lateinit var sessionManager: SessionManager
     private var ejercicioId: Int = -1
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageHelper.establecerIdioma(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,24 +79,11 @@ class EjercicioDetailActivity : AppCompatActivity() {
                             tvNombreEjercicio.text = ejercicio.nombre
                             tvDescripcion.text = ejercicio.descripcion
 
-                            tvGrupoMuscular.text = getStringResourceByName(
-                                "muscle_group_${
-                                    ejercicio.grupoMuscular.lowercase().replace(" ", "_")
-                                }",
-                                ejercicio.grupoMuscular
-                            )
-                            tvDificultad.text = getStringResourceByName(
-                                "difficulty_${ejercicio.dificultad.lowercase().replace(" ", "_")}",
-                                ejercicio.dificultad
-                            )
+                            tvGrupoMuscular.text = ejercicio.grupoMuscular
+                            tvDificultad.text = ejercicio.dificultad
 
                             val translatedDays = ejercicio.dias.split(",").map { day ->
-                                day.trim().let { dayKey ->
-                                    getStringResourceByName(
-                                        "day_${dayKey.lowercase().replace(" ", "_")}",
-                                        dayKey
-                                    )
-                                }
+                                day.trim()
                             }.joinToString(", ")
                             tvDias.text = translatedDays
 
@@ -150,20 +143,6 @@ class EjercicioDetailActivity : AppCompatActivity() {
                     else -> Unit
                 }
             }
-        }
-    }
-
-    private fun getStringResourceByName(resourceName: String, defaultValue: String): String {
-        return try {
-            val resourceIdField = R.string::class.java.getField(resourceName)
-            val resourceId = resourceIdField.getInt(null)
-            if (resourceId != 0) {
-                getString(resourceId)
-            } else {
-                defaultValue
-            }
-        } catch (e: Exception) {
-            defaultValue
         }
     }
 

@@ -405,4 +405,6 @@
     <string name="day_thu">木</string>
     <string name="day_fri">金</string>
     <string name="day_sat">土</string>
+    <string name="test_notification">通知テスト</string>
+    <string name="test_notification_sent">テスト通知が正常に送信されました！</string>
 </resources>

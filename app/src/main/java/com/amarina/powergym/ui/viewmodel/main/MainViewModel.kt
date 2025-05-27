@@ -78,7 +78,6 @@ class MainViewModel(
                 val secciones = ejercicioDao.obtenerTodasSecciones()
                 _seccionesState.value = secciones
             } catch (exception: Exception) {
-                // Silenciar errores, solo log
             }
         }
     }

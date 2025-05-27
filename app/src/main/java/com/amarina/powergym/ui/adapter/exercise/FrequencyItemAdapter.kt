@@ -38,7 +38,7 @@ class FrequencyItemAdapter : RecyclerView.Adapter<FrequencyItemAdapter.Frequency
 
         fun bind(item: Pair<String, Int>) {
             tvName.text = item.first
-            tvCount.text = "${item.second} veces"
+            tvCount.text = itemView.context.getString(R.string.times_completed, item.second)
 
             // Configurar icono según el ejercicio
             setIconForExercise(item.first)
@@ -53,4 +53,3 @@ class FrequencyItemAdapter : RecyclerView.Adapter<FrequencyItemAdapter.Frequency
         }
     }
 }
-

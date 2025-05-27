@@ -1,6 +1,10 @@
 package com.amarina.powergym.database.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import com.amarina.powergym.database.entities.Ejercicio
 
 /**
@@ -123,4 +127,22 @@ interface EjercicioDao {
      */
     @Query("UPDATE ejercicios SET grupoMuscular = :grupoMuscular WHERE id = :id")
     suspend fun actualizarGrupoMuscular(id: Int, grupoMuscular: String)
+
+    /**
+     * Actualiza la dificultad de un ejercicio.
+     *
+     * @param id ID del ejercicio a actualizar
+     * @param dificultad Nueva dificultad traducida
+     */
+    @Query("UPDATE ejercicios SET dificultad = :dificultad WHERE id = :id")
+    suspend fun actualizarDificultad(id: Int, dificultad: String)
+
+    /**
+     * Actualiza los días de un ejercicio.
+     *
+     * @param id ID del ejercicio a actualizar
+     * @param dias Nuevos días traducidos
+     */
+    @Query("UPDATE ejercicios SET dias = :dias WHERE id = :id")
+    suspend fun actualizarDias(id: Int, dias: String)
 }

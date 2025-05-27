@@ -11,8 +11,8 @@ import com.amarina.powergym.database.entities.Ejercicio
 import com.amarina.powergym.databinding.ItemExerciseBinding
 import com.amarina.powergym.databinding.ItemExerciseListBinding
 import com.amarina.powergym.databinding.SectionHeaderBinding
-import com.amarina.powergym.ui.viewholder.exercise.EjercicioListViewHolder
 import com.amarina.powergym.ui.viewholder.exercise.EjercicioGridViewHolder
+import com.amarina.powergym.ui.viewholder.exercise.EjercicioListViewHolder
 
 class EjercicioAdapter(
     private val onEjercicioClick: (Int) -> Unit
@@ -39,35 +39,13 @@ class EjercicioAdapter(
             }
         }
 
-        // Si no quedan ejercicios después del filtrado
-        if (items.isEmpty() && ejercicios.isNotEmpty()) {
-            // Podría ser que el filtro eliminó todos los ejercicios de todas las categorías
-            // Aquí podrías manejar ese caso si es necesario
-            // Aquí podrías mostrar un mensaje al usuario indicando que no se encontraron ejercicios
-            // que coincidan con el filtro aplicado
-            // Por ejemplo, podrías mostrar un Toast o un mensaje en la interfaz de usuario
-            // Aquí te dejo un ejemplo de cómo podrías hacerlo:
-             // La lista items está vacía, así que no podemos acceder a ella
-             // En lugar de eso, usaremos el contexto que viene del ViewHolder
-//             val contexto = currentList.firstOrNull()?.let {
-//                when (it) {
-//                    is EjercicioAdapterItem.EjercicioItem -> it.ejercicio
-//                    else -> null
-//                }
-//             } ?: return // Si no hay elementos, no podemos mostrar el Toast
 
-
-        }
 
         submitList(items)
     }
 
 
-    // Listas planas (búsqueda)
-    fun submitEjerciciosList(ejercicios: List<Ejercicio>) {
-        val items = ejercicios.map { EjercicioAdapterItem.EjercicioItemList(it) }
-        submitList(items)
-    }
+
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -138,29 +116,19 @@ class EjercicioAdapter(
         }
 
         private fun getSectionResourceId(sectionTitle: String, context: Context): Int {
-            val simpleName = sectionTitle.lowercase().trim()
-            return when {
-                simpleName.contains("elderly") || simpleName.contains("tercera edad") || simpleName.contains(
-                    "ältere"
-                ) -> R.string.section_elderly
+            // Use the centralized translation helper to get the resource ID
+            val translatedSection =
+                com.amarina.powergym.utils.TranslationHelper.translateSection(sectionTitle, context)
 
-                simpleName.contains("reduced mobility") || simpleName.contains("movilidad reducida") || simpleName.contains(
-                    "mobilité réduite"
-                ) -> R.string.section_reduced_mobility
-
-                simpleName.contains("rehab") || simpleName.contains("rehabilitation") || simpleName.contains(
-                    "rehabilitación"
-                ) -> R.string.section_rehabilitation
-
-                simpleName.contains("upper body") || simpleName.contains("tren superior") || simpleName.contains(
-                    "oberkörper"
-                ) -> R.string.section_upper_body
-
-                simpleName.contains("lower body") || simpleName.contains("tren inferior") || simpleName.contains(
-                    "unterkörper"
-                ) -> R.string.section_lower_body
-
-                simpleName.contains("cardio") || simpleName.contains("cardiovascular") -> R.string.section_cardio
+            // If translation was successful, find the resource ID for the translated string
+            return when (translatedSection) {
+                context.getString(R.string.section_demo) -> R.string.section_demo
+                context.getString(R.string.section_elderly) -> R.string.section_elderly
+                context.getString(R.string.section_reduced_mobility) -> R.string.section_reduced_mobility
+                context.getString(R.string.section_rehabilitation) -> R.string.section_rehabilitation
+                context.getString(R.string.section_upper_body) -> R.string.section_upper_body
+                context.getString(R.string.section_lower_body) -> R.string.section_lower_body
+                context.getString(R.string.section_cardio) -> R.string.section_cardio
                 else -> 0
             }
         }

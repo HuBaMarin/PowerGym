@@ -239,6 +239,10 @@
     <string name="reminder_message">C’est l’heure de l’exercice ! Ne manquez pas votre entraînement aujourd’hui.</string>
     <string name="channel_name">Rappels d’entraînement</string>
     <string name="channel_description">Notifications pour vous rappeler vos séances d’entraînement</string>
+    <string name="test_notification">Test de notification</string>
+    <string name="test_notification_sent">Notification de test envoyée avec succès !</string>
+    <string name="enable_notifications">Activer les notifications</string>
+    <string name="daily">Quotidien</string>
 
     <!-- Admin Panel -->
     <string name="admin_control_panel">Panneau d’administration</string>
@@ -390,8 +394,6 @@
     <!-- Difficulty -->
     <string name="difficulty_adaptable">Adaptable</string>
     <string name="account_locked_message">Trop de tentatives échouées. Veuillez réessayer plus tard.</string>
-    <string name="enable_notifications">Activer les notifications</string>
-    <string name="daily">Quotidien</string>
     <string name="group_section">Groupe</string>
     <string name="filter_by_group">Filtrer groupe</string>
     <string name="clear_filters">Effacer filtres</string>

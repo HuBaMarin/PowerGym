@@ -159,6 +159,7 @@ class StatisticsActivity : AppCompatActivity() {
                 ejerciciosMasTrabajadosAdapter.submitList(exercises)
                 binding.rvEjerciciosMasTrabajados.visibility =
                     if (exercises.isNotEmpty()) View.VISIBLE else View.GONE
+                updateEmptyState()
             }
         }
 
@@ -174,6 +175,7 @@ class StatisticsActivity : AppCompatActivity() {
                     binding.tvNoStats.visibility = View.GONE
                     binding.rvComprehensiveStats.visibility = View.VISIBLE
                 }
+                updateEmptyState()
             }
         }
 
@@ -185,27 +187,7 @@ class StatisticsActivity : AppCompatActivity() {
                     "Observer received frequency map, size: ${frequencyMap.size}"
                 )
                 updateTrainingChart(frequencyMap)
-            }
-        }
-
-        // Observe loading state for chart
-        lifecycleScope.launch {
-            viewModel.loading.collectLatest { isLoading ->
-                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-                binding.trainingChart.chartProgressBar.visibility =
-                    if (isLoading) View.VISIBLE else View.GONE
-
-                // Show empty state if no data
-                val noData = !isLoading &&
-                        viewModel.comprehensiveStats.value.isEmpty() &&
-                        viewModel.ejerciciosMasTrabajados.value.isEmpty()
-
-                if (noData) {
-                    binding.tvEmpty.visibility = View.VISIBLE
-                    binding.tvEmpty.text = getString(R.string.no_statistics)
-                } else {
-                    binding.tvEmpty.visibility = View.GONE
-                }
+                updateEmptyState()
             }
         }
 
@@ -435,5 +417,18 @@ class StatisticsActivity : AppCompatActivity() {
         super.onDestroy()
         // Clear the reference to avoid memory leaks
         (application as PowerGymApplication).statisticsViewModel = null
+    }
+
+    private fun updateEmptyState() {
+        val hasExercises = viewModel.ejerciciosMasTrabajados.value.isNotEmpty()
+        val hasStats = viewModel.comprehensiveStats.value.isNotEmpty()
+        val hasChartData = viewModel.trainingFrequencyData.value.isNotEmpty()
+
+        if (!hasExercises && !hasStats && !hasChartData) {
+            binding.tvEmpty.visibility = View.VISIBLE
+            binding.tvEmpty.text = getString(R.string.no_exercise_stats)
+        } else {
+            binding.tvEmpty.visibility = View.GONE
+        }
     }
 }

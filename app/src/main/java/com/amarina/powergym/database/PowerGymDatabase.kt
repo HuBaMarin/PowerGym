@@ -17,10 +17,8 @@ import com.amarina.powergym.database.entities.Preferencia
 import com.amarina.powergym.database.entities.Usuario
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Locale
-import java.util.UUID
 
 @Database(
     entities = [
@@ -132,6 +130,37 @@ abstract class PowerGymDatabase : RoomDatabase() {
                                     translatedMuscleGroup
                                 )
                             }
+
+                            // También actualizar la dificultad
+                            val difficultyResId = getDifficultyResourceId(exercise.dificultad)
+                            if (difficultyResId != 0) {
+                                val translatedDifficulty = resources.getString(difficultyResId)
+
+                                Log.d(
+                                    "PowerGymDatabase",
+                                    "Updating difficulty '${exercise.dificultad}' to '$translatedDifficulty'"
+                                )
+
+                                // Actualizar dificultad en el ejercicio
+                                database.ejercicioDao().actualizarDificultad(
+                                    exercise.id,
+                                    translatedDifficulty
+                                )
+                            }
+
+                            // También actualizar los días
+                            val translatedDays = translateDays(exercise.dias, resources)
+
+                            Log.d(
+                                "PowerGymDatabase",
+                                "Updating days '${exercise.dias}' to '$translatedDays'"
+                            )
+
+                            // Actualizar días en el ejercicio
+                            database.ejercicioDao().actualizarDias(
+                                exercise.id,
+                                translatedDays
+                            )
                         } catch (e: Exception) {
                             Log.e(
                                 "PowerGymDatabase",
@@ -157,234 +186,148 @@ abstract class PowerGymDatabase : RoomDatabase() {
 
             return when {
                 // Press Militar
-                simpleName.contains("military press") ||
-                        simpleName.contains("press militar") ||
-                        simpleName.contains("overhead press") ->
+                simpleName.contains("press militar",true) ->
                     Pair(
                         R.string.exercise_military_press_name,
                         R.string.exercise_military_press_desc
                     )
 
                 // Elevaciones laterales
-                simpleName.contains("lateral raise") ||
-                        simpleName.contains("elevaciones laterales") ||
-                        simpleName.contains("elevation lateral") ||
-                        simpleName.contains("seitenheben") ->
+                simpleName.contains("elevaciones laterales",true) ->
                     Pair(
                         R.string.exercise_lateral_raises_name,
                         R.string.exercise_lateral_raises_desc
                     )
 
                 // Press de banca
-                simpleName.contains("press de banca") ||
-                        simpleName.contains("bench press") ||
-                        simpleName.contains("développé couché") ||
-                        simpleName.contains("bankdrücken") ->
+                simpleName.contains("press de banca")  ->
                     Pair(
                         R.string.exercise_press_de_banca_name,
                         R.string.exercise_press_de_banca_desc
                     )
 
                 // Pecho fly / Aperturas
-                simpleName.contains("aperturas") ||
-                        simpleName.contains("chest fly") ||
-                        simpleName.contains("butterfly") ||
-                        simpleName.contains("ouvertures") ||
-                        simpleName.contains("pec fly") ||
-                        simpleName.contains("brustfliegen") ->
+                simpleName.contains("aperturas") ->
                     Pair(
                         R.string.exercise_aperturas_con_mancuernas_name,
                         R.string.exercise_aperturas_con_mancuernas_desc
                     )
 
                 // Pull-ups / Dominadas
-                simpleName.contains("dominadas") ||
-                        simpleName.contains("pull up") ||
-                        simpleName.contains("pullup") ||
-                        simpleName.contains("chin up") ||
-                        simpleName.contains("klimmzüge") ||
-                        simpleName.contains("traction") ->
+                simpleName.contains("dominadas",true) ->
                     Pair(R.string.exercise_dominadas_name, R.string.exercise_dominadas_desc)
 
                 // Remo con barra
-                simpleName.contains("remo con barra") ||
-                        simpleName.contains("barbell row") ||
-                        simpleName.contains("bent over row") ||
-                        simpleName.contains("rameur") ||
-                        simpleName.contains("rudern") ->
+                simpleName.contains("remo con barra",true) ->
                     Pair(
                         R.string.exercise_remo_con_barra_name,
                         R.string.exercise_remo_con_barra_desc
                     )
 
                 // Sentadillas
-                simpleName.contains("sentadillas") ||
-                        simpleName.contains("squat") ||
-                        simpleName.contains("kniebeuge") ||
-                        simpleName.contains("accroupissement") ->
+                simpleName.contains("sentadillas",true)  ->
                     Pair(R.string.exercise_sentadillas_name, R.string.exercise_sentadillas_desc)
 
                 // Extensiones de pierna
-                simpleName.contains("extensiones de pierna") ||
-                        simpleName.contains("leg extension") ||
-                        simpleName.contains("beinstrecker") ||
-                        simpleName.contains("extension de jambe") ->
+                simpleName.contains("extensiones de pierna",true) ->
                     Pair(
                         R.string.exercise_extensiones_de_pierna_name,
                         R.string.exercise_extensiones_de_pierna_desc
                     )
 
                 // Empuje de cadera
-                simpleName.contains("hip thrust") ||
-                        simpleName.contains("empuje de cadera") ||
-                        simpleName.contains("relevé de bassin") ||
-                        simpleName.contains("beckenbrücke") ->
+                simpleName.contains("hip thrust",true)->
                     Pair(R.string.exercise_hip_thrust_name, R.string.exercise_hip_thrust_desc)
 
                 // Puente de glúteos
-                simpleName.contains("puente de gluteos") ||
-                        simpleName.contains("glute bridge") ||
-                        simpleName.contains("pont fessier") ||
-                        simpleName.contains("gesäßbrücke") ||
-                        simpleName.contains("ponte de gluteos") ||
-                        simpleName.contains("puente de glúteos") ->
+                simpleName.contains("glute bridge",true) ->
                     Pair(
                         R.string.exercise_puente_de_gluteos_name,
                         R.string.exercise_puente_de_gluteos_desc
                     )
 
                 // Burpees
-                simpleName.contains("burpees") ||
-                        simpleName.contains("burpee") ->
+                simpleName.contains("burpees",true)->
                     Pair(R.string.exercise_burpees_name, R.string.exercise_burpees_desc)
 
                 // Salto a la comba
-                simpleName.contains("salto a la comba") ||
-                        simpleName.contains("jump rope") ||
-                        simpleName.contains("seilspringen") ||
-                        simpleName.contains("corde à sauter") ||
-                        simpleName.contains("saltar la cuerda") ->
+                simpleName.contains("salto a la comba",true)  ->
                     Pair(
                         R.string.exercise_salto_a_la_comba_name,
                         R.string.exercise_salto_a_la_comba_desc
                     )
 
                 // Estiramiento de rodilla
-                simpleName.contains("knee stretch") ||
-                        simpleName.contains("estiramiento de rodilla") ||
-                        simpleName.contains("estiramientos de rodilla") ||
-                        simpleName.contains("kniestrecker") ||
-                        simpleName.contains("étirement du genou") ->
+                simpleName.contains("knee stretch",true) ->
                     Pair(R.string.exercise_knee_stretch_name, R.string.exercise_knee_stretch_desc)
 
                 // Extensiones de brazo sentado
-                simpleName.contains("seated arm extension") ||
-                        simpleName.contains("extension de brazo sentado") ||
-                        simpleName.contains("extension de brazos sentado") ||
-                        simpleName.contains("sitzende armstrecker") ||
-                        simpleName.contains("extension de bras assis") ->
+                simpleName.contains("seated arm extension")  ->
                     Pair(
                         R.string.exercise_seated_arm_extensions_name,
                         R.string.exercise_seated_arm_extensions_desc
                     )
 
                 // Ejercicios varios
-                simpleName.contains("various exercise") ||
-                        simpleName.contains("ejercicios varios") ||
-                        simpleName.contains("ejercicios de core") ||
-                        simpleName.contains("verschiedene übungen") ||
-                        simpleName.contains("exercices divers") ||
-                        simpleName.contains("core exercise") ->
+                simpleName.contains("varios",true)->
                     Pair(
                         R.string.exercise_various_exercises_name,
                         R.string.exercise_various_exercises_desc
                     )
 
                 // Banda elástica
-                simpleName.contains("resistance band") ||
-                        simpleName.contains("banda elastica") ||
-                        simpleName.contains("banda de resistencia") ||
-                        simpleName.contains("theraband") ||
-                        simpleName.contains("elastique") ||
-                        simpleName.contains("widerstandsband") ->
+                simpleName.contains("ejercicios con banda",true) ->
                     Pair(
                         R.string.exercise_resistance_band_name,
                         R.string.exercise_resistance_band_desc
                     )
 
                 // Elevaciones laterales de brazos sentado
-                simpleName.contains("elevacion lateral") ||
-                        simpleName.contains("lateral raise seated") ||
-                        simpleName.contains("elevaciones laterales sentado") ||
-                        simpleName.contains("elevación lateral de brazos") ||
-                        simpleName.contains("sitzende seitheben") ||
-                        simpleName.contains("élévation latérale assis") ->
+                simpleName.contains("elevacion lat",true) ->
                     Pair(
                         R.string.exercise_elevacion_lateral_de_brazos_sentado_name,
                         R.string.exercise_elevacion_lateral_de_brazos_sentado_desc
                     )
 
                 // Ejercicios respiratorios
-                simpleName.contains("respiratory") ||
-                        simpleName.contains("respirator") ||
-                        simpleName.contains("breathing") ||
-                        simpleName.contains("ejercicios respiratorios") ||
-                        simpleName.contains("respiración") ||
-                        simpleName.contains("atemübung") ||
-                        simpleName.contains("exercice respiratoire") ->
+                simpleName.contains("respiratorios",true)  ->
                     Pair(
                         R.string.exercise_respiratory_exercises_name,
                         R.string.exercise_respiratory_exercises_desc
                     )
 
                 // Flexiones de muñeca
-                simpleName.contains("flexiones de muneca") ||
-                        simpleName.contains("wrist flex") ||
-                        simpleName.contains("handgelenk") ||
-                        simpleName.contains("flexion de poignet") ||
-                        simpleName.contains("flexión de muñeca") ->
+
+                        simpleName.contains("flexiones de muñeca",true)->
                     Pair(
                         R.string.exercise_flexiones_de_muneca_name,
                         R.string.exercise_flexiones_de_muneca_desc
                     )
 
                 // Ejercicios de equilibrio
-                simpleName.contains("equilibrio") ||
-                        simpleName.contains("balance") ||
-                        simpleName.contains("ejercicios de equilibrio") ||
-                        simpleName.contains("gleichgewichtsübung") ||
-                        simpleName.contains("exercice d'équilibre") ->
+                simpleName.contains("equilibrio",true) ->
                     Pair(
                         R.string.exercise_ejercicios_de_equilibrio_con_apoyo_name,
                         R.string.exercise_ejercicios_de_equilibrio_con_apoyo_desc
                     )
 
                 // Estiramientos suaves
-                simpleName.contains("estiramientos") ||
-                        simpleName.contains("stretch") ||
-                        simpleName.contains("stretching") ||
-                        simpleName.contains("dehnung") ||
-                        simpleName.contains("étirement") ||
-                        simpleName.contains("estiramiento") ->
+                simpleName.contains("estiramientos",true)  ->
                     Pair(
                         R.string.exercise_estiramientos_suaves_name,
                         R.string.exercise_estiramientos_suaves_desc
                     )
 
                 // Yoga en silla
-                simpleName.contains("yoga") ||
-                        simpleName.contains("silla") ||
-                        simpleName.contains("chair") ||
-                        simpleName.contains("stuhl") ||
-                        simpleName.contains("chaise") ->
+                simpleName.contains("yoga",true) ->
                     Pair(
                         R.string.exercise_yoga_adaptado_en_silla_name,
                         R.string.exercise_yoga_adaptado_en_silla_desc
                     )
 
-                // Remo con cable
+                // Remo con polea
                 simpleName.contains("cable row") ||
-                        simpleName.contains("remo con cable") ->
+                        simpleName.contains("remo con polea") ->
                     Pair(
                         R.string.exercise_cable_row_name,
                         R.string.exercise_cable_row_desc
@@ -400,111 +343,276 @@ abstract class PowerGymDatabase : RoomDatabase() {
 
 
         /**
-         * Obtiene el ID del recurso para un nombre de grupo muscular
-         * Devuelve el ID del recurso para el grupo muscular dado
+         * Devuelve el recurso de string que representa el grupo muscular recibido.
+         *
+         * El texto puede llegar en diferentes idiomas o con pequeñas variaciones
+         * (plural, acentos, mayúsculas…). Comprobamos
+         * de forma explícita todas las traducciones y sinónimos más habituales
+         * usando contains() en minúsculas.
          */
         private fun getResourceIdForMuscleGroup(muscleGroup: String): Int {
-            val simpleName = muscleGroup.lowercase().trim()
+            val name = muscleGroup.lowercase().trim()
 
-            // Mapa de palabras clave a IDs de recursos
-            val muscleGroupMap = mapOf(
+            return when {
+                // Demo
+                name.contains("demo") -> R.string.muscle_group_demo
+
+                // Caso especial «core + legs»
+                (name.contains("core") && (name.contains("leg") || name.contains("pierna"))) ||
+                        name.contains("core y piernas") ||
+                        name.contains("core and legs") -> R.string.muscle_group_core_legs
+
                 // Piernas
-                "legs" to R.string.muscle_group_legs,
-                "pierna" to R.string.muscle_group_legs,
-                "beine" to R.string.muscle_group_legs,
-                "jambe" to R.string.muscle_group_legs,
-                "脚" to R.string.muscle_group_legs,
+                name.contains("leg") || name.contains("pierna") ||
+                        name.contains("beine") || name.contains("jambe") ||
+                        name.contains("脚") -> R.string.muscle_group_legs
 
                 // Brazos
-                "arms" to R.string.muscle_group_arms,
-                "brazo" to R.string.muscle_group_arms,
-                "arme" to R.string.muscle_group_arms,
-                "腕" to R.string.muscle_group_arms,
+                name.contains("arm") || name.contains("brazo") ||
+                        name.contains("arme") || name.contains("腕") -> R.string.muscle_group_arms
 
                 // Core
-                "core" to R.string.muscle_group_core,
-                "rumpf" to R.string.muscle_group_core,
-                "noyau" to R.string.muscle_group_core,
-                "núcleo" to R.string.muscle_group_core,
-                "コア" to R.string.muscle_group_core,
-
-                // Múltiple
-                "multiple" to R.string.muscle_group_multiple,
-                "múltiple" to R.string.muscle_group_multiple,
-                "mehrere" to R.string.muscle_group_multiple,
-                "複数" to R.string.muscle_group_multiple,
+                name.contains("core") || name.contains("rumpf") ||
+                        name.contains("noyau") || name.contains("núcleo") ||
+                        name.contains("コア") -> R.string.muscle_group_core
 
                 // Hombros
-                "shoulder" to R.string.muscle_group_shoulders,
-                "hombro" to R.string.muscle_group_shoulders,
-                "schulter" to R.string.muscle_group_shoulders,
-                "épaule" to R.string.muscle_group_shoulders,
-                "肩" to R.string.muscle_group_shoulders,
+                name.contains("shoulder") || name.contains("hombro") ||
+                        name.contains("schulter") || name.contains("épaule") ||
+                        name.contains("肩") -> R.string.muscle_group_shoulders
 
                 // Respiratorio
-                "respiratory" to R.string.muscle_group_respiratory,
-                "respirat" to R.string.muscle_group_respiratory,
-                "breathing" to R.string.muscle_group_respiratory,
-                "atmung" to R.string.muscle_group_respiratory,
-                "呼吸" to R.string.muscle_group_respiratory,
+                name.contains("respiratory") || name.contains("respirator") ||
+                        name.contains("breathing") || name.contains("atmung") ||
+                        name.contains("呼吸") -> R.string.muscle_group_respiratory
 
                 // Antebrazos
-                "forearm" to R.string.muscle_group_forearms,
-                "antebrazo" to R.string.muscle_group_forearms,
-                "unterarm" to R.string.muscle_group_forearms,
-                "avant-bras" to R.string.muscle_group_forearms,
-                "前腕" to R.string.muscle_group_forearms,
+                name.contains("forearm") || name.contains("antebrazo") ||
+                        name.contains("unterarm") || name.contains("avant-bras") ||
+                        name.contains("前腕") -> R.string.muscle_group_forearms
 
                 // Pecho
-                "chest" to R.string.muscle_group_chest,
-                "pecho" to R.string.muscle_group_chest,
-                "brust" to R.string.muscle_group_chest,
-                "poitrine" to R.string.muscle_group_chest,
-                "胸" to R.string.muscle_group_chest,
+                name.contains("chest") || name.contains("pecho") ||
+                        name.contains("brust") || name.contains("poitrine") ||
+                        name.contains("胸") -> R.string.muscle_group_chest
 
                 // Espalda
-                "back" to R.string.muscle_group_back,
-                "espalda" to R.string.muscle_group_back,
-                "rücken" to R.string.muscle_group_back,
-                "dos" to R.string.muscle_group_back,
-                "背中" to R.string.muscle_group_back,
+                name.contains("back") || name.contains("espalda") ||
+                        name.contains("rücken") || name.contains("dos") ||
+                        name.contains("背") -> R.string.muscle_group_back
 
                 // Glúteos
-                "glute" to R.string.muscle_group_glutes,
-                "glúteo" to R.string.muscle_group_glutes,
-                "gesäß" to R.string.muscle_group_glutes,
-                "fessier" to R.string.muscle_group_glutes,
-                "臀部" to R.string.muscle_group_glutes,
+                name.contains("glute") || name.contains("glúteo") ||
+                        name.contains("gesäß") || name.contains("fessier") ||
+                        name.contains("臀") -> R.string.muscle_group_glutes
 
                 // Cuerpo completo
-                "full body" to R.string.muscle_group_full_body,
-                "whole body" to R.string.muscle_group_full_body,
-                "cuerpo completo" to R.string.muscle_group_full_body,
-                "ganzkörper" to R.string.muscle_group_full_body,
-                "corps entier" to R.string.muscle_group_full_body,
-                "全身" to R.string.muscle_group_full_body
-            )
+                name.contains("full body") || name.contains("whole body") ||
+                        name.contains("cuerpo completo") || name.contains("ganzkörper") ||
+                        name.contains("corps entier") || name.contains("全身") -> R.string.muscle_group_full_body
 
-            // Caso especial para "core_legs"
-            if (simpleName.contains("core") && (
-                        simpleName.contains("leg") ||
-                                simpleName.contains("pierna") ||
-                                simpleName.contains("beine") ||
-                                simpleName.contains("jambe") ||
-                                simpleName.contains("脚"))
-            ) {
-                return R.string.muscle_group_core_legs
+                // Múltiple
+                name.contains("multiple") || name.contains("múltiple") ||
+                        name.contains("mehrere") || name.contains("複数") -> R.string.muscle_group_multiple
+
+                // Valor predeterminado
+                else -> R.string.muscle_group_multiple
             }
+        }
 
-            // Encuentra la primera palabra clave coincidente
-            for ((keyword, resourceId) in muscleGroupMap) {
-                if (simpleName.contains(keyword)) {
-                    return resourceId
+        /**
+         * Obtiene el ID del recurso para una dificultad
+         */
+        private fun getDifficultyResourceId(difficulty: String): Int {
+            val simpleName = difficulty.lowercase().trim()
+
+            return when {
+                simpleName.contains("basic") ||
+                        simpleName.contains("básico") ||
+                        simpleName.contains("basico") ||
+                        simpleName.contains("débutant") ||
+                        simpleName.contains("anfänger") ||
+                        simpleName.contains("初級") -> R.string.difficulty_basic
+
+                simpleName.contains("intermediate") ||
+                        simpleName.contains("intermedio") ||
+                        simpleName.contains("intermédiaire") ||
+                        simpleName.contains("mittelstufe") ||
+                        simpleName.contains("中級") -> R.string.difficulty_intermediate
+
+                simpleName.contains("advanced") ||
+                        simpleName.contains("avanzado") ||
+                        simpleName.contains("avancé") ||
+                        simpleName.contains("fortgeschritten") ||
+                        simpleName.contains("上級") -> R.string.difficulty_advanced
+
+                simpleName.contains("adaptable") ||
+                        simpleName.contains("anpassbar") -> R.string.difficulty_adaptable
+
+                else -> 0
+            }
+        }
+
+        /**
+         * Traduce los días de entrenamiento al idioma actual
+         */
+        private fun translateDays(days: String, resources: android.content.res.Resources): String {
+            if (days.isEmpty()) return days
+
+            return days.split(",").map { day ->
+                val trimmedDay = day.trim()
+                translateSingleDay(trimmedDay, resources)
+            }.joinToString(", ")
+        }
+
+        /**
+         * Traduce un día individual
+         */
+        private fun translateSingleDay(
+            day: String,
+            resources: android.content.res.Resources
+        ): String {
+            val simpleName = day.lowercase().trim()
+
+            // First check for exact matches with existing translated strings
+            try {
+                if (day == resources.getString(R.string.days_all)) {
+                    return resources.getString(R.string.days_all)
                 }
+                if (day == resources.getString(R.string.days_monday_wednesday_friday)) {
+                    return resources.getString(R.string.days_monday_wednesday_friday)
+                }
+                if (day == resources.getString(R.string.days_monday_thursday)) {
+                    return resources.getString(R.string.days_monday_thursday)
+                }
+                if (day == resources.getString(R.string.days_tuesday_friday)) {
+                    return resources.getString(R.string.days_tuesday_friday)
+                }
+                if (day == resources.getString(R.string.days_tuesday_thursday)) {
+                    return resources.getString(R.string.days_tuesday_thursday)
+                }
+                if (day == resources.getString(R.string.days_wednesday_saturday)) {
+                    return resources.getString(R.string.days_wednesday_saturday)
+                }
+                if (day == resources.getString(R.string.days_wednesday_saturday_sunday)) {
+                    return resources.getString(R.string.days_wednesday_saturday_sunday)
+                }
+                if (day == resources.getString(R.string.days_tuesday_thursday_saturday)) {
+                    return resources.getString(R.string.days_tuesday_thursday_saturday)
+                }
+                if (day == resources.getString(R.string.days_all_week)) {
+                    return resources.getString(R.string.days_all_week)
+                }
+            } catch (e: Exception) {
+                // Continue with pattern matching if exact match fails
             }
 
-            // Valor predeterminado a múltiple como respaldo
-            return R.string.muscle_group_multiple
+            // Pattern matching for individual days and common combinations
+            return when {
+                // Individual days
+                simpleName.contains("monday") || simpleName.contains("lunes") ||
+                        simpleName.contains("montag") || simpleName.contains("lundi") ||
+                        simpleName.contains("月曜") -> resources.getString(R.string.day_monday)
+
+                simpleName.contains("tuesday") || simpleName.contains("martes") ||
+                        simpleName.contains("dienstag") || simpleName.contains("mardi") ||
+                        simpleName.contains("火曜") -> resources.getString(R.string.day_tuesday)
+
+                simpleName.contains("wednesday") || simpleName.contains("miércoles") ||
+                        simpleName.contains("miercoles") || simpleName.contains("mittwoch") ||
+                        simpleName.contains("mercredi") || simpleName.contains("水曜") -> resources.getString(
+                    R.string.day_wednesday
+                )
+
+                simpleName.contains("thursday") || simpleName.contains("jueves") ||
+                        simpleName.contains("donnerstag") || simpleName.contains("jeudi") ||
+                        simpleName.contains("木曜") -> resources.getString(R.string.day_thursday)
+
+                simpleName.contains("friday") || simpleName.contains("viernes") ||
+                        simpleName.contains("freitag") || simpleName.contains("vendredi") ||
+                        simpleName.contains("金曜") -> resources.getString(R.string.day_friday)
+
+                simpleName.contains("saturday") || simpleName.contains("sábado") ||
+                        simpleName.contains("sabado") || simpleName.contains("samstag") ||
+                        simpleName.contains("samedi") || simpleName.contains("土曜") -> resources.getString(
+                    R.string.day_saturday
+                )
+
+                simpleName.contains("sunday") || simpleName.contains("domingo") ||
+                        simpleName.contains("sonntag") || simpleName.contains("dimanche") ||
+                        simpleName.contains("日曜") -> resources.getString(R.string.day_sunday)
+
+                // Complex day combinations (check for patterns in original string)
+                (simpleName.contains("monday") && simpleName.contains("wednesday") && simpleName.contains(
+                    "friday"
+                )) ||
+                        (simpleName.contains("lunes") && simpleName.contains("miércoles") && simpleName.contains(
+                            "viernes"
+                        )) ||
+                        (simpleName.contains("montag") && simpleName.contains("mittwoch") && simpleName.contains(
+                            "freitag"
+                        )) ||
+                        (simpleName.contains("lundi") && simpleName.contains("mercredi") && simpleName.contains(
+                            "vendredi"
+                        )) ->
+                    resources.getString(R.string.days_monday_wednesday_friday)
+
+                (simpleName.contains("tuesday") && simpleName.contains("thursday") && !simpleName.contains(
+                    "saturday"
+                )) ||
+                        (simpleName.contains("martes") && simpleName.contains("jueves") && !simpleName.contains(
+                            "sábado"
+                        )) ->
+                    resources.getString(R.string.days_tuesday_thursday)
+
+                (simpleName.contains("monday") && simpleName.contains("thursday") && !simpleName.contains(
+                    "tuesday"
+                )) ||
+                        (simpleName.contains("lunes") && simpleName.contains("jueves") && !simpleName.contains(
+                            "martes"
+                        )) ->
+                    resources.getString(R.string.days_monday_thursday)
+
+                (simpleName.contains("tuesday") && simpleName.contains("friday") && !simpleName.contains(
+                    "thursday"
+                )) ||
+                        (simpleName.contains("martes") && simpleName.contains("viernes") && !simpleName.contains(
+                            "jueves"
+                        )) ->
+                    resources.getString(R.string.days_tuesday_friday)
+
+                (simpleName.contains("wednesday") && simpleName.contains("saturday") && !simpleName.contains(
+                    "sunday"
+                )) ||
+                        (simpleName.contains("miércoles") && simpleName.contains("sábado") && !simpleName.contains(
+                            "domingo"
+                        )) ->
+                    resources.getString(R.string.days_wednesday_saturday)
+
+                (simpleName.contains("tuesday") && simpleName.contains("thursday") && simpleName.contains(
+                    "saturday"
+                )) ||
+                        (simpleName.contains("martes") && simpleName.contains("jueves") && simpleName.contains(
+                            "sábado"
+                        )) ->
+                    resources.getString(R.string.days_tuesday_thursday_saturday)
+
+                (simpleName.contains("wednesday") && simpleName.contains("saturday") && simpleName.contains(
+                    "sunday"
+                )) ||
+                        (simpleName.contains("miércoles") && simpleName.contains("sábado") && simpleName.contains(
+                            "domingo"
+                        )) ->
+                    resources.getString(R.string.days_wednesday_saturday_sunday)
+
+                // All days patterns
+                simpleName.contains("all days") || simpleName.contains("todos los días") ||
+                        simpleName.contains("alle tage") || simpleName.contains("tous les jours") ||
+                        simpleName.contains("毎日") -> resources.getString(R.string.days_all)
+
+                // Return original if no translation found
+                else -> day
+            }
         }
     }
 
@@ -520,7 +628,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
 
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
-            // Actualizar las traducciones de ejercicios cada vez que se abre la base de datos
+            // Actualizar las traducciones de ejercicios
             // con el contexto de idioma actual
             updateExerciseTranslations(context)
         }

@@ -72,7 +72,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/cardImage"
-                tools:text="Exercise Name" />
+                tools:text="@string/exercises" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDetails"
@@ -98,7 +98,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        tools:text="Chest" />
+                        tools:text="@string/muscle_group_chest" />
 
                     <TextView
                         android:id="@+id/tvDificultad"
@@ -107,7 +107,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        tools:text="Intermediate" />
+                        tools:text="@string/selected_difficulty" />
 
                     <TextView
                         android:id="@+id/tvDias"
@@ -116,7 +116,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        tools:text="Mon, Wed" />
+                        tools:text="@string/training_days" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -127,7 +127,7 @@
                 android:layout_marginTop="24dp"
                 android:textColor="?attr/colorPrimaryVariant"
                 app:layout_constraintTop_toBottomOf="@id/cardDetails"
-                tools:text="Exercise description goes here..." />
+                tools:text="@string/enter_description" />
 
             <TextView
                 android:id="@+id/tvCalorias"
@@ -136,7 +136,7 @@
                 android:layout_marginTop="16dp"
                 android:textColor="?attr/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/tvDescripcion"
-                tools:text="250 calories per session" />
+                tools:text="@string/calories_count" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMostrarEstadisticas"

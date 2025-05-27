@@ -12,9 +12,9 @@ import com.amarina.powergym.PowerGymApplication
 import com.amarina.powergym.R
 import com.amarina.powergym.databinding.ActivityPrincipalBinding
 import com.amarina.powergym.ui.adapter.exercise.EjercicioAdapter
-import com.amarina.powergym.ui.adapter.exercise.EjercicioAdapterItem
 import com.amarina.powergym.ui.viewmodel.main.MainViewModel
 import com.amarina.powergym.utils.LanguageHelper
+import com.amarina.powergym.utils.TranslationHelper
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -123,23 +123,23 @@ class PrincipalActivity : AppCompatActivity() {
     private fun showDificultadDialog() {
         // Opciones visibles para el usuario
         val dificultadesDisplay = arrayOf(
-            getString(R.string.basic),
-            getString(R.string.medium),
-            getString(R.string.advanced)
+            getString(R.string.difficulty_basic),
+            getString(R.string.difficulty_intermediate),
+            getString(R.string.difficulty_advanced)
         )
 
-        // Valores reales en la base de datos
+        // Valores reales en la base de datos (usar los mismos string resources)
         val dificultadesDB = arrayOf(
-            "basico",
-            "intermedio",
-            "avanzado"
+            getString(R.string.difficulty_basic),
+            getString(R.string.difficulty_intermediate),
+            getString(R.string.difficulty_advanced)
         )
 
         // Determinar el índice de selección actual
         val currentDisplayValue = when(currentDifficulty) {
-            "basico" -> getString(R.string.basic)
-            "intermedio" -> getString(R.string.medium)
-            "avanzado" -> getString(R.string.advanced)
+            getString(R.string.difficulty_basic) -> getString(R.string.difficulty_basic)
+            getString(R.string.difficulty_intermediate) -> getString(R.string.difficulty_intermediate)
+            getString(R.string.difficulty_advanced) -> getString(R.string.difficulty_advanced)
             else -> null
         }
 
@@ -176,50 +176,42 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
     private fun showSectionDialog() {
-        // Get sections from resources
-        val sectionsDisplay = arrayOf(
-            getString(R.string.section_elderly),
-            getString(R.string.section_reduced_mobility),
-            getString(R.string.section_rehabilitation),
-            getString(R.string.section_upper_body),
-            getString(R.string.section_lower_body),
-            getString(R.string.section_cardio)
-        )
+        lifecycleScope.launch {
+            try {
+                // Get sections from database directly (already translated)
+                val sectionsFromDB = viewModel.secciones.value
 
-        // Corresponding DB values (must match the values in the database)
-        // Must use the exact values used in the PowerGymDatabase.kt initialization
-        val sectionsDB = arrayOf(
-            getString(R.string.section_elderly),
-            getString(R.string.section_reduced_mobility),
-            getString(R.string.section_rehabilitation),
-            getString(R.string.section_upper_body),
-            getString(R.string.section_lower_body),
-            getString(R.string.section_cardio)
-        )
+                if (sectionsFromDB.isEmpty()) {
+                    return@launch
+                }
 
-        // Determine current selection index
-        val currentDisplayValue = currentSection
+                // Use the actual database values for both display and filtering
+                val sectionsDisplay = sectionsFromDB.toTypedArray()
 
-        val currentIndex = if (currentDisplayValue != null) {
-            sectionsDisplay.indexOf(currentDisplayValue)
-        } else {
-            -1
-        }
+                // Determine current selection index
+                val currentIndex = if (currentSection != null) {
+                    sectionsFromDB.indexOf(currentSection)
+                } else {
+                    -1
+                }
 
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.filter_by_group))
-            .setSingleChoiceItems(sectionsDisplay, currentIndex) { dialog, which ->
-                // Use DB value for filtering
-                val dbValue = sectionsDB[which]
-                val displayValue = sectionsDisplay[which]
+                AlertDialog.Builder(this@PrincipalActivity)
+                    .setTitle(getString(R.string.filter_by_group))
+                    .setSingleChoiceItems(sectionsDisplay, currentIndex) { dialog, which ->
+                        // Use the selected section value directly from database
+                        val selectedSection = sectionsFromDB[which]
 
-                // Save selection and apply filter
-                currentSection = dbValue
-                applySectionFilter(dbValue, displayValue)
-                dialog.dismiss()
+                        // Save selection and apply filter
+                        currentSection = selectedSection
+                        applySectionFilter(selectedSection, selectedSection)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton(getString(R.string.cancel), null)
+                    .show()
+            } catch (e: Exception) {
+                // Handle any errors
             }
-            .setNegativeButton(getString(R.string.cancel), null)
-            .show()
+        }
     }
 
     private fun applySectionFilter(dbValue: String, displayValue: String) {
@@ -242,6 +234,11 @@ class PrincipalActivity : AppCompatActivity() {
                     return@launch
                 }
 
+                // Translate muscle groups for display
+                val muscleGroupsDisplay = muscleGroups.map { muscleGroup ->
+                    translateMuscleGroupForDisplay(muscleGroup)
+                }.toTypedArray()
+
                 // Determine current selection index
                 val currentIndex = if (currentMuscleGroup != null) {
                     muscleGroups.indexOf(currentMuscleGroup)
@@ -252,15 +249,16 @@ class PrincipalActivity : AppCompatActivity() {
                 AlertDialog.Builder(this@PrincipalActivity)
                     .setTitle(getString(R.string.filter_by_group))
                     .setSingleChoiceItems(
-                        muscleGroups.toTypedArray(),
+                        muscleGroupsDisplay,
                         currentIndex
                     ) { dialog, which ->
-                        // Use the selected muscle group for filtering
+                        // Use the original muscle group value for filtering (database value)
                         val selectedMuscleGroup = muscleGroups[which]
+                        val displayValue = muscleGroupsDisplay[which]
 
                         // Save selection and apply filter
                         currentMuscleGroup = selectedMuscleGroup
-                        applyMuscleGroupFilter(selectedMuscleGroup)
+                        applyMuscleGroupFilter(selectedMuscleGroup, displayValue)
                         dialog.dismiss()
                     }
                     .setNegativeButton(getString(R.string.cancel), null)
@@ -271,14 +269,28 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
-    private fun applyMuscleGroupFilter(muscleGroup: String) {
-        // Update chip UI
-        binding.chipMuscleGroup.text = "${getString(R.string.muscle_group)}: $muscleGroup"
+    private fun applyMuscleGroupFilter(muscleGroup: String, displayValue: String) {
+        // Update chip UI with translated display value
+        binding.chipMuscleGroup.text = "${getString(R.string.muscle_group)}: $displayValue"
         binding.chipMuscleGroup.isCloseIconVisible = true
         binding.chipMuscleGroup.isChecked = true
 
-        // Apply filter using muscle group
+        // Apply filter using original muscle group value from database
         viewModel.setMuscleGroupFilter(muscleGroup)
+    }
+
+    /**
+     * Translate muscle group names for display in filter dialog
+     */
+    private fun translateMuscleGroupForDisplay(muscleGroup: String): String {
+        return TranslationHelper.translateMuscleGroup(muscleGroup, this)
+    }
+
+    /**
+     * Translate section names for display in filter dialog
+     */
+    private fun translateSectionForDisplay(section: String): String {
+        return TranslationHelper.translateSection(section, this)
     }
 
     private fun setupNavigation() {
