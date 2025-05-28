@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PowerGym"
         android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
         <receiver android:name=".receivers.ReminderReceiver" 
                  android:exported="false"/>

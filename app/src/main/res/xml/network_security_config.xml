@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">img.youtube.com</domain>
+        <domain includeSubdomains="true">images.pexels.com</domain>
+        <domain includeSubdomains="true">training.fit</domain>
+        <domain includeSubdomains="true">anabolicaliens.com</domain>
+        <domain includeSubdomains="true">s3assets.skimble.com</domain>
+        <domain includeSubdomains="true">cdn.shopify.com</domain>
+        <domain includeSubdomains="true">static.thenounproject.com</domain>
+        <domain includeSubdomains="true">static.vecteezy.com</domain>
+        <domain includeSubdomains="true">www.performancehealthacademy.com</domain>
+        <domain includeSubdomains="true">media.istockphoto.com</domain>
+        <domain includeSubdomains="true">i.ytimg.com</domain>
+    </domain-config>
+</network-security-config>
