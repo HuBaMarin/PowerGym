@@ -411,12 +411,12 @@ abstract class PowerGymDatabase : RoomDatabase() {
                         name.contains("cuerpo completo") || name.contains("ganzkörper") ||
                         name.contains("corps entier") || name.contains("全身") -> R.string.muscle_group_full_body
 
-                // Múltiple
+                // Múltiple -> Cuerpo completo
                 name.contains("multiple") || name.contains("múltiple") ||
-                        name.contains("mehrere") || name.contains("複数") -> R.string.muscle_group_multiple
+                        name.contains("mehrere") || name.contains("複数") -> R.string.muscle_group_full_body
 
                 // Valor predeterminado
-                else -> R.string.muscle_group_multiple
+                else -> R.string.muscle_group_full_body
             }
         }
 
@@ -703,7 +703,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_resistance_band_name),
                     descripcion = resources.getString(R.string.exercise_resistance_band_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_multiple),
+                    grupoMuscular = resources.getString(R.string.muscle_group_full_body),
                     dificultad = resources.getString(R.string.difficulty_adaptable),
                     dias = resources.getString(R.string.days_monday_wednesday_friday),
                     imagenEjercicio = "https://img.youtube.com/vi/YPILISq2SW8/maxresdefault.jpg",
@@ -756,7 +756,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_estiramientos_suaves_name),
                     descripcion = resources.getString(R.string.exercise_estiramientos_suaves_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_multiple),
+                    grupoMuscular = resources.getString(R.string.muscle_group_full_body),
                     dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_all),
                     imagenEjercicio = "https://media.istockphoto.com/id/468978675/es/vector/cuerpo-de-estiramiento-ejercicio-stick-figura-pictograma-icono.jpg",
@@ -769,7 +769,7 @@ abstract class PowerGymDatabase : RoomDatabase() {
                 Ejercicio(
                     nombre = resources.getString(R.string.exercise_yoga_adaptado_en_silla_name),
                     descripcion = resources.getString(R.string.exercise_yoga_adaptado_en_silla_desc),
-                    grupoMuscular = resources.getString(R.string.muscle_group_multiple),
+                    grupoMuscular = resources.getString(R.string.muscle_group_full_body),
                     dificultad = resources.getString(R.string.difficulty_basic),
                     dias = resources.getString(R.string.days_tuesday_thursday_saturday),
                     imagenEjercicio = "https://i.ytimg.com/vi/KEjiXtb2hRg/hqdefault.jpg",

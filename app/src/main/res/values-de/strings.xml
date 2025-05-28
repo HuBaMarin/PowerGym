@@ -23,8 +23,6 @@
     <string name="reminder_frequency">Erinnerungshäufigkeit</string>
     <string name="enable_reminders">Erinnerungen aktivieren</string>
     <string name="enable_notifications">Benachrichtigungen aktivieren</string>
-    <string name="test_notification">Benachrichtigung testen</string>
-    <string name="test_notification_sent">Test-Benachrichtigung erfolgreich gesendet!</string>
 
     <!-- Statistics -->
     <string name="sort_by">Sortieren</string>
@@ -92,6 +90,7 @@
     <string name="profile">Profil</string>
     <string name="log_out">Abmelden</string>
     <string name="name">Name</string>
+    <string name="daily">Täglich</string>
     <!-- Statistics -->
     <string name="times_completed">%1$d mal</string>
     <string name="percent_format">%1$d%%</string>
@@ -230,7 +229,7 @@
     <string name="follow_system">Systemeinstellung folgen</string>
     <string name="about">Über</string>
     <string name="app_version">App-Version</string>
-    <string name="app_version_number">1.0.0</string>
+    <string name="app_version_number">1.0.7</string>
     <string name="german">Deutsch</string>
     <string name="english">Englisch</string>
     <string name="spanish">Spanisch</string>
@@ -356,7 +355,6 @@
     <string name="muscle_group_legs">Beine</string>
     <string name="muscle_group_arms">Arme</string>
     <string name="muscle_group_core">Rumpf</string>
-    <string name="muscle_group_multiple">Mehrere</string>
     <string name="muscle_group_shoulders">Schultern</string>
     <string name="muscle_group_respiratory">Atmung</string>
     <string name="muscle_group_forearms">Unterarme</string>
@@ -412,4 +410,13 @@
     <string name="clear_filters">Filter löschen</string>
     <string name="series">Serien</string>
     <string name="repetitions">Wiederholungen</string>
+
+    <!-- No Data Strings for Statistics -->
+    <string name="no_frequent_exercises">Keine Daten für häufige Übungen verfügbar</string>
+    <string name="no_exercise_history">Keine Übungshistorie verfügbar</string>
+    <string name="no_training_frequency_data">Keine Trainingsfrequenz-Daten verfügbar</string>
+
+    <!-- Success Messages -->
+    <string name="registration_success">Registrierung erfolgreich, bitte melden Sie sich an</string>
+    <string name="exercise_completed_success">Übung erfolgreich abgeschlossen</string>
 </resources>

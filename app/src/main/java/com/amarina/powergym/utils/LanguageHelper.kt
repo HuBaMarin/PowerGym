@@ -2,11 +2,10 @@ package com.amarina.powergym.utils
 
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
-import java.util.Locale
-import com.amarina.powergym.database.PowerGymDatabase
 import android.util.Log
+import com.amarina.powergym.database.PowerGymDatabase
+import java.util.Locale
 
 /**
  * Clase auxiliar para gestionar la configuración de idiomas en la aplicación
@@ -27,7 +26,14 @@ object LanguageHelper {
         val configuration = Configuration(resources.configuration)
 
         configuration.setLocale(locale)
-        context.createConfigurationContext(configuration)
+
+        // Apply the configuration change immediately
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.createConfigurationContext(configuration)
+        } else {
+            @Suppress("DEPRECATION")
+            resources.updateConfiguration(configuration, resources.displayMetrics)
+        }
 
         PreferenceManager(context).setLanguage(languageCode)
 

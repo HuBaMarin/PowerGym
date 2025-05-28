@@ -67,16 +67,14 @@ object TranslationHelper {
                     simpleName.contains("gesäß") || simpleName.contains("fessier") ||
                     simpleName.contains("臀") -> context.getString(R.string.muscle_group_glutes)
 
+            // Multiple -> Full body
+            simpleName.contains("multiple") || simpleName.contains("múltiple") ||
+                    simpleName.contains("mehrere") || simpleName.contains("複数") ||
             // Full body
             simpleName.contains("full body") || simpleName.contains("whole body") ||
                     simpleName.contains("cuerpo completo") || simpleName.contains("ganzkörper") ||
                     simpleName.contains("corps entier") || simpleName.contains("全身") ->
                 context.getString(R.string.muscle_group_full_body)
-
-            // Multiple
-            simpleName.contains("multiple") || simpleName.contains("múltiple") ||
-                    simpleName.contains("mehrere") || simpleName.contains("複数") ->
-                context.getString(R.string.muscle_group_multiple)
 
             // Default - return original if no translation found
             else -> muscleGroup

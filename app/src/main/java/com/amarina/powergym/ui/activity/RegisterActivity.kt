@@ -115,7 +115,7 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.navigationEvents.collectLatest { event ->
                 when (event) {
                     is RegisterViewModel.NavigationEvent.ToLogin -> {
-                        mostrarToast("Registro exitoso, inicia sesión")
+                        mostrarToast(getString(R.string.registration_success))
                         navigateToLogin()
                     }
                     is RegisterViewModel.NavigationEvent.Back -> {

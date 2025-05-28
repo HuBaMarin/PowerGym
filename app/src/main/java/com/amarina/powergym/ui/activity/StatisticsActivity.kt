@@ -157,8 +157,13 @@ class StatisticsActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.ejerciciosMasTrabajados.collectLatest { exercises ->
                 ejerciciosMasTrabajadosAdapter.submitList(exercises)
-                binding.rvEjerciciosMasTrabajados.visibility =
-                    if (exercises.isNotEmpty()) View.VISIBLE else View.GONE
+                if (exercises.isEmpty()) {
+                    binding.tvNoFrequentExercises.visibility = View.VISIBLE
+                    binding.rvEjerciciosMasTrabajados.visibility = View.GONE
+                } else {
+                    binding.tvNoFrequentExercises.visibility = View.GONE
+                    binding.rvEjerciciosMasTrabajados.visibility = View.VISIBLE
+                }
                 updateEmptyState()
             }
         }
@@ -169,10 +174,10 @@ class StatisticsActivity : AppCompatActivity() {
                 comprehensiveStatsAdapter.submitList(stats)
 
                 if (stats.isEmpty()) {
-                    binding.tvNoStats.visibility = View.VISIBLE
+                    binding.tvNoExerciseHistory.visibility = View.VISIBLE
                     binding.rvComprehensiveStats.visibility = View.GONE
                 } else {
-                    binding.tvNoStats.visibility = View.GONE
+                    binding.tvNoExerciseHistory.visibility = View.GONE
                     binding.rvComprehensiveStats.visibility = View.VISIBLE
                 }
                 updateEmptyState()

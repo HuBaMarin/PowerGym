@@ -2,6 +2,7 @@ package com.amarina.powergym.ui.viewmodel.exercise
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.amarina.powergym.R
 import com.amarina.powergym.database.dao.EjercicioDao
 import com.amarina.powergym.database.dao.EstadisticaDao
 import com.amarina.powergym.database.entities.Ejercicio
@@ -18,6 +19,12 @@ class EjercicioDetailViewModel(
     private val estadisticaDao: EstadisticaDao,
     private val sessionManager: SessionManager
 ) : ViewModel() {
+
+    private var context: android.content.Context? = null
+
+    fun setContext(context: android.content.Context) {
+        this.context = context
+    }
 
     // Estado para el ejercicio
     private val _ejercicioState = MutableStateFlow<EjercicioState>(EjercicioState.Loading)
@@ -91,7 +98,9 @@ class EjercicioDetailViewModel(
 
                     try {
                         estadisticaDao.insertarEstadistica(estadistica)
-                        _actionState.value = ActionState.Success("Ejercicio completado con éxito")
+                        val message = context?.getString(R.string.exercise_completed_success)
+                            ?: "Exercise completed successfully"
+                        _actionState.value = ActionState.Success(message)
                         // Recargar estadísticas
                         loadEstadisticas(ejercicioId)
                     } catch (e: Exception) {

@@ -51,6 +51,9 @@ class EjercicioDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, app.ejercicioDetailViewModelFactory)
             .get(EjercicioDetailViewModel::class.java)
 
+        // Set context for proper string resource access
+        viewModel.setContext(this)
+
         if (ejercicioId != -1) {
             viewModel.loadEjercicio(ejercicioId)
         } else {

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import com.amarina.powergym.R
 import com.amarina.powergym.databinding.ActivitySettingsBinding
-import com.amarina.powergym.receivers.ReminderReceiver
 import com.amarina.powergym.utils.LanguageHelper
 import com.amarina.powergym.utils.ReminderManager
 import java.util.Locale
@@ -196,24 +195,6 @@ class SettingsActivity : AppCompatActivity() {
                 showFrequencySelectionDialog()
             }
         }
-
-        binding.testNotificationContainer.setOnClickListener {
-            sendTestNotification()
-        }
-    }
-
-    private fun sendTestNotification() {
-        val context = this
-        val intent = Intent(context, ReminderReceiver::class.java)
-        intent.action = "ACTION_TEST_NOTIFICATION"
-        context.sendBroadcast(intent)
-
-        // Show confirmation to user
-        androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle(getString(R.string.test_notification))
-            .setMessage(getString(R.string.test_notification_sent))
-            .setPositiveButton(getString(R.string.accept), null)
-            .show()
     }
 
     private fun setNotificationEnabled(enabled: Boolean) {
@@ -319,6 +300,10 @@ class SettingsActivity : AppCompatActivity() {
         // Restart the entire app to ensure all activities get the new language
         val intent = packageManager.getLaunchIntentForPackage(packageName)
         intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        // Add extra to indicate we should go to settings
+        intent?.putExtra("open_settings", true)
+
         startActivity(intent)
         finishAffinity()
     }

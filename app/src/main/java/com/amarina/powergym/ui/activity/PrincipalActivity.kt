@@ -42,6 +42,13 @@ class PrincipalActivity : AppCompatActivity() {
             return
         }
 
+        // Check if we should open settings after app restart (language change)
+        if (intent.getBooleanExtra("open_settings", false)) {
+            startActivity(Intent(this, SettingsActivity::class.java))
+            finish()
+            return
+        }
+
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -185,8 +192,10 @@ class PrincipalActivity : AppCompatActivity() {
                     return@launch
                 }
 
-                // Use the actual database values for both display and filtering
-                val sectionsDisplay = sectionsFromDB.toTypedArray()
+                // Translate sections for display using TranslationHelper
+                val sectionsDisplay = sectionsFromDB.map { section ->
+                    translateSectionForDisplay(section)
+                }.toTypedArray()
 
                 // Determine current selection index
                 val currentIndex = if (currentSection != null) {
@@ -200,10 +209,11 @@ class PrincipalActivity : AppCompatActivity() {
                     .setSingleChoiceItems(sectionsDisplay, currentIndex) { dialog, which ->
                         // Use the selected section value directly from database
                         val selectedSection = sectionsFromDB[which]
+                        val displayValue = sectionsDisplay[which]
 
                         // Save selection and apply filter
                         currentSection = selectedSection
-                        applySectionFilter(selectedSection, selectedSection)
+                        applySectionFilter(selectedSection, displayValue)
                         dialog.dismiss()
                     }
                     .setNegativeButton(getString(R.string.cancel), null)

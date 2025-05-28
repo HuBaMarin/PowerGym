@@ -100,7 +100,7 @@
                 android:id="@+id/tvNoChartData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_chart_data"
+                android:text="@string/no_training_frequency_data"
                 android:textSize="16sp"
                 android:textColor="@color/text_color"
                 android:gravity="center"

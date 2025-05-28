@@ -57,6 +57,17 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"/>
 
+            <TextView
+                android:id="@+id/tvNoFrequentExercises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_frequent_exercises"
+                android:textSize="16sp"
+                android:textColor="@color/icon_tint"
+                android:gravity="center"
+                android:layout_margin="16dp"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEjerciciosMasTrabajados"
                 android:layout_width="match_parent"
@@ -78,10 +89,10 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
-                android:id="@+id/tvNoStats"
+                android:id="@+id/tvNoExerciseHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/no_exercise_stats"
+                android:text="@string/no_exercise_history"
                 android:textSize="16sp"
                 android:textColor="@color/icon_tint"
                 android:gravity="center"
@@ -132,12 +143,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/load_more"
-                android:visibility="gone"
                 android:backgroundTint="@color/icon_tint"
                 android:textColor="@color/background_color"
                 app:cornerRadius="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvEmpty"

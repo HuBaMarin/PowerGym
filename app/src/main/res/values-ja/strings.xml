@@ -148,7 +148,15 @@
     <string name="training_sessions">トレーニングセッション</string>
     <string name="no_exercise_selected">エクササイズが選択されていません</string>
     <string name="performed_count">実施回数: %d 回</string>
+
+    <!-- No Data Strings for Statistics -->
+    <string name="no_frequent_exercises">よく使う運動のデータがありません</string>
+    <string name="no_exercise_history">運動履歴がありません</string>
+    <string name="no_training_frequency_data">トレーニング頻度のデータがありません</string>
+
     <!-- Notifications -->
+    <string name="enable_notifications">通知を有効にする</string>
+    <string name="daily">毎日</string>
     <string name="reminder_message">運動の時間です！今日のトレーニングをお忘れなく。</string>
     <string name="channel_name">トレーニングリマインダー</string>
     <string name="channel_description">予定されたトレーニングセッションのリマインダー</string>
@@ -229,10 +237,15 @@
     <string name="french">フランス語</string>
     <string name="about">アプリについて</string>
     <string name="app_version">アプリバージョン</string>
-    <string name="app_version_number">1.0.0</string>
+    <string name="app_version_number">1.0.7</string>
     <string name="home">ホーム</string>
     <string name="clear_all">すべてクリア</string>
     <string name="japanese">日本語</string>
+
+    <!-- Success Messages -->
+    <string name="registration_success">登録が完了しました、ログインしてください</string>
+    <string name="exercise_completed_success">エクササイズが正常に完了しました</string>
+
     <!-- Exercise Names and Descriptions -->
     <string name="account_locked_title">アカウントロック</string>
     <string name="exercise_demo_name">デモエクササイズ</string>
@@ -351,7 +364,6 @@
     <string name="muscle_group_legs">脚</string>
     <string name="muscle_group_arms">腕</string>
     <string name="muscle_group_core">コア</string>
-    <string name="muscle_group_multiple">複数</string>
     <string name="muscle_group_shoulders">肩</string>
     <string name="muscle_group_respiratory">呼吸器</string>
     <string name="muscle_group_forearms">前腕</string>
@@ -392,8 +404,6 @@
     <!-- Difficulty -->
     <string name="difficulty_adaptable">適応可能</string>
     <string name="account_locked_message">試行回数が多すぎます。後でもう一度お試しください。</string>
-    <string name="enable_notifications">通知を有効にする</string>
-    <string name="daily">毎日</string>
     <string name="group_section">グループ</string>
     <string name="filter_by_group">グループでフィルタ</string>
     <string name="clear_filters">フィルタークリア</string>
@@ -405,6 +415,4 @@
     <string name="day_thu">木</string>
     <string name="day_fri">金</string>
     <string name="day_sat">土</string>
-    <string name="test_notification">通知テスト</string>
-    <string name="test_notification_sent">テスト通知が正常に送信されました！</string>
 </resources>
